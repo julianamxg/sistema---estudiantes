@@ -1,0 +1,238 @@
+:root {
+  --verde: rgba(67, 189, 107, 0.815);
+  --gris: rgb(176, 176, 176);
+  --gris-oscuro: rgb(54, 54, 54);
+}
+
+body {
+  background-color: var(--verde);
+  font-family: 'Arimo', sans-serif;
+}
+
+h2 {
+  color: var(--gris-oscuro);
+}
+
+form {
+  width: 100%;
+}
+
+.formulario {
+  background-color: #fff;
+  margin: 0.3rem 3rem;
+  padding: 1.5rem;
+  display: flex;
+  justify-content: center;
+  -webkit-box-shadow: 1px 5px 16px -10px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 1px 5px 16px -10px rgba(0, 0, 0, 0.75);
+  box-shadow: 1px 5px 16px -10px rgba(0, 0, 0, 0.75);
+}
+
+.formulario .grupos {
+  display: flex;
+  flex-direction: column;
+}
+
+.formulario .grupos .grupo {
+  display: flex;
+  flex-direction: row;
+}
+
+.formulario .grupos .grupo .grupo-input {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+  width: 100%;
+}
+
+.formulario .grupos .grupo .grupo-input input,
+select {
+  padding: 0.8rem;
+  margin-top: 0.3rem;
+  border: none;
+  border-bottom: 2px solid var(--verde);
+  outline: none;
+}
+
+.formulario .grupos .grupo .grupo-input select::after{
+ color: var(--verde);
+ background-color: var(--verde);
+}
+
+.formulario .grupos .grupo .grupo-input input:placeholder-shown {
+  font-family: 'Arimo', sans-serif;
+}
+
+.formulario .grupos .grupo .grupo-input select {
+  font-family: 'Arimo', sans-serif;
+}
+
+.formulario .grupos .grupo .grupo-input select option {
+  padding: 1rem;
+}
+
+
+.formulario .grupos .grupo .grupo-input select:focus {
+  background-color: rgba(238, 238, 238, 0.897);
+}
+
+.formulario .grupos .grupo .grupo-input input:focus {
+  background-color: rgba(238, 238, 238, 0.897);
+
+}
+
+
+.formulario button {
+  background-color: var(--verde);
+  padding: 1rem;
+  width: 15rem;
+  border: none;
+  margin: auto;
+  border-radius: 25px;
+  display: flex;
+  justify-content: center;
+  color: #fff;
+  font-size: 17px;
+  font-family: 'Arimo', sans-serif;
+  cursor: pointer;
+  transition: all 0.5s ease;
+}
+
+.formulario button:hover {
+  background-color: rgba(67, 189, 108, 0.912);
+}
+
+
+a{
+  text-decoration: none;
+}
+
+.botonInicio {
+  border: none;
+  background-color: #fff;
+  color: var(--verde);
+  margin: 1rem;
+  padding: 0.5rem;
+  font-size: 15px;
+  cursor: pointer;
+  border-radius: 25px;
+}
+
+.botonInicio:hover {
+  color: rgba(67, 189, 108, 0.912);
+  background-color: rgb(246, 255, 241);
+}
+
+.encabezadoTabla{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+
+.encabezadoTabla button{
+  margin: 1rem;
+  background-color: var(--verde);
+  padding: 1rem;
+  width: 3rem;
+  border: none;
+  border-radius: 25px;
+  display: flex;
+  justify-content: center;
+  color: #fff;
+  font-size: 17px;
+  font-family: 'Arimo', sans-serif;
+  cursor: pointer;
+  transition: all 0.5s ease;
+}
+
+.encabezadoTabla button:hover{
+  background-color: rgba(67, 189, 108, 0.912);
+}
+
+.tabla {
+  background-color: #fff;
+  padding: 3rem;
+  margin: 4rem;
+  -webkit-box-shadow: 1px 5px 16px -10px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 1px 5px 16px -10px rgba(0, 0, 0, 0.75);
+  box-shadow: 1px 5px 16px -10px rgba(0, 0, 0, 0.75);
+  
+  overflow-x: scroll;
+}
+
+table {
+  margin-bottom: 1rem;
+  /* border: 1px solid var(--gris); */
+  border-collapse: collapse;
+  margin: auto;
+  background-color: #fff;
+}
+
+td {
+  /* border: 1px solid var(--gris); */
+  padding: 1rem;
+}
+
+thead {
+  background-color: #eee;
+  font-weight: bolder;
+  color: var(--gris-oscuro);
+}
+
+thead tr th {
+  text-align: center;
+  border-bottom: 1px solid rgb(211, 211, 211);
+  border-top: 1px solid rgb(211, 211, 211);
+}
+
+tr td {
+  text-align: center;
+  border-top: 1px solid rgb(211, 211, 211);
+  border-bottom: 1px solid rgb(211, 211, 211);
+  width: 0.5%;
+  ;
+}
+
+.botones {
+  background: transparent;
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+
+.botones.botonEd {
+  border: 2px solid var(--verde);
+  color: var(--verde);
+}
+
+.botones.botonEd:hover {
+  border: 2px solid rgb(67, 189, 108);
+  ;
+  color: rgb(67, 189, 108);
+  ;
+}
+
+
+.botones.botonEl {
+  border: 2px solid rgb(211, 97, 97);
+  color: rgb(211, 97, 97);
+}
+
+
+.botones.botonEl:hover {
+  border: 2px solid rgb(196, 68, 68);
+  color: rgb(196, 68, 68);
+}
+
+@media screen and (min-width: 200px) and (max-width: 768px) {
+  .formulario .grupos .grupo {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .formulario .grupos .grupo .grupo-input {
+    width: 90%;
+  }
+}
