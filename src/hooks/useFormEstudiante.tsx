@@ -31,7 +31,6 @@ export const useForm = ()=>{
             [event.target.name]: selectedOption.value
         });
     }
-    
 
     const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
         setInputs({

@@ -1,18 +1,21 @@
 
-import { useContext, useEffect, useState } from "react"
-import { getlistaEstudiantes } from "../../services/datosEstudiante";
+import { FunctionComponent, useContext, useEffect, useState } from "react"
+import { editarEstudiante, eliminarEstudiante, getlistaEstudiantes } from "../../services/datosEstudiante";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faRotateRight } from '@fortawesome/free-solid-svg-icons'
 import { Estudiante } from "./Estudiante";
-import EstudianteIn from "../entidades/IEstudiante";
+import IEstudiante from "../entidades/IEstudiante";
 
+export interface ListarEstudianteProps {
+    verEstudiante: () => any
+    estudiantes: IEstudiante[]
+}
 
-export const ListarEstudiantes = () => {
-    const [estudiantes, setEstudiantes] = useState([]);
-    //const {lista} = useContext(contexto);
-    useEffect(() => {
-        setEstudiantes(getlistaEstudiantes());
-    }, [])
+export const ListarEstudiantes: FunctionComponent<ListarEstudianteProps> = ({ verEstudiante, estudiantes }) => {
+    // const [estudiantes, setEstudiantes] = useState([]);
+    // useEffect(() => {
+    //     setEstudiantes(getlistaEstudiantes());
+    // }, [])
 
     const botonRecargar = document.getElementById("botonRecargar");
     botonRecargar?.addEventListener("click", function () {
@@ -41,8 +44,8 @@ export const ListarEstudiantes = () => {
 
                         <tbody>
                             {
-                                estudiantes.map((estudiante: EstudianteIn) =>
-                                    <Estudiante estudiante={estudiante} key={estudiante.id} setEstudiantes={setEstudiantes} />)}
+                                estudiantes.map((estudiante: IEstudiante) =>
+                                  estudiante?  <Estudiante key={estudiante.id} estudiante={estudiante} eliminarEstudiante={eliminarEstudiante}/> : null)}
                         </tbody>
                     </table>
                 ) : (

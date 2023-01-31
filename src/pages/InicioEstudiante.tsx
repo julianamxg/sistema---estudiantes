@@ -21,24 +21,23 @@ function InicioEstudiante() {
     dGrado: "''"
   }
   const [estudiante, setEstudiante] = useState<IEstudiante>(initialState);
-
-
-  useEffect(() => {
-    setEstudiante(getlistaEstudiantes());
-  }, [])
+  const [estudiantes, setEstudiantes] = useState<IEstudiante[]>([]);
+ 
 
   function guardarEstudiante(): void {
-    console.log("Estudiante guardado")
+     addEstudiante(estudiante); 
+     estudiantes.push(estudiante)
+     setEstudiantes(estudiantes)
   }
   const { setForm } = useForm()
   const { id } = useParams()
 
-  useEffect(() => {
-    if (id) {
-      const estudiante = getEstudianteById(id);
-      setForm(estudiante)
-    }
-  }, [id])
+  // useEffect(() => {
+  //   if (id) {
+  //     const estudiante = getEstudianteById(id);
+  //     setForm(estudiante)
+  //   }
+  // }, [id])
 
   const alcambiarValor = (key: string, value: string) => {
     setEstudiante({ ...estudiante, [key]: value })
@@ -48,11 +47,19 @@ function InicioEstudiante() {
     setEstudiante(initialState)
   }
 
+  useEffect(() => {
+    setEstudiantes(getlistaEstudiantes());
+  }, [])
+
+
+  function verEstudiante(): void {
+    console.log("ver estudiantes")
+  }
   return (
 
     <div className="App">
       <RegistrarEstudiante guardarEstudiante={guardarEstudiante} estudiante={estudiante} alCambiarValor={alcambiarValor} limpiar={limpiarFormulario} />
-      <ListarEstudiantes  />
+      <ListarEstudiantes verEstudiante={verEstudiante} estudiantes={estudiantes} />
     </div>
 
   );

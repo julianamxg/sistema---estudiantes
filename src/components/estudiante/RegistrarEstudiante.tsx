@@ -30,7 +30,7 @@ export const RegistrarEstudiante: FunctionComponent<RegistrarEstudianteProps> = 
         e.preventDefault();
         // resetearForm();
         guardarEstudiante();
-        estudiante.id ? editarEstudiante(estudiante.id, estudiante) : addEstudiante(estudiante);
+        // estudiante.id ? editarEstudiante(estudiante.id, estudiante) : addEstudiante(estudiante);
         if (1 === 1) {
             Swal.fire({
                 text: `Se ha guardado a ${estudiante.nombres} ${estudiante.apellidos}`,

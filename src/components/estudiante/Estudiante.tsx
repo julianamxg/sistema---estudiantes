@@ -3,15 +3,20 @@ import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { eliminarEstudiante, getlistaEstudiantes } from '../../services/datosEstudiante';
+import IEstudiante from '../entidades/IEstudiante';
+import { FunctionComponent } from 'react';
 
+export interface EstudianteProps {
+    // editarEstudiante: (id?:string) => any
+    eliminarEstudiante: (id?:string) => any
+    estudiante : IEstudiante
+}
 
-
-export const Estudiante = ({ estudiante }: any, { setEstudiantes }: any) => {
-    const { id, nombres, apellidos, tDocumento, nDocumento, grado, dGrado } = estudiante;
+export const Estudiante:FunctionComponent<EstudianteProps> = ( {eliminarEstudiante, estudiante}) => {
 
     const eliminarEstudiante2 = () => {
         Swal.fire({
-            title: `¿Deseas eliminar a ${nombres}?`,
+            title: `¿Deseas eliminar a ${estudiante.nombres}?`,
             text: "Esta acción no se puede revertir",
             icon: 'warning',
             showCancelButton: true,
@@ -22,16 +27,15 @@ export const Estudiante = ({ estudiante }: any, { setEstudiantes }: any) => {
             if (result.isConfirmed) {
                 Swal.fire(
                     '¡Registro eliminado!',
-                    `Has eliminado a ${nombres}`,
+                    `Has eliminado a ${estudiante.nombres}`,
                     'success'
                   )
                   setTimeout(() => {
                     window.location.reload();
                 }, 4000);
                 
-                eliminarEstudiante(id);
-                setEstudiantes(getlistaEstudiantes())
-             
+                eliminarEstudiante(estudiante.id);
+                
             }
           })
        
@@ -40,14 +44,14 @@ export const Estudiante = ({ estudiante }: any, { setEstudiantes }: any) => {
     return (
         <tr>
             {/* <td>{id}</td> */}
-            <td>{nombres}</td>
-            <td>{apellidos}</td>
-            <td>{tDocumento}</td>
-            <td>{nDocumento}</td>
-            <td>{grado}</td>
-            <td>{dGrado}</td>
+            <td>{estudiante.nombres}</td>
+            <td>{estudiante.apellidos}</td>
+            <td>{estudiante.tDocumento}</td>
+            <td>{estudiante.nDocumento}</td>
+            <td>{estudiante.grado}</td>
+            <td>{estudiante.dGrado}</td>
             <td>
-                <Link to={`/editar-estudiante/${id}`}>
+                <Link to={`/editar-estudiante/${estudiante.id}`}>
                     <button className="botones botonEd">
                         <FontAwesomeIcon icon={faPenToSquare} />
                     </button>
