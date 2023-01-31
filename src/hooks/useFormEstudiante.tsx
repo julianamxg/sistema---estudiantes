@@ -1,6 +1,7 @@
 import { useState, ChangeEvent, FormEvent } from "react";
+import IEstudiante from "../components/entidades/IEstudiante";
 
-const initialState = {
+const initialState:IEstudiante = {
     nombres: "",
     apellidos:"",
     tDocumento: "",
@@ -43,7 +44,6 @@ export const useForm = ()=>{
         setInputs(newValues)
     }
 
-    
 
     return{
         inputs,

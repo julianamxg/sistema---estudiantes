@@ -1,34 +1,45 @@
-import { useForm } from "../hooks/useForm";
-import { addEstudiante, getEstudianteById, editarEstudiante } from "../services/localstorage";
+import { useForm } from "../../hooks/useFormEstudiante";
+import { addEstudiante, getEstudianteById, editarEstudiante } from "../../services/datosEstudiante";
 import Swal from "sweetalert2";
-import { Link, useParams } from "react-router-dom";
-import { useEffect, useRef } from "react";
-import { BotonInicio } from "./BotonInicio";
+import { FunctionComponent, useEffect } from "react";
+import { BotonInicio } from "../BotonInicio";
+import IEstudiante from "../entidades/IEstudiante";
 
-export const RegistrarEstudiante = () => {
-    const { id } = useParams()
-    const { inputs, handleInputChange, handleOptionChange, resetearForm, setForm } = useForm()
+export interface RegistrarEstudianteProps {
+    guardarEstudiante: () => any
+    estudiante: IEstudiante
+    alCambiarValor : (key : string, value: string) => any
+    limpiar : () => any
+}
 
-    useEffect(() => {
-        if (id) {
-            const estudiante = getEstudianteById(id);
-            setForm(estudiante)
-        }
-    }, [id])
+export const RegistrarEstudiante: FunctionComponent<RegistrarEstudianteProps> = ({guardarEstudiante, estudiante, alCambiarValor, limpiar}) => {
+    // const { id } = useParams()
+     const { handleInputChange, handleOptionChange, resetearForm, setForm } = useForm()
 
+    // useEffect(() => {
+    //     if (estudiante.id) {
+    //         const estudiante = getEstudianteById(id);
+    //         setForm(estudiante)
+    //     }
+    // }, [estudiante.id])
+
+
+    //evento de vista
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        limpiar()
         e.preventDefault();
-        resetearForm();
-        id ? editarEstudiante(id, inputs) : addEstudiante(inputs);
-        if (inputs) {
+        // resetearForm();
+        guardarEstudiante();
+        estudiante.id ? editarEstudiante(estudiante.id, estudiante) : addEstudiante(estudiante);
+        if (1 === 1) {
             Swal.fire({
-                text: `Se ha guardado a ${inputs.nombres} ${inputs.apellidos}`,
+                text: `Se ha guardado a ${estudiante.nombres} ${estudiante.apellidos}`,
                 icon: 'success',
-                
+
             })
-            setTimeout(() => {
-                window.location.reload();
-            }, 3000);
+            // setTimeout(() => {
+            //     window.location.reload();
+            // }, 3000);
         }
         else {
             Swal.fire({
@@ -43,23 +54,22 @@ export const RegistrarEstudiante = () => {
             <div className="formulario">
                 <form onSubmit={handleSubmit}>
                     <h2>Registrar estudiante</h2>
-                    {/* <Link to={'/'}>Inicio</Link> */}
                     <div className="grupos" >
                         <div className="grupo">
                             <div className="grupo-input">
                                 <label htmlFor="nombres">Nombres</label>
-                                <input onChange={handleInputChange} value={inputs.nombres} type="text" name="nombres" id="nombres" placeholder="Ingresa los nombres" />
+                                <input onChange={(e) => alCambiarValor(e.target.name, e.target.value)} value={estudiante.nombres} type="text" name="nombres" id="nombres" placeholder="Ingresa los nombres" />
                             </div>
 
                             <div className="grupo-input">
                                 <label htmlFor="apellidos">Apellidos</label>
-                                <input onChange={handleInputChange} value={inputs.apellidos} type="text" name="apellidos" id="apellidos" placeholder="Ingresa los apellidos" />
+                                <input onChange={(e) => alCambiarValor(e.target.name, e.target.value)} value={estudiante.apellidos} type="text" name="apellidos" id="apellidos" placeholder="Ingresa los apellidos" />
                             </div>
                         </div>
                         <div className="grupo">
                             <div className="grupo-input">
                                 <label htmlFor="tDocumento">Tipo de documento</label>
-                                <select onChange={handleOptionChange} value={inputs.tDocumento} name="tDocumento" id="tDocumento">
+                                <select onChange={(e) => alCambiarValor(e.target.name, e.target.value)} value={estudiante.tDocumento} name="tDocumento" id="tDocumento">
                                     <option>Selecciona...</option>
                                     <option>Cedula de ciudadania</option>
                                     <option>Tarjeta de identidad</option>
@@ -68,13 +78,13 @@ export const RegistrarEstudiante = () => {
 
                             <div className="grupo-input">
                                 <label htmlFor="nDocumento">Número de documento</label>
-                                <input onChange={handleInputChange} value={inputs.nDocumento} type="number" name="nDocumento" id="nDocumento" placeholder="Ingresa el número de documento" />
+                                <input onChange={(e) => alCambiarValor(e.target.name, e.target.value)} value={estudiante.nDocumento} type="number" name="nDocumento" id="nDocumento" placeholder="Ingresa el número de documento" />
                             </div>
                         </div>
                         <div className="grupo">
                             <div className="grupo-input">
                                 <label htmlFor="grado">Grado</label>
-                                <select onChange={handleOptionChange} value={inputs.grado} name="grado" id="grado">
+                                <select onChange={(e) => alCambiarValor(e.target.name, e.target.value)} value={estudiante.grado} name="grado" id="grado">
                                     <option>Selecciona...</option>
                                     <option>Primero</option>
                                     <option>Segundo</option>
@@ -92,7 +102,7 @@ export const RegistrarEstudiante = () => {
 
                             <div className="grupo-input">
                                 <label htmlFor="dGrado">Director de grado</label>
-                                <select onChange={handleOptionChange} value={inputs.dGrado} name="dGrado" id="dGrado">
+                                <select onChange={(e) => alCambiarValor(e.target.name, e.target.value)} value={estudiante.dGrado} name="dGrado" id="dGrado">
                                     <option>Selecciona...</option>
                                     <option>Sandra Roncancio</option>
                                     <option>Luis Rodriguez</option>

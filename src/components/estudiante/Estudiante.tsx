@@ -1,9 +1,8 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom';
-import { useParams } from "react-router";
 import Swal from 'sweetalert2';
-import { eliminarEstudiante, getlistaEstudiantes } from '../services/localstorage';
+import { eliminarEstudiante, getlistaEstudiantes } from '../../services/datosEstudiante';
 
 
 

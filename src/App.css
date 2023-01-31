@@ -13,6 +13,64 @@ h2 {
   color: var(--gris-oscuro);
 }
 
+.menu{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 2rem;
+}
+
+.links a{
+  margin: 1rem;
+  padding: 0.8rem;
+  color: #fff;
+}
+
+.links a:hover{
+  
+  border-bottom: 2px solid #fff;
+}
+
+.inicioPagina{
+  background: linear-gradient(0.37turn,rgba(255, 255, 255, 0.474), rgba(67, 189, 108, 0.856));
+  height: 560px;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Manrope', sans-serif;
+}
+.inicioPagina h2{
+  color: var(--verde);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    text-align: center;
+    font-size: 3rem;
+    padding: 1rem;
+    height: 30%;
+    background-color: #fff;
+}
+
+.inicioPagina p{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #fff;
+  font-size: 1.5rem;
+}
+
+.degrade{
+  background-image: url(https://images.unsplash.com/photo-1510531704581-5b2870972060?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=873&q=80);
+  background-position: center;
+  background-size: cover;
+  background-repeat: repeat;
+  width: 100%;
+  height: 560px;
+}
+
+
 form {
   width: 100%;
 }
@@ -59,6 +117,8 @@ select {
  background-color: var(--verde);
 }
 
+
+
 .formulario .grupos .grupo .grupo-input input:placeholder-shown {
   font-family: 'Arimo', sans-serif;
 }
@@ -81,6 +141,14 @@ select {
 
 }
 
+.formulario .grupos .grupo-input select:focus {
+  background-color: rgba(238, 238, 238, 0.897);
+}
+
+.formulario .grupos .grupo-input input:focus {
+  background-color: rgba(238, 238, 238, 0.897);
+
+}
 
 .formulario button {
   background-color: var(--verde);
@@ -111,7 +179,6 @@ a{
   border: none;
   background-color: #fff;
   color: var(--verde);
-  margin: 1rem;
   padding: 0.5rem;
   font-size: 15px;
   cursor: pointer;
@@ -225,6 +292,38 @@ tr td {
   border: 2px solid rgb(196, 68, 68);
   color: rgb(196, 68, 68);
 }
+
+.formulario .grupos .grupo-input input,
+select {
+  padding: 0.8rem;
+  margin-top: 0.3rem;
+  border: none;
+  border-bottom: 2px solid var(--verde);
+  outline: none;
+}
+/* materia */
+
+.formulario.materia {
+  background-color: #fff;
+  margin: 1rem 3rem;
+  padding: 1.5rem;
+  display: flex;
+  justify-content: center;
+  -webkit-box-shadow: 1px 5px 16px -10px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 1px 5px 16px -10px rgba(0, 0, 0, 0.75);
+  box-shadow: 1px 5px 16px -10px rgba(0, 0, 0, 0.75);
+}
+
+
+.formulario .grupos .grupo-input {
+  display: flex;
+    flex-direction: column;
+}
+
+.formulario .grupos .grupo-input{
+  margin-bottom: 1rem;
+}
+
 
 @media screen and (min-width: 200px) and (max-width: 768px) {
   .formulario .grupos .grupo {
