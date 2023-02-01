@@ -164,12 +164,16 @@ select {
   font-family: 'Arimo', sans-serif;
   cursor: pointer;
   transition: all 0.5s ease;
+  cursor: pointer;
 }
 
 .formulario button:hover {
   background-color: rgba(67, 189, 108, 0.912);
 }
 
+button{
+  cursor: pointer;
+}
 
 a{
   text-decoration: none;
@@ -183,6 +187,8 @@ a{
   font-size: 15px;
   cursor: pointer;
   border-radius: 25px;
+  
+  cursor: pointer;
 }
 
 .botonInicio:hover {

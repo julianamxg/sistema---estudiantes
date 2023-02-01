@@ -1,13 +1,10 @@
-import { useForm } from "../hooks/useFormEstudiante";
 import React, { useState, useEffect, useContext, createContext } from 'react';
 import { ListarEstudiantes } from '../components/estudiante/ListarEstudiantes';
 import { RegistrarEstudiante } from '../components/estudiante/RegistrarEstudiante';
-import { RegistrarEstudianteProps } from "../components/estudiante/RegistrarEstudiante";
-import EstudianteIn from '../components/entidades/IEstudiante';
-import { addEstudiante, getEstudianteById, editarEstudiante, getlistaEstudiantes } from "../services/datosEstudiante";
-import { useParams } from "react-router-dom";
+import { addEstudiante, editarEstudiante, getlistaEstudiantes, deleteEstudiante } from "../services/datosEstudiante";
 import IEstudiante from "../components/entidades/IEstudiante";
-import { Estudiante } from "../components/estudiante/Estudiante";
+import Swal from "sweetalert2";
+
 
 export const context: any = React.createContext;
 
@@ -22,31 +19,36 @@ function InicioEstudiante() {
   }
   const [estudiante, setEstudiante] = useState<IEstudiante>(initialState);
   const [estudiantes, setEstudiantes] = useState<IEstudiante[]>([]);
- 
 
+  //registrar
   function guardarEstudiante(): void {
-     addEstudiante(estudiante); 
-     estudiantes.push(estudiante)
-     setEstudiantes(estudiantes)
+    addEstudiante(estudiante);
+    estudiantes.push(estudiante)
+    setEstudiantes(estudiantes)
+    if (1 === 1) {
+      Swal.fire({
+        text: `Se ha guardado a ${estudiante.nombres} ${estudiante.apellidos}`,
+        icon: 'success',
+
+      })
+    }
+    else {
+      Swal.fire({
+        text: `No se pudo guardar al usuario`,
+        icon: 'error',
+      })
+    }
   }
-  const { setForm } = useForm()
-  const { id } = useParams()
 
-  // useEffect(() => {
-  //   if (id) {
-  //     const estudiante = getEstudianteById(id);
-  //     setForm(estudiante)
-  //   }
-  // }, [id])
-
-  const alcambiarValor = (key: string, value: string) => {
-    setEstudiante({ ...estudiante, [key]: value })
+  const alcambiarValor = (name: string, value: string) => {
+    setEstudiante({ ...estudiante, [name]: value })
   }
 
   const limpiarFormulario = () => {
     setEstudiante(initialState)
   }
 
+  //listar
   useEffect(() => {
     setEstudiantes(getlistaEstudiantes());
   }, [])
@@ -55,11 +57,54 @@ function InicioEstudiante() {
   function verEstudiante(): void {
     console.log("ver estudiantes")
   }
+
+
+  //editar
+  // const { setForm } = useForm()
+
+  // const { id } = useParams()
+
+  // const setForm = (newValues: any) => {
+  //   setEstudiante(newValues)
+  // }
+
+  // useEffect(() => {
+  //   if (estudiante.id) {
+  //     const estudianteE = getEstudianteById(id);
+  //     setForm(estudianteE)
+  //   }
+  // }, [estudiante.id])
+
+
+  //eliminar
+  // function eliminarEstudiante(id?:string): void {
+  //   // console.log("eiminado")
+  //   deleteEstudiante(id);
+  //   setEstudiantes(getlistaEstudiantes().filter((estudiante:IEstudiante) => estudiante.id !== estudiante.id));
+
+  // }
+
+
+  // function eliminarEstudiante(id?:string): void {
+  //   let estudiantes = getlistaEstudiantes();
+  //   setEstudiantes (estudiantes.filter((estudiante:IEstudiante) => estudiante && estudiante.id !== id));
+  //   deleteEstudiante(id);
+  //   // setEstudiantes(estudiantes.filter((estudiante:IEstudiante) => estudiante.id !== id));
+  // }
+
+  function eliminarEstudiante(id?: string): void {
+    deleteEstudiante(id);
+    setEstudiantes(prevState => prevState.filter((estudiante: IEstudiante) => estudiante && estudiante.id !== id));
+  }
+
+
+
+
   return (
 
     <div className="App">
       <RegistrarEstudiante guardarEstudiante={guardarEstudiante} estudiante={estudiante} alCambiarValor={alcambiarValor} limpiar={limpiarFormulario} />
-      <ListarEstudiantes verEstudiante={verEstudiante} estudiantes={estudiantes} />
+      <ListarEstudiantes editarEstudiante={editarEstudiante} eliminarEstudiante={eliminarEstudiante} verEstudiante={verEstudiante} estudiantes={estudiantes} />
     </div>
 
   );

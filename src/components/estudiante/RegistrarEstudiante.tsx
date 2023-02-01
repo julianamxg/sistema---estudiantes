@@ -1,6 +1,5 @@
 import { useForm } from "../../hooks/useFormEstudiante";
 import { addEstudiante, getEstudianteById, editarEstudiante } from "../../services/datosEstudiante";
-import Swal from "sweetalert2";
 import { FunctionComponent, useEffect } from "react";
 import { BotonInicio } from "../BotonInicio";
 import IEstudiante from "../entidades/IEstudiante";
@@ -8,13 +7,13 @@ import IEstudiante from "../entidades/IEstudiante";
 export interface RegistrarEstudianteProps {
     guardarEstudiante: () => any
     estudiante: IEstudiante
-    alCambiarValor : (key : string, value: string) => any
-    limpiar : () => any
+    alCambiarValor: (key: string, value: string) => any
+    limpiar: () => any
 }
 
-export const RegistrarEstudiante: FunctionComponent<RegistrarEstudianteProps> = ({guardarEstudiante, estudiante, alCambiarValor, limpiar}) => {
+export const RegistrarEstudiante: FunctionComponent<RegistrarEstudianteProps> = ({ guardarEstudiante, estudiante, alCambiarValor, limpiar }) => {
     // const { id } = useParams()
-     const { handleInputChange, handleOptionChange, resetearForm, setForm } = useForm()
+    const { handleInputChange, handleOptionChange, resetearForm, setForm } = useForm()
 
     // useEffect(() => {
     //     if (estudiante.id) {
@@ -30,23 +29,8 @@ export const RegistrarEstudiante: FunctionComponent<RegistrarEstudianteProps> = 
         e.preventDefault();
         // resetearForm();
         guardarEstudiante();
+        editarEstudiante();
         // estudiante.id ? editarEstudiante(estudiante.id, estudiante) : addEstudiante(estudiante);
-        if (1 === 1) {
-            Swal.fire({
-                text: `Se ha guardado a ${estudiante.nombres} ${estudiante.apellidos}`,
-                icon: 'success',
-
-            })
-            // setTimeout(() => {
-            //     window.location.reload();
-            // }, 3000);
-        }
-        else {
-            Swal.fire({
-                text: `No se pudo guardar al usuario`,
-                icon: 'error',
-            })
-        }
     }
     return (
         <>
@@ -63,7 +47,19 @@ export const RegistrarEstudiante: FunctionComponent<RegistrarEstudianteProps> = 
 
                             <div className="grupo-input">
                                 <label htmlFor="apellidos">Apellidos</label>
-                                <input onChange={(e) => alCambiarValor(e.target.name, e.target.value)} value={estudiante.apellidos} type="text" name="apellidos" id="apellidos" placeholder="Ingresa los apellidos" />
+                                <input
+                                    onChange={(e) => {
+                                        const { target: { name, value } } = e;
+                                        alCambiarValor(name, value);
+                                    }}
+                                    value={estudiante.apellidos}
+                                    type="text"
+                                    name="apellidos"
+                                    id="apellidos"
+                                    placeholder="Ingresa los apellidos"
+                                />
+
+
                             </div>
                         </div>
                         <div className="grupo">

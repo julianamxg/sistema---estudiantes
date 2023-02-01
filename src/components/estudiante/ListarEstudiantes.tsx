@@ -1,17 +1,18 @@
 
 import { FunctionComponent, useContext, useEffect, useState } from "react"
-import { editarEstudiante, eliminarEstudiante, getlistaEstudiantes } from "../../services/datosEstudiante";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faRotateRight } from '@fortawesome/free-solid-svg-icons'
 import { Estudiante } from "./Estudiante";
 import IEstudiante from "../entidades/IEstudiante";
 
 export interface ListarEstudianteProps {
+    editarEstudiante: (id?:string) => any
+    eliminarEstudiante: (id?:string) => any
     verEstudiante: () => any
     estudiantes: IEstudiante[]
 }
 
-export const ListarEstudiantes: FunctionComponent<ListarEstudianteProps> = ({ verEstudiante, estudiantes }) => {
+export const ListarEstudiantes: FunctionComponent<ListarEstudianteProps> = ({editarEstudiante, eliminarEstudiante, verEstudiante, estudiantes }) => {
     // const [estudiantes, setEstudiantes] = useState([]);
     // useEffect(() => {
     //     setEstudiantes(getlistaEstudiantes());
@@ -45,7 +46,7 @@ export const ListarEstudiantes: FunctionComponent<ListarEstudianteProps> = ({ ve
                         <tbody>
                             {
                                 estudiantes.map((estudiante: IEstudiante) =>
-                                  estudiante?  <Estudiante key={estudiante.id} estudiante={estudiante} eliminarEstudiante={eliminarEstudiante}/> : null)}
+                                  estudiante?  <Estudiante key={estudiante.id} estudiante={estudiante} editarEstudiante={editarEstudiante} eliminarEstudiante={eliminarEstudiante}/> : null)}
                         </tbody>
                     </table>
                 ) : (

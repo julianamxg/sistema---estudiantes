@@ -2,17 +2,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import { eliminarEstudiante, getlistaEstudiantes } from '../../services/datosEstudiante';
 import IEstudiante from '../entidades/IEstudiante';
 import { FunctionComponent } from 'react';
+import { getlistaEstudiantes } from '../../services/datosEstudiante';
 
 export interface EstudianteProps {
-    // editarEstudiante: (id?:string) => any
+    editarEstudiante: (id?:string) => any
     eliminarEstudiante: (id?:string) => any
     estudiante : IEstudiante
 }
 
-export const Estudiante:FunctionComponent<EstudianteProps> = ( {eliminarEstudiante, estudiante}) => {
+export const Estudiante:FunctionComponent<EstudianteProps> = ( {editarEstudiante,eliminarEstudiante, estudiante}) => {
 
     const eliminarEstudiante2 = () => {
         Swal.fire({
@@ -30,11 +30,10 @@ export const Estudiante:FunctionComponent<EstudianteProps> = ( {eliminarEstudian
                     `Has eliminado a ${estudiante.nombres}`,
                     'success'
                   )
-                  setTimeout(() => {
-                    window.location.reload();
-                }, 4000);
+                  
                 
                 eliminarEstudiante(estudiante.id);
+                console.log(estudiante.id)
                 
             }
           })
@@ -64,4 +63,4 @@ export const Estudiante:FunctionComponent<EstudianteProps> = ( {eliminarEstudian
             </td>
         </tr>
     )
-}
+} 
