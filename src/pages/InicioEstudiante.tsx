@@ -4,6 +4,7 @@ import { RegistrarEstudiante } from '../components/estudiante/RegistrarEstudiant
 import { addEstudiante, editarEstudiante, getlistaEstudiantes, deleteEstudiante } from "../services/datosEstudiante";
 import IEstudiante from "../components/entidades/IEstudiante";
 import Swal from "sweetalert2";
+import uuid from 'react-uuid';
 
 
 export const context: any = React.createContext;
@@ -21,9 +22,10 @@ function InicioEstudiante() {
   const [estudiantes, setEstudiantes] = useState<IEstudiante[]>([]);
 
   //registrar
-  function guardarEstudiante(): void {
-    addEstudiante(estudiante);
-    estudiantes.push(estudiante)
+ function guardarEstudiante(): void {
+    let idEstudiante = uuid()
+    addEstudiante({ id: idEstudiante, ...estudiante });
+    estudiantes.push({ id: idEstudiante, ...estudiante })
     setEstudiantes(estudiantes)
     if (1 === 1) {
       Swal.fire({
@@ -94,9 +96,9 @@ function InicioEstudiante() {
 
   function eliminarEstudiante(id?: string): void {
     deleteEstudiante(id);
-    setEstudiantes(prevState => prevState.filter((estudiante: IEstudiante) => estudiante && estudiante.id !== id));
+    let est = estudiantes.filter((estudiante: IEstudiante) => estudiante && estudiante.id !== id)
+    setEstudiantes(est);
   }
-
 
 
 

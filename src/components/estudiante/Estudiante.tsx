@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import IEstudiante from '../entidades/IEstudiante';
 import { FunctionComponent } from 'react';
-import { getlistaEstudiantes } from '../../services/datosEstudiante';
 
 export interface EstudianteProps {
     editarEstudiante: (id?:string) => any
@@ -31,7 +30,7 @@ export const Estudiante:FunctionComponent<EstudianteProps> = ( {editarEstudiante
                     'success'
                   )
                   
-                
+                debugger
                 eliminarEstudiante(estudiante.id);
                 console.log(estudiante.id)
                 

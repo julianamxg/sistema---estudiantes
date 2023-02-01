@@ -6,6 +6,7 @@ import InicioMateria from './pages/InicioMateria';
 import Inicio from './pages/Inicio';
 import InicioNotas from './pages/InicioNotas';
 import IEstudiante from './components/entidades/IEstudiante';
+import EditarEstudiante from './pages/EditarEstudiante';
 
 const initialState:IEstudiante = {
   nombres: "",
@@ -22,7 +23,7 @@ function App() {
     <Router>
       <Routes>
       <Route path="/" element={<Inicio />} />
-        <Route path="/editar-estudiante/:id" element={<RegistrarEstudiante guardarEstudiante={()=>{}} estudiante={initialState} alCambiarValor={()=>{}} limpiar={() =>{}} />} />
+        <Route path="/editar-estudiante/:id" element={<EditarEstudiante />} />
         <Route path='/estudiantes' element={<InicioEstudiante />}></Route>
         <Route path='/materias' element={<InicioMateria />}></Route>
         <Route path='/notas' element={<InicioNotas />}></Route>

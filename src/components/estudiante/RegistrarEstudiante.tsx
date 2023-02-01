@@ -1,6 +1,6 @@
 import { useForm } from "../../hooks/useFormEstudiante";
-import { addEstudiante, getEstudianteById, editarEstudiante } from "../../services/datosEstudiante";
-import { FunctionComponent, useEffect } from "react";
+import { addEstudiante, editarEstudiante } from "../../services/datosEstudiante";
+import { FunctionComponent } from "react";
 import { BotonInicio } from "../BotonInicio";
 import IEstudiante from "../entidades/IEstudiante";
 
@@ -30,7 +30,7 @@ export const RegistrarEstudiante: FunctionComponent<RegistrarEstudianteProps> = 
         // resetearForm();
         guardarEstudiante();
         editarEstudiante();
-        // estudiante.id ? editarEstudiante(estudiante.id, estudiante) : addEstudiante(estudiante);
+        estudiante.id ? editarEstudiante(estudiante.id, estudiante) : addEstudiante(estudiante);
     }
     return (
         <>
