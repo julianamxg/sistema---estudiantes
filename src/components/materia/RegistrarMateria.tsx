@@ -1,9 +1,9 @@
-import { BotonInicio } from "../BotonInicio"
+import { Menu } from "../Menu"
 export const RegistrarMateria = () =>{
     
     return(
         <>
-        <BotonInicio />
+        <Menu />
         <div className="formulario materia">
         <form>
             <h2>Registrar materia</h2>

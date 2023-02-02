@@ -29,25 +29,15 @@ function EditarEstudiante() {
     }, [id]);
 
     function guardarEstudiante(): void {
-        // if (estudiante.id) {
-        //     estudiantes = estudiantes.filter((estudiante:IEstudiante) => estudiante.id !== id);
-        //   }
 
-        // addEstudiante({ id, ...estudiante });
-        // setEstudiantes([...estudiantes, { id, ...estudiante }])
-        // estudiante.id ? editarEstudiante(estudiante.id, estudiante) : addEstudiante(estudiante);
-
-        let id = uuid();
         if (estudiante.id) {
             editarEstudiante(estudiante.id, estudiante);
-          } else {
+        }
+        else {
             let id = uuid();
             addEstudiante({ id, ...estudiante });
             setEstudiantes([...estudiantes, { id, ...estudiante }]);
-          }
-          
-          
-
+        }
 
         if (1 === 1) {
             Swal.fire({
@@ -64,7 +54,6 @@ function EditarEstudiante() {
         }
     }
 
-
     const alcambiarValor = (name: string, value: string) => {
         setEstudiante({ ...estudiante, [name]: value })
     }
@@ -74,11 +63,9 @@ function EditarEstudiante() {
     }
 
     return (
-
         <div className="App">
             <RegistrarEstudiante guardarEstudiante={guardarEstudiante} estudiante={estudiante} alCambiarValor={alcambiarValor} limpiar={limpiarFormulario} />
         </div>
-
     );
 }
 

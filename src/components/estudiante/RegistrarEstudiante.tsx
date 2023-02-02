@@ -1,7 +1,6 @@
-import { useForm } from "../../hooks/useFormEstudiante";
-import { addEstudiante, editarEstudiante } from "../../services/datosEstudiante";
+import { editarEstudiante } from "../../services/datosEstudiante";
 import { FunctionComponent } from "react";
-import { BotonInicio } from "../BotonInicio";
+import { Menu } from "../Menu";
 import IEstudiante from "../entidades/IEstudiante";
 
 export interface RegistrarEstudianteProps {
@@ -12,29 +11,17 @@ export interface RegistrarEstudianteProps {
 }
 
 export const RegistrarEstudiante: FunctionComponent<RegistrarEstudianteProps> = ({ guardarEstudiante, estudiante, alCambiarValor, limpiar }) => {
-    // const { id } = useParams()
-    const { handleInputChange, handleOptionChange, resetearForm, setForm } = useForm()
-
-    // useEffect(() => {
-    //     if (estudiante.id) {
-    //         const estudiante = getEstudianteById(id);
-    //         setForm(estudiante)
-    //     }
-    // }, [estudiante.id])
-
-
-    //evento de vista
+   //evento de vista
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         limpiar()
         e.preventDefault();
-        // resetearForm();
         guardarEstudiante();
         editarEstudiante();
         // estudiante.id ? editarEstudiante(estudiante.id, estudiante) : addEstudiante(estudiante);
     }
     return (
         <>
-            <BotonInicio />
+            <Menu />
             <div className="formulario">
                 <form onSubmit={handleSubmit}>
                     <h2>Registrar estudiante</h2>

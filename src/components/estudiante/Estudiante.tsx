@@ -6,12 +6,12 @@ import IEstudiante from '../entidades/IEstudiante';
 import { FunctionComponent } from 'react';
 
 export interface EstudianteProps {
-    editarEstudiante: (id?:string) => any
-    eliminarEstudiante: (id?:string) => any
-    estudiante : IEstudiante
+    editarEstudiante: (id?: string) => any
+    eliminarEstudiante: (id?: string) => any
+    estudiante: IEstudiante
 }
 
-export const Estudiante:FunctionComponent<EstudianteProps> = ( {editarEstudiante,eliminarEstudiante, estudiante}) => {
+export const Estudiante: FunctionComponent<EstudianteProps> = ({ editarEstudiante, eliminarEstudiante, estudiante }) => {
 
     const eliminarEstudiante2 = () => {
         Swal.fire({
@@ -22,21 +22,20 @@ export const Estudiante:FunctionComponent<EstudianteProps> = ( {editarEstudiante
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Si, eliminar'
-          }).then((result) => {
+        }).then((result) => {
             if (result.isConfirmed) {
                 Swal.fire(
                     '¡Registro eliminado!',
                     `Has eliminado a ${estudiante.nombres}`,
                     'success'
-                  )
-                  
+                )
+
                 debugger
                 eliminarEstudiante(estudiante.id);
                 console.log(estudiante.id)
-                
+
             }
-          })
-       
+        })
     }
 
     return (

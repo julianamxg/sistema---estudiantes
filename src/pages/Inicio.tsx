@@ -1,9 +1,9 @@
-import { BotonInicio } from "../components/BotonInicio";
+import { Menu } from "../components/Menu";
 
 function Inicio() {
     return (
         <>
-            < BotonInicio />
+            < Menu />
             <div className="degrade">
                 <div className="inicioPagina">
                     <h2>Sistema de información de estudiantes</h2>

@@ -1,8 +1,8 @@
-import { BotonInicio } from "../BotonInicio"
+import { Menu } from "../Menu"
 export const RegistrarNotas = () => {
     return (
         <>
-            <BotonInicio />
+            <Menu />
             <div className="formulario">
                 <form>
                     <h2>Registrar notas</h2>

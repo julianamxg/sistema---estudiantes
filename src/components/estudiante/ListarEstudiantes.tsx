@@ -1,4 +1,3 @@
-
 import { FunctionComponent, useContext, useEffect, useState } from "react"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faRotateRight } from '@fortawesome/free-solid-svg-icons'
@@ -13,11 +12,6 @@ export interface ListarEstudianteProps {
 }
 
 export const ListarEstudiantes: FunctionComponent<ListarEstudianteProps> = ({editarEstudiante, eliminarEstudiante, verEstudiante, estudiantes }) => {
-    // const [estudiantes, setEstudiantes] = useState([]);
-    // useEffect(() => {
-    //     setEstudiantes(getlistaEstudiantes());
-    // }, [])
-
     const botonRecargar = document.getElementById("botonRecargar");
     botonRecargar?.addEventListener("click", function () {
         window.location.reload();
