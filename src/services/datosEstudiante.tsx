@@ -28,7 +28,7 @@ export const addEstudiante = (estudiante: IEstudiante) => {
 
 export const editarEstudiante = (id?: string, newEstudiante?: any) => {
     let estudiantes = getlistaEstudiantes();
-    estudiantes = estudiantes.filter((estudiante:IEstudiante) => estudiante && estudiante.id !== id); localStorage["@estudiantes"] = JSON.stringify(estudiantes);
+    estudiantes = estudiantes.filter((estudiante:IEstudiante) => estudiante.id !== id);
     estudiantes.push(newEstudiante);
     localStorage["@estudiantes"] = JSON.stringify(estudiantes)
 }

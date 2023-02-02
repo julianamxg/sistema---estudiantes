@@ -28,9 +28,7 @@ function EditarEstudiante() {
     }, [estudiante.id])
 
     function guardarEstudiante(): void {
-        let idEstudiante = uuid()
-        addEstudiante({ id: idEstudiante, ...estudiante });
-        estudiantes.push({ id: idEstudiante, ...estudiante })
+       
         setEstudiantes(estudiantes)
         if (1 === 1) {
             Swal.fire({
