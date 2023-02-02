@@ -26,19 +26,34 @@ export const addEstudiante = (estudiante: IEstudiante) => {
 
 }
 
+// export const editarEstudiante = (id?: string, newEstudiante?: any) => {
+//     let estudiantes = getlistaEstudiantes();
+//     estudiantes = estudiantes.filter((estudiante: IEstudiante) => estudiante.id !== id);
+//     estudiantes.push(newEstudiante);
+//     localStorage["@estudiantes"] = JSON.stringify(estudiantes)
+
 export const editarEstudiante = (id?: string, newEstudiante?: any) => {
     let estudiantes = getlistaEstudiantes();
-    estudiantes = estudiantes.filter((estudiante:IEstudiante) => estudiante.id !== id);
-    estudiantes.push(newEstudiante);
-    localStorage["@estudiantes"] = JSON.stringify(estudiantes)
+    estudiantes = estudiantes.map((estudiante: IEstudiante) => estudiante.id === id ? newEstudiante : estudiante);
+    localStorage["@estudiantes"] = JSON.stringify(estudiantes);
+
+
+
+    // let estudiantes = getlistaEstudiantes();
+    // let estudianteAEditar = estudiantes.find((estudiante: IEstudiante) => estudiante.id === id);
+    // if (estudianteAEditar) {
+    //     Object.assign(estudianteAEditar, newEstudiante);
+    // }
+    // localStorage["@estudiantes"] = JSON.stringify(estudiantes)
+
 }
 
-export const deleteEstudiante = (id?:string) => { 
+export const deleteEstudiante = (id?: string) => {
     let estudiantes = getlistaEstudiantes();
-     estudiantes = estudiantes.filter((estudiante:IEstudiante) => estudiante && estudiante.id !== id); localStorage["@estudiantes"] = JSON.stringify(estudiantes);
-     estudiantes = localStorage["@estudiantes"] ? JSON.parse(localStorage["@estudiantes"]) : [];
+    estudiantes = estudiantes.filter((estudiante: IEstudiante) => estudiante && estudiante.id !== id); localStorage["@estudiantes"] = JSON.stringify(estudiantes);
+    estudiantes = localStorage["@estudiantes"] ? JSON.parse(localStorage["@estudiantes"]) : [];
 
-    };
+};
 
 
 
