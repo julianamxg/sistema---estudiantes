@@ -30,7 +30,7 @@ export const RegistrarEstudiante: FunctionComponent<RegistrarEstudianteProps> = 
         // resetearForm();
         guardarEstudiante();
         editarEstudiante();
-        estudiante.id ? editarEstudiante(estudiante.id, estudiante) : addEstudiante(estudiante);
+        // estudiante.id ? editarEstudiante(estudiante.id, estudiante) : addEstudiante(estudiante);
     }
     return (
         <>
@@ -123,3 +123,4 @@ export const RegistrarEstudiante: FunctionComponent<RegistrarEstudianteProps> = 
     )
 
 }
+
