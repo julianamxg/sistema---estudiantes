@@ -6,11 +6,8 @@ import IEstudiante from "../components/entidades/IEstudiante";
 import Swal from "sweetalert2";
 import uuid from 'react-uuid';
 
-interface RegistrarEstudianteProps {
-  agregarEstudiante: (estudiante: IEstudiante) => any
-}
 
-const InicioEstudiante: FunctionComponent<RegistrarEstudianteProps> = ({agregarEstudiante}) => {
+const InicioEstudiante = () => {
   const initialState: IEstudiante = {
     nombres: "",
     apellidos: "",
@@ -71,7 +68,7 @@ const InicioEstudiante: FunctionComponent<RegistrarEstudianteProps> = ({agregarE
   
   return (
     <div className="App">
-      <RegistrarEstudiante agregarEstudiante={agregarEstudiante} guardarEstudiante={guardarEstudiante} estudiante={estudiante} alCambiarValor={alcambiarValor} limpiar={limpiarFormulario} />
+      <RegistrarEstudiante guardarEstudiante={guardarEstudiante} estudiante={estudiante} alCambiarValor={alcambiarValor} limpiar={limpiarFormulario} />
       <ListarEstudiantes editarEstudiante={editarEstudiante} eliminarEstudiante={eliminarEstudiante} verEstudiante={verEstudiante} estudiantes={estudiantes} />
     </div>
   );

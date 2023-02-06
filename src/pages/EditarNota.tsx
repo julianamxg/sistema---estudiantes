@@ -1,13 +1,20 @@
-import { useEffect, useState } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import uuid from "react-uuid";
 import Swal from "sweetalert2";
+import IEstudiante from "../components/entidades/IEstudiante";
+import IMateria from "../components/entidades/IMateria";
 import INotas from "../components/entidades/INotas";
 import { RegistrarNotas } from "../components/notas/RegistrarNotas";
 import { editarNota, getNotaById, addNota } from "../services/datosNotas";
 
 
-function EditarNota() {
+interface CatalogosNotas {
+    listaMaterias: IMateria[]
+    listaEstudiantes: IEstudiante[]
+}
+
+const EditarNota:FunctionComponent<CatalogosNotas> = ({listaEstudiantes, listaMaterias}) => {
     const [notas, setNotas] = useState<INotas[]>([]);
     const [nota, setNota] = useState<INotas>({
         estudiante: "",
@@ -63,8 +70,11 @@ function EditarNota() {
         console.log('limpiar')
     }
 
+
+    
+
     return (
-        <RegistrarNotas guardarNota={guardarNota} alCambiarValor={alcambiarValor} limpiar={limpiarFormulario} nota={nota} />
+        <RegistrarNotas guardarNota={guardarNota} alCambiarValor={alcambiarValor} limpiar={limpiarFormulario} nota={nota} catalogos={{listaMaterias, listaEstudiantes}}/>
     )
 }
 

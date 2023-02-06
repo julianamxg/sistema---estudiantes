@@ -63,15 +63,9 @@ function EditarEstudiante() {
         console.log('limpiar')
     }
 
-    const agregarEstudiante = (estudiante: IEstudiante) => {
-        let copiaEstudiantes = estudiantes;
-        copiaEstudiantes.push(estudiante);
-        setEstudiantes(copiaEstudiantes);
-      }
-
     return (
         <div className="App">
-            <RegistrarEstudiante agregarEstudiante={agregarEstudiante} guardarEstudiante={guardarEstudiante} estudiante={estudiante} alCambiarValor={alcambiarValor} limpiar={limpiarFormulario} />
+            <RegistrarEstudiante guardarEstudiante={guardarEstudiante} estudiante={estudiante} alCambiarValor={alcambiarValor} limpiar={limpiarFormulario} />
         </div>
     );
 }

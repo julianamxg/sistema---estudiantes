@@ -1,42 +1,29 @@
 import { FunctionComponent } from "react";import IEstudiante from "../entidades/IEstudiante";
 import IMateria from "../entidades/IMateria";
  import INotas from "../entidades/INotas";
+import { ListarEstudiantes } from "../estudiante/ListarEstudiantes";
 import { Menu } from "../Menu"
 
-let estudiantes = localStorage.getItem("@estudiantes");
-let estudiantesArray: IEstudiante[] = [];
-if (estudiantes) {
-    try {
-        estudiantesArray = JSON.parse(estudiantes);
-    } catch (error) {
-        console.error("No se pudo parsear el JSON de estudiantes", error);
-    }
+interface CatalogosNotas {
+    listaMaterias : IMateria[]
+    listaEstudiantes : IEstudiante[]
 }
-let materias = localStorage.getItem("@materias");
-let materiasArray: IMateria[] = [];
-if (materias) {
-    materiasArray = JSON.parse(materias);
-    
-}
-
-
-
-
 
 export interface RegistrarNotasProps {
     guardarNota: () => any;
     nota: INotas;
     alCambiarValor: (key: string, value: string) => any
     limpiar: () => any;
+    catalogos : CatalogosNotas
 }
-export const RegistrarNotas: FunctionComponent<RegistrarNotasProps> = ({ guardarNota, nota, alCambiarValor, limpiar }) => {
+
+export const RegistrarNotas: FunctionComponent<RegistrarNotasProps> = ({ guardarNota, nota, alCambiarValor, limpiar, catalogos }) => {
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         limpiar();
         e.preventDefault();
         guardarNota();
     }
 
- 
     return (
         <>
             <Menu />
@@ -50,9 +37,9 @@ export const RegistrarNotas: FunctionComponent<RegistrarNotasProps> = ({ guardar
                             <select onChange={(e) => alCambiarValor(e.target.name, e.target.value)} value={nota.materia} name="materia" id="materia">
                         
                                <option>Selecciona...</option>
-                                {materiasArray.map((materias) => (
+                                {catalogos.listaMaterias.map((materia) => (
                                        
-                                    <option key={materias.id}>{materias.materia}</option>
+                                    <option key={materia.id}>{materia.materia}</option>
                                 ))}
                             </select>
 
@@ -61,8 +48,8 @@ export const RegistrarNotas: FunctionComponent<RegistrarNotasProps> = ({ guardar
                             <label htmlFor="estudiante">Estudiante</label>
                             <select onChange={(e) => alCambiarValor(e.target.name, e.target.value)} value={nota.estudiante} name="estudiante" id="estudiante">
                                 <option>Selecciona...</option>
-                                {estudiantesArray.map((estudiantes) => (
-                                    <option key={estudiantes.id}>{estudiantes.nombres}</option>
+                                {catalogos.listaEstudiantes.map((estudiante) => (
+                                    <option key={estudiante.id}>{estudiante.nombres}</option>
                                 ))}
                             </select>
                         </div>

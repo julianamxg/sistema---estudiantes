@@ -4,14 +4,13 @@ import { Menu } from "../Menu";
 import IEstudiante from "../entidades/IEstudiante";
 
 export interface RegistrarEstudianteProps {
-    agregarEstudiante: (estudiante: IEstudiante) => void
     guardarEstudiante: () => any
     estudiante: IEstudiante
     alCambiarValor: (key: string, value: string) => any
     limpiar: () => any
 }
 
-export const RegistrarEstudiante: FunctionComponent<RegistrarEstudianteProps> = ({agregarEstudiante, guardarEstudiante, estudiante, alCambiarValor, limpiar }) => {
+export const RegistrarEstudiante: FunctionComponent<RegistrarEstudianteProps> = ({ guardarEstudiante, estudiante, alCambiarValor, limpiar }) => {
    //evento de vista
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         limpiar()
@@ -103,7 +102,7 @@ export const RegistrarEstudiante: FunctionComponent<RegistrarEstudianteProps> = 
                             </div>
                         </div>
                     </div>
-                    <button onClick={ ()=>agregarEstudiante(estudiante)} type="submit">Guardar</button>
+                    <button type="submit">Guardar</button>
                 </form>
 
             </div>

@@ -7,38 +7,31 @@ import InicioNotas from './pages/InicioNotas';
 import IEstudiante from './components/entidades/IEstudiante';
 import EditarEstudiante from './pages/EditarEstudiante';
 import EditarMateria from './pages/EditarMateria';
-import { useState } from 'react';
 import EditarNota from './pages/EditarNota';
-
-const initialState: IEstudiante = {
-  nombres: "",
-  apellidos: "",
-  tDocumento: "",
-  nDocumento: 0,
-  grado: "",
-  dGrado: ""
-}
+import IMateria from './components/entidades/IMateria';
+import { getlistaEstudiantes } from './services/datosEstudiante';
+import { getlistaMaterias } from './services/datosMateria';
 
 function App() {
-
-  const [estudiantes, setEstudiantes] = useState<IEstudiante[]>([]);
-
-  const agregarEstudiante = (estudiante: IEstudiante) => {
-    let copiaEstudiantes = estudiantes;
-    copiaEstudiantes.push(estudiante);
-    setEstudiantes(copiaEstudiantes);
+  function listaEstudiantes(): IEstudiante[] {
+    return getlistaEstudiantes()
   }
+  
+  function listaMaterias(): IMateria[] {
+    return getlistaMaterias();
+  }
+  
 
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Inicio />} />
-        <Route path='/estudiantes' element={<InicioEstudiante agregarEstudiante={agregarEstudiante} />}></Route>
+        <Route path='/estudiantes' element={<InicioEstudiante/>}></Route>
         <Route path="/editar-estudiante/:id" element={<EditarEstudiante />} />
         <Route path='/materias' element={<InicioMateria />}></Route>
         <Route path="/editar-materia/:id" element={<EditarMateria />} />
-        <Route path='/notas' element={<InicioNotas />}></Route>
-        <Route path="/editar-nota/:id" element={<EditarNota />} />
+        <Route path='/notas' element={<InicioNotas listaEstudiantes={listaEstudiantes()} listaMaterias={listaMaterias()}/>}></Route>
+        <Route path="/editar-nota/:id" element={<EditarNota listaEstudiantes={listaEstudiantes()} listaMaterias={listaMaterias()}/>} />
       </Routes>
     </Router>
   );

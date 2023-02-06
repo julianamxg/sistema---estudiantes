@@ -1,13 +1,22 @@
 import { RegistrarNotas } from "../components/notas/RegistrarNotas";
 import { ListarNotas } from "../components/notas/ListarNotas";
 import INotas from "../components/entidades/INotas";
-import { useEffect, useState } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 import IMateria from "../components/entidades/IMateria";
 import { addNota, deleteNota, getListaNotas } from "../services/datosNotas";
 import uuid from "react-uuid";
 import Swal from "sweetalert2";
+import IEstudiante from "../components/entidades/IEstudiante";
+import { getlistaMaterias } from "../services/datosMateria";
+import { getlistaEstudiantes } from "../services/datosEstudiante";
 
-function InicioNotas() {
+
+export interface CatalogosNotas {
+    listaMaterias: IMateria[]
+    listaEstudiantes: IEstudiante[]
+}
+
+const InicioNotas: FunctionComponent<CatalogosNotas> = ({ listaEstudiantes, listaMaterias }) => {
     const initialState: INotas = {
         estudiante: "",
         materia: "",
@@ -19,6 +28,10 @@ function InicioNotas() {
     //listar
     useEffect(() => {
         setNotas(getListaNotas());
+        listaMaterias = getlistaMaterias();
+        // setNotas(getlistaMaterias());
+        listaEstudiantes = getlistaEstudiantes()
+        // setNotas(getlistaEstudiantes());
     }, [])
 
     function guardarNota() {
@@ -55,10 +68,11 @@ function InicioNotas() {
         let nota = notas.filter((nota: INotas) => nota && nota.id !== id)
         setNotas(nota);
     }
-    
+
+
     return (
         <div className="App">
-            <RegistrarNotas guardarNota={guardarNota} alCambiarValor={alcambiarValor} limpiar={limpiarFormulario} nota={nota} />
+            <RegistrarNotas guardarNota={guardarNota} alCambiarValor={alcambiarValor} limpiar={limpiarFormulario} nota={nota} catalogos={{listaMaterias, listaEstudiantes}} />
             <ListarNotas eliminarNota={eliminarNota} notas={notas} />
         </div>
     )
