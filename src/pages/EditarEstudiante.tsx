@@ -20,13 +20,13 @@ function EditarEstudiante() {
     const { id } = useParams();
 
     useEffect(() => {
-        const cargarEstudiante = async () => {
-            const estudiante = await getEstudianteById(id);
-            setEstudiante(estudiante);
-        };
-
         cargarEstudiante();
     }, [id]);
+    
+    const cargarEstudiante = async () => {
+        const estudiante = await getEstudianteById(id);
+        setEstudiante(estudiante);
+    };
 
     function guardarEstudiante(): void {
 
@@ -39,13 +39,14 @@ function EditarEstudiante() {
             setEstudiantes([...estudiantes, { id, ...estudiante }]);
         }
 
-        if (1 === 1) {
+        if (estudiante) {
             Swal.fire({
                 text: `Se ha guardado a ${estudiante.nombres} ${estudiante.apellidos}`,
                 icon: 'success',
 
             })
         }
+     
         else {
             Swal.fire({
                 text: `No se pudo guardar al usuario`,
@@ -62,9 +63,15 @@ function EditarEstudiante() {
         console.log('limpiar')
     }
 
+    const agregarEstudiante = (estudiante: IEstudiante) => {
+        let copiaEstudiantes = estudiantes;
+        copiaEstudiantes.push(estudiante);
+        setEstudiantes(copiaEstudiantes);
+      }
+
     return (
         <div className="App">
-            <RegistrarEstudiante guardarEstudiante={guardarEstudiante} estudiante={estudiante} alCambiarValor={alcambiarValor} limpiar={limpiarFormulario} />
+            <RegistrarEstudiante agregarEstudiante={agregarEstudiante} guardarEstudiante={guardarEstudiante} estudiante={estudiante} alCambiarValor={alcambiarValor} limpiar={limpiarFormulario} />
         </div>
     );
 }

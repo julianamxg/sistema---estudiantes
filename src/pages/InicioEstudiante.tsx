@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, createContext } from 'react';
+import React, { useState, useEffect, useContext, createContext, FunctionComponent } from 'react';
 import { ListarEstudiantes } from '../components/estudiante/ListarEstudiantes';
 import { RegistrarEstudiante } from '../components/estudiante/RegistrarEstudiante';
 import { addEstudiante, editarEstudiante, getlistaEstudiantes, deleteEstudiante } from "../services/datosEstudiante";
@@ -6,10 +6,11 @@ import IEstudiante from "../components/entidades/IEstudiante";
 import Swal from "sweetalert2";
 import uuid from 'react-uuid';
 
+interface RegistrarEstudianteProps {
+  agregarEstudiante: (estudiante: IEstudiante) => any
+}
 
-export const context: any = React.createContext;
-
-function InicioEstudiante() {
+const InicioEstudiante: FunctionComponent<RegistrarEstudianteProps> = ({agregarEstudiante}) => {
   const initialState: IEstudiante = {
     nombres: "",
     apellidos: "",
@@ -20,6 +21,11 @@ function InicioEstudiante() {
   }
   const [estudiante, setEstudiante] = useState<IEstudiante>(initialState);
   const [estudiantes, setEstudiantes] = useState<IEstudiante[]>([]);
+
+  useEffect(() => {
+    setEstudiantes(getlistaEstudiantes());
+    console.log(getlistaEstudiantes())
+  }, [])
 
   //registrar
   function guardarEstudiante(): void {
@@ -51,11 +57,6 @@ function InicioEstudiante() {
   }
 
   //listar
-  useEffect(() => {
-    setEstudiantes(getlistaEstudiantes());
-  }, [])
-
-
   function verEstudiante(): void {
     console.log("ver estudiantes")
   }
@@ -68,7 +69,7 @@ function InicioEstudiante() {
   
   return (
     <div className="App">
-      <RegistrarEstudiante guardarEstudiante={guardarEstudiante} estudiante={estudiante} alCambiarValor={alcambiarValor} limpiar={limpiarFormulario} />
+      <RegistrarEstudiante agregarEstudiante={agregarEstudiante} guardarEstudiante={guardarEstudiante} estudiante={estudiante} alCambiarValor={alcambiarValor} limpiar={limpiarFormulario} />
       <ListarEstudiantes editarEstudiante={editarEstudiante} eliminarEstudiante={eliminarEstudiante} verEstudiante={verEstudiante} estudiantes={estudiantes} />
     </div>
   );

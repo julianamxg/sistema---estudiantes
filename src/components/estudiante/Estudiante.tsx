@@ -40,7 +40,6 @@ export const Estudiante: FunctionComponent<EstudianteProps> = ({ editarEstudiant
 
     return (
         <tr>
-            {/* <td>{id}</td> */}
             <td>{estudiante.nombres}</td>
             <td>{estudiante.apellidos}</td>
             <td>{estudiante.tDocumento}</td>

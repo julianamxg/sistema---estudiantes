@@ -12,6 +12,7 @@ export interface ListarEstudianteProps {
 }
 
 export const ListarEstudiantes: FunctionComponent<ListarEstudianteProps> = ({editarEstudiante, eliminarEstudiante, verEstudiante, estudiantes }) => {
+    
     const botonRecargar = document.getElementById("botonRecargar");
     botonRecargar?.addEventListener("click", function () {
         window.location.reload();

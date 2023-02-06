@@ -1,7 +1,6 @@
 import uuid from "react-uuid";
 import IEstudiante from "../components/entidades/IEstudiante";
 //estudiante
-import { Estudiante } from "../components/estudiante/Estudiante";
 
 export const getlistaEstudiantes = () => {
     if (!localStorage["@estudiantes"]) {
