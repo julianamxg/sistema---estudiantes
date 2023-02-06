@@ -35,9 +35,24 @@ export const Nota: FunctionComponent<Notasprops> = ({ editarNota, eliminarNota, 
             }
         })
     }
+
+    //let colorTd: Boolean
+
+    let colorTd: HTMLElement | null = document.getElementById("colorTd");
+    if(nota.promedio == 25){
+        colorTd?.classList.add("malRojo");
+    }
+
+    else if(nota.promedio < 45){
+        colorTd?.classList.add("bienVerde");
+    }
+
+
+
+
     return (
-        <tr>
-            <td>{nota.materia}</td>
+        <tr id="colorTd">
+            <td >{nota.materia}</td>
             <td>{nota.estudiante}</td>
             <td>{nota.promedio}</td>
             <td>

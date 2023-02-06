@@ -61,6 +61,8 @@ const InicioEstudiante: FunctionComponent<RegistrarEstudianteProps> = ({agregarE
     console.log("ver estudiantes")
   }
 
+ 
+
   function eliminarEstudiante(id?: string): void {
     deleteEstudiante(id);
     let est = estudiantes.filter((estudiante: IEstudiante) => estudiante && estudiante.id !== id)
