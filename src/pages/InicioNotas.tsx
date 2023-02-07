@@ -29,8 +29,9 @@ const InicioNotas: FunctionComponent = () => {
     function guardarNota() {
         let idNota = uuid()
         addNota({ id: idNota, ...nota });
-        notas.push({ id: idNota, ...nota })
-        setNotas(notas)
+        let listaNotas = [...notas]
+        listaNotas.push({ id: idNota, ...nota })
+        setNotas(listaNotas)
         if (1 === 1) {
             Swal.fire({
                 text: `Se ha guardado la nota de ${nota.estudiante} en la materia de ${nota.materia} con un promedio de ${nota.promedio}`,
@@ -51,7 +52,7 @@ const InicioNotas: FunctionComponent = () => {
     }
 
     const limpiarFormulario = () => {
-        setNota(initialState)
+        // setNota(initialState)
     }
 
 

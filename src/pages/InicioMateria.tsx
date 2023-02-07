@@ -18,8 +18,9 @@ function InicioMateria() {
   function guardarMateria(): void {
     let idMateria = uuid()
     addMateria({ id: idMateria, ...materia });
-    materias.push({ id: idMateria, ...materia })
-    setMaterias(materias)
+    let listaMaterias = [...materias]
+    listaMaterias.push({ id: idMateria, ...materia })
+    setMaterias(listaMaterias)
     if (1 === 1) {
       Swal.fire({
         text: `Se ha guardado la materia de ${materia.materia}`,

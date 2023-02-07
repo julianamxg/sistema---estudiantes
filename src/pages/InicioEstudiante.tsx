@@ -28,8 +28,9 @@ const InicioEstudiante = () => {
   function guardarEstudiante(): void {
     let idEstudiante = uuid()
     addEstudiante({ id: idEstudiante, ...estudiante });
-    estudiantes.push({ id: idEstudiante, ...estudiante })
-    setEstudiantes(estudiantes)
+    let listaEstudiantes=[...estudiantes]
+    listaEstudiantes.push({ id: idEstudiante, ...estudiante })
+    setEstudiantes(listaEstudiantes)
     if (1 === 1) {
       Swal.fire({
         text: `Se ha guardado a ${estudiante.nombres} ${estudiante.apellidos}`,
