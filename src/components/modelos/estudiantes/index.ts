@@ -1,5 +1,5 @@
 import uuid from "react-uuid";
-import IEstudiante from "../components/entidades/IEstudiante";
+import IEstudiante from "./entidades/IEstudiante";
 //estudiante
 
 export const getlistaEstudiantes = () => {

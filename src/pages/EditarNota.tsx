@@ -2,19 +2,17 @@ import { FunctionComponent, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import uuid from "react-uuid";
 import Swal from "sweetalert2";
-import IEstudiante from "../components/entidades/IEstudiante";
-import IMateria from "../components/entidades/IMateria";
-import INotas from "../components/entidades/INotas";
+import IEstudiante from "../components/modelos/estudiantes/entidades/IEstudiante";
+import IMateria from "../components/modelos/materias/entidades/IMateria";
+import INotas from "../components/modelos/notas/entidades/INotas";
 import { RegistrarNotas } from "../components/notas/RegistrarNotas";
-import { editarNota, getNotaById, addNota } from "../services/datosNotas";
+import { getlistaEstudiantes } from "../components/modelos/estudiantes";
+import { getlistaMaterias } from "../components/modelos/materias";
+import { editarNota, getNotaById, addNota } from "../components/modelos/notas";
 
 
-interface CatalogosNotas {
-    listaMaterias: IMateria[]
-    listaEstudiantes: IEstudiante[]
-}
 
-const EditarNota:FunctionComponent<CatalogosNotas> = ({listaEstudiantes, listaMaterias}) => {
+const EditarNota= () => {
     const [notas, setNotas] = useState<INotas[]>([]);
     const [nota, setNota] = useState<INotas>({
         estudiante: "",
@@ -72,9 +70,16 @@ const EditarNota:FunctionComponent<CatalogosNotas> = ({listaEstudiantes, listaMa
 
 
     
+    function listaEstudiantes(): IEstudiante[] {
+        return getlistaEstudiantes()
+      }
+      
+      function listaMaterias(): IMateria[] {
+        return getlistaMaterias();
+      }
 
     return (
-        <RegistrarNotas guardarNota={guardarNota} alCambiarValor={alcambiarValor} limpiar={limpiarFormulario} nota={nota} catalogos={{listaMaterias, listaEstudiantes}}/>
+        <RegistrarNotas guardarNota={guardarNota} alCambiarValor={alcambiarValor} limpiar={limpiarFormulario} nota={nota} catalogos={{listaMaterias: listaMaterias(), listaEstudiantes: listaEstudiantes()}}/>
     )
 }
 

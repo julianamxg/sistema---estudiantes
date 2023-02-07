@@ -1,9 +1,9 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faRotateRight } from '@fortawesome/free-solid-svg-icons'
-import INotas from '../entidades/INotas';
+import INotas from '../modelos/notas/entidades/INotas';
 import { FunctionComponent } from 'react';
 import { Nota } from './Nota';
-import { editarNota } from '../../services/datosNotas';
+import { editarNota } from '../modelos/notas';
 
 export interface ListarNotasProps {
     eliminarNota: (id?: string) => any

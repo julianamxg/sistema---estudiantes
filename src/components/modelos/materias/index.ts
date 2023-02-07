@@ -1,5 +1,5 @@
 import uuid from "react-uuid";
-import IMateria from "../components/entidades/IMateria";
+import IMateria from "./entidades/IMateria";
 
 export const getlistaMaterias = () => {
     if (!localStorage["@materias"]) {

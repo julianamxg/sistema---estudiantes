@@ -1,5 +1,5 @@
 import uuid from "react-uuid";
-import INotas from "../components/entidades/INotas";
+import INotas from "./entidades/INotas";
 
 export const getListaNotas = () =>{
     if(!localStorage['@notas']){

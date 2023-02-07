@@ -1,7 +1,7 @@
-import { editarEstudiante } from "../../services/datosEstudiante";
+import { editarEstudiante } from "../modelos/estudiantes";
 import { FunctionComponent } from "react";
 import { Menu } from "../Menu";
-import IEstudiante from "../entidades/IEstudiante";
+import IEstudiante from "../modelos/estudiantes/entidades/IEstudiante";
 
 export interface RegistrarEstudianteProps {
     guardarEstudiante: () => any

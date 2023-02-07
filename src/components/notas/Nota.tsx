@@ -3,8 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { FunctionComponent } from "react"
 import { Link } from "react-router-dom"
 import Swal from "sweetalert2"
-import { editarNota } from "../../services/datosNotas"
-import INotas from "../entidades/INotas"
+import { editarNota } from "../modelos/notas"
+import INotas from "../modelos/notas/entidades/INotas"
 
 export interface Notasprops {
     editarNota: (id?: string) => any

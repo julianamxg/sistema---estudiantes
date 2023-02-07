@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import IEstudiante from '../entidades/IEstudiante';
+import IEstudiante from '../modelos/estudiantes/entidades/IEstudiante';
 import { FunctionComponent } from 'react';
 
 export interface EstudianteProps {

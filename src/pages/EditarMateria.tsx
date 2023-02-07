@@ -1,9 +1,9 @@
 import uuid from "react-uuid";
 import Swal from "sweetalert2";
 import { useParams } from "react-router-dom";
-import IMateria from "../components/entidades/IMateria";
+import IMateria from "../components/modelos/materias/entidades/IMateria";
 import { useEffect, useState } from "react";
-import { addMateria, editarMateria, getMateriaById } from "../services/datosMateria";
+import { addMateria, editarMateria, getMateriaById } from "../components/modelos/materias";
 import { RegistrarMateria } from "../components/materia/RegistrarMateria";
 
 function EditarMateria() {

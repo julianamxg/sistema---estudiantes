@@ -2,7 +2,7 @@ import { FunctionComponent, useContext, useEffect, useState } from "react"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faRotateRight } from '@fortawesome/free-solid-svg-icons'
 import { Estudiante } from "./Estudiante";
-import IEstudiante from "../entidades/IEstudiante";
+import IEstudiante from "../modelos/estudiantes/entidades/IEstudiante";
 
 export interface ListarEstudianteProps {
     editarEstudiante: (id?:string) => any

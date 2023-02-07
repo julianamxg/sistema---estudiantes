@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faRotateRight } from '@fortawesome/free-solid-svg-icons'
-import IMateria from '../entidades/IMateria'
+import IMateria from '../modelos/materias/entidades/IMateria'
 import { FunctionComponent } from 'react'
 import { Materia } from './Materia'
 

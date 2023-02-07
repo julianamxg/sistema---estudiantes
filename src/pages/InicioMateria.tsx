@@ -1,9 +1,9 @@
 import { RegistrarMateria } from "../components/materia/RegistrarMateria"
 import { ListarMaterias } from "../components/materia/ListarMaterias";
-import IMateria from "../components/entidades/IMateria";
+import IMateria from "../components/modelos/materias/entidades/IMateria";
 import { useEffect, useState } from "react";
 import uuid from "react-uuid";
-import { addMateria, deleteMateria, getlistaMaterias } from "../services/datosMateria";
+import { addMateria, deleteMateria, getlistaMaterias } from "../components/modelos/materias";
 import Swal from "sweetalert2";
 
 function InicioMateria() {

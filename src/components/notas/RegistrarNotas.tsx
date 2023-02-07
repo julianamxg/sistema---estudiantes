@@ -1,6 +1,6 @@
-import { FunctionComponent } from "react";import IEstudiante from "../entidades/IEstudiante";
-import IMateria from "../entidades/IMateria";
- import INotas from "../entidades/INotas";
+import { FunctionComponent } from "react";import IEstudiante from "../modelos/estudiantes/entidades/IEstudiante";
+import IMateria from "../modelos/materias/entidades/IMateria";
+ import INotas from "../modelos/notas/entidades/INotas";
 import { ListarEstudiantes } from "../estudiante/ListarEstudiantes";
 import { Menu } from "../Menu"
 

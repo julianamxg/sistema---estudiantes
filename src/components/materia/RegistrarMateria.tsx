@@ -1,5 +1,5 @@
 import { FunctionComponent } from "react";
-import IMateria from "../entidades/IMateria";
+import IMateria from "../modelos/materias/entidades/IMateria";
 import { Menu } from "../Menu"
 export interface RegistrarMateriaProps{
     guardarMateria: () => any;

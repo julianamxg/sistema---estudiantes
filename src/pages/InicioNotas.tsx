@@ -1,22 +1,18 @@
 import { RegistrarNotas } from "../components/notas/RegistrarNotas";
 import { ListarNotas } from "../components/notas/ListarNotas";
-import INotas from "../components/entidades/INotas";
+import INotas from "../components/modelos/notas/entidades/INotas";
 import { FunctionComponent, useEffect, useState } from "react";
-import IMateria from "../components/entidades/IMateria";
-import { addNota, deleteNota, getListaNotas } from "../services/datosNotas";
+import IMateria from "../components/modelos/materias/entidades/IMateria";
+import { addNota, deleteNota, getListaNotas } from "../components/modelos/notas";
 import uuid from "react-uuid";
 import Swal from "sweetalert2";
-import IEstudiante from "../components/entidades/IEstudiante";
-import { getlistaMaterias } from "../services/datosMateria";
-import { getlistaEstudiantes } from "../services/datosEstudiante";
+import IEstudiante from "../components/modelos/estudiantes/entidades/IEstudiante";
+import { getlistaMaterias } from "../components/modelos/materias";
+import { getlistaEstudiantes } from "../components/modelos/estudiantes";
 
 
-export interface CatalogosNotas {
-    listaMaterias: IMateria[]
-    listaEstudiantes: IEstudiante[]
-}
 
-const InicioNotas: FunctionComponent<CatalogosNotas> = ({ listaEstudiantes, listaMaterias }) => {
+const InicioNotas: FunctionComponent = () => {
     const initialState: INotas = {
         estudiante: "",
         materia: "",
@@ -28,8 +24,6 @@ const InicioNotas: FunctionComponent<CatalogosNotas> = ({ listaEstudiantes, list
     //listar
     useEffect(() => {
         setNotas(getListaNotas());
-        listaMaterias = getlistaMaterias();
-        listaEstudiantes = getlistaEstudiantes()
     }, [])
 
     function guardarNota() {
@@ -67,10 +61,16 @@ const InicioNotas: FunctionComponent<CatalogosNotas> = ({ listaEstudiantes, list
         setNotas(nota);
     }
 
-
+    function listaEstudiantes(): IEstudiante[] {
+        return getlistaEstudiantes()
+      }
+      
+      function listaMaterias(): IMateria[] {
+        return getlistaMaterias();
+      }
     return (
         <div className="App">
-            <RegistrarNotas guardarNota={guardarNota} alCambiarValor={alcambiarValor} limpiar={limpiarFormulario} nota={nota} catalogos={{listaMaterias, listaEstudiantes}} />
+            <RegistrarNotas guardarNota={guardarNota} alCambiarValor={alcambiarValor} limpiar={limpiarFormulario} nota={nota} catalogos={{listaEstudiantes : listaEstudiantes(), listaMaterias : listaMaterias()}} />
             <ListarNotas eliminarNota={eliminarNota} notas={notas} />
         </div>
     )

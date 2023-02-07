@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext, createContext, FunctionComponent } from 'react';
 import { ListarEstudiantes } from '../components/estudiante/ListarEstudiantes';
 import { RegistrarEstudiante } from '../components/estudiante/RegistrarEstudiante';
-import { addEstudiante, editarEstudiante, getlistaEstudiantes, deleteEstudiante } from "../services/datosEstudiante";
-import IEstudiante from "../components/entidades/IEstudiante";
+import { addEstudiante, editarEstudiante, getlistaEstudiantes, deleteEstudiante } from "../components/modelos/estudiantes";
+import IEstudiante from "../components/modelos/estudiantes/entidades/IEstudiante";
 import Swal from "sweetalert2";
 import uuid from 'react-uuid';
 

@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FunctionComponent } from "react";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
-import IMateria from "../entidades/IMateria"
+import IMateria from "../modelos/materias/entidades/IMateria"
 
 export interface MateriaProps {
     eliminarMateria: (id?: string) => any

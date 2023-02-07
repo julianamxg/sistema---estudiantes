@@ -1,8 +1,8 @@
 import uuid from "react-uuid";
 import { RegistrarEstudiante } from "../components/estudiante/RegistrarEstudiante";
-import IEstudiante from "../components/entidades/IEstudiante";
+import IEstudiante from "../components/modelos/estudiantes/entidades/IEstudiante";
 import { useEffect, useState } from "react";
-import { addEstudiante, editarEstudiante, getEstudianteById } from "../services/datosEstudiante";
+import { addEstudiante, editarEstudiante, getEstudianteById } from "../components/modelos/estudiantes";
 import Swal from "sweetalert2";
 import { useParams } from "react-router-dom";
 
@@ -20,8 +20,9 @@ function EditarEstudiante() {
     const { id } = useParams();
 
     useEffect(() => {
+        console.log(estudiante)
         cargarEstudiante();
-    }, [id]);
+    }, []);
     
     const cargarEstudiante = async () => {
         const estudiante = await getEstudianteById(id);
