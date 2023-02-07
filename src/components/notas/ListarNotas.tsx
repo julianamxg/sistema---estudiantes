@@ -32,7 +32,7 @@ export const ListarNotas: FunctionComponent<ListarNotasProps> = ({ eliminarNota,
                             <tbody>
                             {
                                 notas.map((nota: INotas) =>
-                                  nota?  <Nota key={nota.id} nota={nota} editarNota={editarNota} eliminarNota={eliminarNota}/> : null)}
+                                  <Nota key={nota.id} nota={nota} editarNota={editarNota} eliminarNota={eliminarNota}/>)}
                         </tbody>
                     </table>
                 ) : (

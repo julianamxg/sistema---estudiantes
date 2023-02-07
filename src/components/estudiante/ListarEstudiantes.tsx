@@ -41,7 +41,7 @@ export const ListarEstudiantes: FunctionComponent<ListarEstudianteProps> = ({edi
                         <tbody>
                             {
                                 estudiantes.map((estudiante: IEstudiante) =>
-                                  estudiante?  <Estudiante key={estudiante.id} estudiante={estudiante} editarEstudiante={editarEstudiante} eliminarEstudiante={eliminarEstudiante}/> : null)}
+                                 <Estudiante key={estudiante.id} estudiante={estudiante} editarEstudiante={editarEstudiante} eliminarEstudiante={eliminarEstudiante}/>)}
                         </tbody>
                     </table>
                 ) : (

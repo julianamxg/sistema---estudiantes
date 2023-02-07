@@ -29,9 +29,7 @@ const InicioNotas: FunctionComponent<CatalogosNotas> = ({ listaEstudiantes, list
     useEffect(() => {
         setNotas(getListaNotas());
         listaMaterias = getlistaMaterias();
-        // setNotas(getlistaMaterias());
         listaEstudiantes = getlistaEstudiantes()
-        // setNotas(getlistaEstudiantes());
     }, [])
 
     function guardarNota() {

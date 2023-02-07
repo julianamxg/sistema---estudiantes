@@ -21,7 +21,6 @@ function App() {
     return getlistaMaterias();
   }
   
-
   return (
     <Router>
       <Routes>
