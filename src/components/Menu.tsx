@@ -4,6 +4,7 @@ import { faHouseChimney } from '@fortawesome/free-solid-svg-icons'
 
 export const Menu = () => {
     return (
+
         <div className="menu">
             <div className="inicio">
                 <Link to={'/'}><button className="botonInicio"><FontAwesomeIcon icon={faHouseChimney} /></button></Link>

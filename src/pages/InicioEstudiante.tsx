@@ -19,6 +19,7 @@ const InicioEstudiante = () => {
   const [estudiante, setEstudiante] = useState<IEstudiante>(initialState);
   const [estudiantes, setEstudiantes] = useState<IEstudiante[]>([]);
 
+
   useEffect(() => {
     setEstudiantes(getlistaEstudiantes());
     console.log(getlistaEstudiantes())
@@ -28,7 +29,7 @@ const InicioEstudiante = () => {
   function guardarEstudiante(): void {
     let idEstudiante = uuid()
     addEstudiante({ id: idEstudiante, ...estudiante });
-    let listaEstudiantes=[...estudiantes]
+    let listaEstudiantes = [...estudiantes]
     listaEstudiantes.push({ id: idEstudiante, ...estudiante })
     setEstudiantes(listaEstudiantes)
     if (1 === 1) {
@@ -44,6 +45,7 @@ const InicioEstudiante = () => {
         icon: 'error',
       })
     }
+    limpiarFormulario();
   }
 
   const alcambiarValor = (name: string, value: string) => {
@@ -59,14 +61,14 @@ const InicioEstudiante = () => {
     console.log("ver estudiantes")
   }
 
- 
 
   function eliminarEstudiante(id?: string): void {
     deleteEstudiante(id);
     let est = estudiantes.filter((estudiante: IEstudiante) => estudiante && estudiante.id !== id)
     setEstudiantes(est);
   }
-  
+
+
   return (
     <div className="App">
       <RegistrarEstudiante guardarEstudiante={guardarEstudiante} estudiante={estudiante} alCambiarValor={alcambiarValor} limpiar={limpiarFormulario} />

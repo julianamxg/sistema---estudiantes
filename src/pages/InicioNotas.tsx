@@ -52,7 +52,7 @@ const InicioNotas: FunctionComponent = () => {
     }
 
     const limpiarFormulario = () => {
-        // setNota(initialState)
+        setNota(initialState)
     }
 
 
