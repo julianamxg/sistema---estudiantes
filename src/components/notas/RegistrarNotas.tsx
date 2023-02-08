@@ -3,6 +3,7 @@ import IMateria from "../modelos/materias/entidades/IMateria";
  import INotas from "../modelos/notas/entidades/INotas";
 import { ListarEstudiantes } from "../estudiante/ListarEstudiantes";
 import { Menu } from "../Menu"
+import Swal from "sweetalert2";
 
 interface CatalogosNotas {
     listaMaterias : IMateria[]
@@ -19,8 +20,25 @@ export interface RegistrarNotasProps {
 
 export const RegistrarNotas: FunctionComponent<RegistrarNotasProps> = ({ guardarNota, nota, alCambiarValor, limpiar, catalogos }) => {
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        limpiar();
+        // limpiar();
         e.preventDefault();
+
+        if (nota.materia === '' || nota.estudiante === '' || nota.promedio === 0) {
+            Swal.fire({
+                text: `Por favor diligencia todos los campos`,
+                icon: 'error',
+            })
+            return false;
+        }
+
+        if (String(nota.promedio).length !== 2){
+            Swal.fire({
+                text: `El campo "Promedio" solo debe tener 2 digitos`,
+                icon: 'warning',
+            })
+            return false;
+        }
+
         guardarNota();
     }
 

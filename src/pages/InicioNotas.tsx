@@ -45,6 +45,7 @@ const InicioNotas: FunctionComponent = () => {
                 icon: 'error',
             })
         }
+        limpiarFormulario()
     }
 
     const alcambiarValor = (name: string, value: string) => {

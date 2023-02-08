@@ -33,7 +33,7 @@ h2 {
 }
 
 .inicioPagina{
-  background: linear-gradient(0.37turn,rgba(255, 255, 255, 0.474), rgba(67, 189, 108, 0.856));
+  background: linear-gradient(0.37turn,rgba(0, 0, 0, 0.307), rgba(67, 189, 108, 0.856));
   height: 560px;
   display: flex;
   flex-direction: column;
@@ -62,7 +62,7 @@ h2 {
 }
 
 .degrade{
-  background-image: url(https://images.unsplash.com/photo-1510531704581-5b2870972060?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=873&q=80);
+  background-image: url(https://images.unsplash.com/photo-1516979187457-637abb4f9353?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDF8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60);
   background-position: center;
   background-size: cover;
   background-repeat: repeat;
