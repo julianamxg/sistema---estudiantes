@@ -13,7 +13,7 @@ h2 {
   color: var(--gris-oscuro);
 }
 
-.menu{
+.menu {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -21,38 +21,39 @@ h2 {
   margin: 2rem;
 }
 
-.links a{
+.links a {
   margin: 1rem;
   padding: 0.8rem;
   color: #fff;
 }
 
-.links a:hover{
-  
+.links a:hover {
+
   border-bottom: 2px solid #fff;
 }
 
-.inicioPagina{
-  background: linear-gradient(0.37turn,rgba(0, 0, 0, 0.307), rgba(67, 189, 108, 0.856));
+.inicioPagina {
+  background: linear-gradient(0.37turn, rgba(0, 0, 0, 0.307), rgba(67, 189, 108, 0.856));
   height: 560px;
   display: flex;
   flex-direction: column;
   font-family: 'Manrope', sans-serif;
 }
-.inicioPagina h2{
+
+.inicioPagina h2 {
   color: var(--verde);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
-    text-align: center;
-    font-size: 3rem;
-    padding: 1rem;
-    height: 30%;
-    background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  text-align: center;
+  font-size: 3rem;
+  padding: 1rem;
+  height: 30%;
+  background-color: #fff;
 }
 
-.inicioPagina p{
+.inicioPagina p {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -61,8 +62,8 @@ h2 {
   font-size: 1.5rem;
 }
 
-.degrade{
-  background-image: url(https://images.unsplash.com/photo-1516979187457-637abb4f9353?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDF8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60);
+.degrade {
+  background-image: url(https://images.unsplash.com/photo-1470549638415-0a0755be0619?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDh8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60);
   background-position: center;
   background-size: cover;
   background-repeat: repeat;
@@ -112,9 +113,23 @@ select {
   outline: none;
 }
 
-.formulario .grupos .grupo .grupo-input select::after{
- color: var(--verde);
- background-color: var(--verde);
+.formulario .grupos .grupo .grupo-input,
+select:disabled {
+  cursor: not-allowed;
+}
+
+.formulario .grupos .grupo .grupo-input,
+input:disabled {
+  cursor: not-allowed;
+}
+
+.formulario button:disabled {
+  cursor: not-allowed;
+}
+
+.formulario .grupos .grupo .grupo-input select::after {
+  color: var(--verde);
+  background-color: var(--verde);
 }
 
 
@@ -171,11 +186,34 @@ select {
   background-color: rgba(67, 189, 108, 0.912);
 }
 
-button{
+button {
   cursor: pointer;
 }
 
-a{
+.habilitar {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+  align-items: center;
+}
+
+.checkbox{
+  cursor: pointer;
+  background-color: #fff;
+  padding: 5.5px;
+  appearance: none;
+  border: 1.8px solid var(--verde);
+  border-radius: 2px;
+}
+
+
+.checkbox:checked{
+  background-color: var(--verde);
+}
+
+
+
+a {
   text-decoration: none;
 }
 
@@ -187,7 +225,7 @@ a{
   font-size: 15px;
   cursor: pointer;
   border-radius: 25px;
-  
+
   cursor: pointer;
 }
 
@@ -196,7 +234,7 @@ a{
   background-color: rgb(246, 255, 241);
 }
 
-.encabezadoTabla{
+.encabezadoTabla {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -204,7 +242,7 @@ a{
 
 
 
-.encabezadoTabla button{
+.encabezadoTabla button {
   margin: 1rem;
   background-color: var(--verde);
   padding: 1rem;
@@ -220,7 +258,7 @@ a{
   transition: all 0.5s ease;
 }
 
-.encabezadoTabla button:hover{
+.encabezadoTabla button:hover {
   background-color: rgba(67, 189, 108, 0.912);
 }
 
@@ -231,7 +269,7 @@ a{
   -webkit-box-shadow: 1px 5px 16px -10px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 1px 5px 16px -10px rgba(0, 0, 0, 0.75);
   box-shadow: 1px 5px 16px -10px rgba(0, 0, 0, 0.75);
-  
+
   overflow-x: scroll;
 }
 
@@ -268,11 +306,11 @@ tr td {
   ;
 }
 
-.malRojo{
+.malRojo {
   background: #ffc1c1;
 }
 
-.bienVerde{
+.bienVerde {
   background-color: #c1ffc7
 }
 
@@ -315,6 +353,7 @@ select {
   border-bottom: 2px solid var(--verde);
   outline: none;
 }
+
 /* materia */
 
 .formulario.materia {
@@ -331,10 +370,10 @@ select {
 
 .formulario .grupos .grupo-input {
   display: flex;
-    flex-direction: column;
+  flex-direction: column;
 }
 
-.formulario .grupos .grupo-input{
+.formulario .grupos .grupo-input {
   margin-bottom: 1rem;
 }
 

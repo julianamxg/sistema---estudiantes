@@ -18,12 +18,16 @@ const InicioEstudiante = () => {
   }
   const [estudiante, setEstudiante] = useState<IEstudiante>(initialState);
   const [estudiantes, setEstudiantes] = useState<IEstudiante[]>([]);
+  const [inputLectura, setInputLectura] = useState(true)
 
 
   useEffect(() => {
     setEstudiantes(getlistaEstudiantes());
-    console.log(getlistaEstudiantes())
   }, [])
+
+  const habilitarFormulario = () =>{
+    setInputLectura(!inputLectura)
+  }
 
   //registrar
   function guardarEstudiante(): void {
@@ -71,7 +75,7 @@ const InicioEstudiante = () => {
 
   return (
     <div className="App">
-      <RegistrarEstudiante guardarEstudiante={guardarEstudiante} estudiante={estudiante} alCambiarValor={alcambiarValor} limpiar={limpiarFormulario} />
+      <RegistrarEstudiante guardarEstudiante={guardarEstudiante} estudiante={estudiante} alCambiarValor={alcambiarValor} limpiar={limpiarFormulario} inputLectura={inputLectura} habilitarFormulario={habilitarFormulario}/>
       <ListarEstudiantes editarEstudiante={editarEstudiante} eliminarEstudiante={eliminarEstudiante} verEstudiante={verEstudiante} estudiantes={estudiantes} />
     </div>
   );

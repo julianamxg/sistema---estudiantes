@@ -8,6 +8,7 @@ import { useParams } from "react-router-dom";
 
 function EditarEstudiante() {
     const [estudiantes, setEstudiantes] = useState<IEstudiante[]>([]);
+    const [inputLectura, setInputLectura] = useState(true) 
     const [estudiante, setEstudiante] = useState<IEstudiante>({
         nombres: "",
         apellidos: "",
@@ -22,7 +23,12 @@ function EditarEstudiante() {
     useEffect(() => {
         console.log(estudiante)
         cargarEstudiante();
+        setInputLectura(!inputLectura)
     }, []);
+
+    function habilitarFormulario(): void{
+        setInputLectura(!inputLectura)
+      }
     
     const cargarEstudiante = async () => {
         const estudiante = await getEstudianteById(id);
@@ -66,7 +72,7 @@ function EditarEstudiante() {
 
     return (
         <div className="App">
-            <RegistrarEstudiante guardarEstudiante={guardarEstudiante} estudiante={estudiante} alCambiarValor={alcambiarValor} limpiar={limpiarFormulario} />
+            <RegistrarEstudiante guardarEstudiante={guardarEstudiante} estudiante={estudiante} alCambiarValor={alcambiarValor} limpiar={limpiarFormulario} inputLectura={inputLectura} habilitarFormulario={habilitarFormulario}/>
         </div>
     );
 }

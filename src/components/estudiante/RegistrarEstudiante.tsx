@@ -1,21 +1,26 @@
 import { editarEstudiante } from "../modelos/estudiantes";
-import { FunctionComponent } from "react";
+import { FunctionComponent, useState } from "react";
 import { Menu } from "../Menu";
 import IEstudiante from "../modelos/estudiantes/entidades/IEstudiante";
 import Swal from "sweetalert2";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck } from '@fortawesome/free-solid-svg-icons'
 
 export interface RegistrarEstudianteProps {
     guardarEstudiante: () => any
     estudiante: IEstudiante
     alCambiarValor: (key: string, value: string) => any
     limpiar: () => any
+    inputLectura: any
+    habilitarFormulario: () => any
 }
 
-export const RegistrarEstudiante: FunctionComponent<RegistrarEstudianteProps> = ({ guardarEstudiante, estudiante, alCambiarValor, limpiar }) => {
+export const RegistrarEstudiante: FunctionComponent<RegistrarEstudianteProps> = ({ guardarEstudiante, estudiante, alCambiarValor, limpiar, inputLectura, habilitarFormulario }) => {
+
     //evento de vista
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if (estudiante.nombres === '' || estudiante.apellidos === '' || estudiante.tDocumento === '' || estudiante.nDocumento === 0 || estudiante.grado == '' || estudiante.dGrado === '') {
+        if (estudiante.nombres === '' || estudiante.apellidos === '' || estudiante.tDocumento === '' || estudiante.nDocumento === 0 || estudiante.grado === '' || estudiante.dGrado === '') {
             Swal.fire({
                 text: `Por favor diligencia todos los campos`,
                 icon: 'error',
@@ -49,7 +54,6 @@ export const RegistrarEstudiante: FunctionComponent<RegistrarEstudianteProps> = 
             return false;
         }
 
-
         if (!/^[a-zA-Z\s]+$/.test(estudiante.apellidos.valueOf())) {
             Swal.fire({
                 text: `El campo "Apellidos" solo debe contener letras`,
@@ -66,7 +70,6 @@ export const RegistrarEstudiante: FunctionComponent<RegistrarEstudianteProps> = 
             })
             return false;
         }
-
 
         //validación de número de documento
         if (String(estudiante.nDocumento).length !== 10) {
@@ -86,7 +89,6 @@ export const RegistrarEstudiante: FunctionComponent<RegistrarEstudianteProps> = 
             return false;
         }
 
-
         //validación de director de grado
         if (estudiante.dGrado === "1") {
             Swal.fire({
@@ -100,7 +102,7 @@ export const RegistrarEstudiante: FunctionComponent<RegistrarEstudianteProps> = 
         editarEstudiante();
         // estudiante.id ? editarEstudiante(estudiante.id, estudiante) : addEstudiante(estudiante);
     }
-    
+
     return (
         <>
             <Menu />
@@ -111,7 +113,7 @@ export const RegistrarEstudiante: FunctionComponent<RegistrarEstudianteProps> = 
                         <div className="grupo">
                             <div className="grupo-input">
                                 <label htmlFor="nombres">Nombres</label>
-                                <input onChange={(e) => alCambiarValor(e.target.name, e.target.value)} value={estudiante.nombres} type="text" name="nombres" id="nombres" placeholder="Ingresa los nombres" />
+                                <input disabled={inputLectura} onChange={(e) => alCambiarValor(e.target.name, e.target.value)} value={estudiante.nombres} type="text" name="nombres" id="nombres" placeholder="Ingresa los nombres" />
                             </div>
 
                             <div className="grupo-input">
@@ -121,6 +123,7 @@ export const RegistrarEstudiante: FunctionComponent<RegistrarEstudianteProps> = 
                                         const { target: { name, value } } = e;
                                         alCambiarValor(name, value);
                                     }}
+                                    disabled={inputLectura}
                                     value={estudiante.apellidos}
                                     type="text"
                                     name="apellidos"
@@ -133,7 +136,7 @@ export const RegistrarEstudiante: FunctionComponent<RegistrarEstudianteProps> = 
                         <div className="grupo">
                             <div className="grupo-input">
                                 <label htmlFor="tDocumento">Tipo de documento</label>
-                                <select onChange={(e) => alCambiarValor(e.target.name, e.target.value)} value={estudiante.tDocumento} name="tDocumento" id="tDocumento">
+                                <select disabled={inputLectura} onChange={(e) => alCambiarValor(e.target.name, e.target.value)} value={estudiante.tDocumento} name="tDocumento" id="tDocumento">
                                     <option value={1}>Selecciona...</option>
                                     <option>Cedula de ciudadania</option>
                                     <option>Tarjeta de identidad</option>
@@ -143,13 +146,13 @@ export const RegistrarEstudiante: FunctionComponent<RegistrarEstudianteProps> = 
 
                             <div className="grupo-input">
                                 <label htmlFor="nDocumento">Número de documento</label>
-                                <input onChange={(e) => alCambiarValor(e.target.name, e.target.value)} value={estudiante.nDocumento} type="number" name="nDocumento" id="nDocumento" placeholder="Ingresa el número de documento" />
+                                <input disabled={inputLectura} onChange={(e) => alCambiarValor(e.target.name, e.target.value)} value={estudiante.nDocumento} type="number" name="nDocumento" id="nDocumento" placeholder="Ingresa el número de documento" />
                             </div>
                         </div>
                         <div className="grupo">
                             <div className="grupo-input">
                                 <label htmlFor="grado">Grado</label>
-                                <select onChange={(e) => alCambiarValor(e.target.name, e.target.value)} value={estudiante.grado} name="grado" id="grado">
+                                <select disabled={inputLectura} onChange={(e) => alCambiarValor(e.target.name, e.target.value)} value={estudiante.grado} name="grado" id="grado">
                                     <option value={1}>Selecciona...</option>
                                     <option>Primero</option>
                                     <option>Segundo</option>
@@ -167,7 +170,7 @@ export const RegistrarEstudiante: FunctionComponent<RegistrarEstudianteProps> = 
 
                             <div className="grupo-input">
                                 <label htmlFor="dGrado">Director de grado</label>
-                                <select onChange={(e) => alCambiarValor(e.target.name, e.target.value)} value={estudiante.dGrado} name="dGrado" id="dGrado">
+                                <select disabled={inputLectura} onChange={(e) => alCambiarValor(e.target.name, e.target.value)} value={estudiante.dGrado} name="dGrado" id="dGrado">
                                     <option value={1}>Selecciona...</option>
                                     <option>Sandra Roncancio</option>
                                     <option>Luis Rodriguez</option>
@@ -184,7 +187,13 @@ export const RegistrarEstudiante: FunctionComponent<RegistrarEstudianteProps> = 
                             </div>
                         </div>
                     </div>
-                    <button className="botonGuardar" type="submit">Guardar</button>
+                   
+                    <button disabled={inputLectura} className="botonGuardar" type="submit">Guardar</button>
+                    <div className="habilitar">
+                        <input className="checkbox" onClick={habilitarFormulario} type="checkbox" name="habilitar" id="habilitar" />
+                        {/* <FontAwesomeIcon icon={faCheck} ></FontAwesomeIcon> */}
+                        <label htmlFor="habilitar">Habilitar formulario</label>
+                    </div>
                 </form>
             </div>
         </>
