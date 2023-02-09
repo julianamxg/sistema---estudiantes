@@ -19,7 +19,7 @@ const InicioNotas: FunctionComponent = () => {
         promedio: 0
     }
 
-    const [inputLectura, setInputLectura]= useState(true)
+    const [inputLectura, setInputLectura] = useState(true)
     const [nota, setNota] = useState<INotas>(initialState);
     const [notas, setNotas] = useState<INotas[]>([]);
 
@@ -67,20 +67,20 @@ const InicioNotas: FunctionComponent = () => {
 
     function listaEstudiantes(): IEstudiante[] {
         return getlistaEstudiantes()
-      }
-      
-      function listaMaterias(): IMateria[] {
-        return getlistaMaterias();
-      }
+    }
 
-      const habilitarFormulario = () =>{
+    function listaMaterias(): IMateria[] {
+        return getlistaMaterias();
+    }
+
+    const habilitarFormulario = () => {
         setInputLectura(!inputLectura)
-      }
+    }
 
     return (
         <div className="App">
-            <RegistrarNotas guardarNota={guardarNota} alCambiarValor={alcambiarValor} limpiar={limpiarFormulario} nota={nota} catalogos={{listaEstudiantes : listaEstudiantes(), listaMaterias : listaMaterias()}} inputLectura={inputLectura} habilitarFormulario={habilitarFormulario} />
-            <ListarNotas eliminarNota={eliminarNota} notas={notas} />
+            <RegistrarNotas guardarNota={guardarNota} alCambiarValor={alcambiarValor} limpiar={limpiarFormulario} nota={nota} catalogos={{ listaEstudiantes: listaEstudiantes(), listaMaterias: listaMaterias() }} inputLectura={inputLectura} habilitarFormulario={habilitarFormulario} />
+            {inputLectura ? <></> : <ListarNotas eliminarNota={eliminarNota} notas={notas} />}
         </div>
     )
 }

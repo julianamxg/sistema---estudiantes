@@ -57,15 +57,15 @@ function InicioMateria() {
     setMaterias(materia);
   }
 
-  const habilitarFormulario = () =>{
+  const habilitarFormulario = () => {
     setInputLectura(!inputLectura)
   }
 
 
   return (
     <div className="App">
-      <RegistrarMateria guardarMateria={guardarMateria} alCambiarValor={alcambiarValor} materia={materia} limpiar={limpiarFormulario} inputLectura={inputLectura} habilitarFormulario={habilitarFormulario}/>
-      <ListarMaterias eliminarMateria={eliminarMateria} materias={materias} />
+      <RegistrarMateria guardarMateria={guardarMateria} alCambiarValor={alcambiarValor} materia={materia} limpiar={limpiarFormulario} inputLectura={inputLectura} habilitarFormulario={habilitarFormulario} />
+      {inputLectura ? <></> : <ListarMaterias eliminarMateria={eliminarMateria} materias={materias} />}
     </div>
   );
 }
