@@ -199,7 +199,7 @@ button {
 
 .checkbox{
   cursor: pointer;
-  background-color: #fff;
+  /* background-color: #fff; */
   padding: 5.5px;
   appearance: none;
   border: 1.8px solid var(--verde);

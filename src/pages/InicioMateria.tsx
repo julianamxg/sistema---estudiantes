@@ -13,6 +13,7 @@ function InicioMateria() {
   }
   const [materia, setMateria] = useState<IMateria>(initialState);
   const [materias, setMaterias] = useState<IMateria[]>([]);
+  const [inputLectura, setInputLectura] = useState(true)
 
   //registrar
   function guardarMateria(): void {
@@ -56,10 +57,14 @@ function InicioMateria() {
     setMaterias(materia);
   }
 
+  const habilitarFormulario = () =>{
+    setInputLectura(!inputLectura)
+  }
+
 
   return (
     <div className="App">
-      <RegistrarMateria guardarMateria={guardarMateria} alCambiarValor={alcambiarValor} materia={materia} limpiar={limpiarFormulario} />
+      <RegistrarMateria guardarMateria={guardarMateria} alCambiarValor={alcambiarValor} materia={materia} limpiar={limpiarFormulario} inputLectura={inputLectura} habilitarFormulario={habilitarFormulario}/>
       <ListarMaterias eliminarMateria={eliminarMateria} materias={materias} />
     </div>
   );

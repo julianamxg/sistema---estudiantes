@@ -2,16 +2,19 @@ import { FunctionComponent } from "react";
 import IMateria from "../modelos/materias/entidades/IMateria";
 import { Menu } from "../Menu"
 import Swal from "sweetalert2";
-export interface RegistrarMateriaProps{
+export interface RegistrarMateriaProps {
     guardarMateria: () => any;
     materia: IMateria;
-    alCambiarValor: (key: string, value:string) =>any;
-    limpiar: () => any
+    alCambiarValor: (key: string, value: string) => any;
+    limpiar: () => any;
+    inputLectura: any;
+    habilitarFormulario: () => any
+
 }
 
-export const RegistrarMateria: FunctionComponent<RegistrarMateriaProps> = ({guardarMateria, materia, alCambiarValor, limpiar}) =>{
-   
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>)=>{
+export const RegistrarMateria: FunctionComponent<RegistrarMateriaProps> = ({ guardarMateria, materia, alCambiarValor, limpiar, inputLectura, habilitarFormulario }) => {
+
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         // limpiar();
         e.preventDefault();
 
@@ -25,7 +28,7 @@ export const RegistrarMateria: FunctionComponent<RegistrarMateriaProps> = ({guar
         }
 
         //validación de materia
-        if(materia.materia.length < 5 || materia.materia.length >15){
+        if (materia.materia.length < 5 || materia.materia.length > 15) {
             Swal.fire({
                 text: `El campo "Materia" debe tener de 5 a 15 caracteres`,
                 icon: 'warning',
@@ -42,7 +45,7 @@ export const RegistrarMateria: FunctionComponent<RegistrarMateriaProps> = ({guar
         }
 
         //validación de nombre de profesor
-        if(materia.nombreProfesor === "1"){
+        if (materia.nombreProfesor === "1") {
             Swal.fire({
                 text: `Por favor selecciona el nombre del profesor`,
                 icon: 'warning',
@@ -52,39 +55,44 @@ export const RegistrarMateria: FunctionComponent<RegistrarMateriaProps> = ({guar
 
         guardarMateria();
     }
-    return(
+    return (
         <>
-        <Menu />
-        <div className="formulario materia">
-        <form onSubmit={handleSubmit}>
-            <h2>Guardar materia</h2>
-            <div className="grupos materia" >
-                    <div className="grupo-input">
-                        <label htmlFor="materia">Materia</label>
-                        <input onChange={(e) => alCambiarValor(e.target.name, e.target.value)} value={materia.materia} type="text" name="materia" id="materia" placeholder="Ingresa el nombre de la materia" />
+            <Menu />
+            <div className="formulario materia">
+                <form onSubmit={handleSubmit}>
+                    <h2>Guardar materia</h2>
+                    <div className="grupos materia" >
+                        <div className="grupo-input">
+                            <label htmlFor="materia">Materia</label>
+                            <input disabled={inputLectura} onChange={(e) => alCambiarValor(e.target.name, e.target.value)} value={materia.materia} type="text" name="materia" id="materia" placeholder="Ingresa el nombre de la materia" />
+                        </div>
+                        <div className="grupo-input">
+                            <label htmlFor="nombreProfesor">Nombre del profesor</label>
+                            <select disabled={inputLectura} onChange={(e) => alCambiarValor(e.target.name, e.target.value)} value={materia.nombreProfesor} name="nombreProfesor" id="nombreProfesor">
+                                <option value={1}>Selecciona...</option>
+                                <option>Sandra Roncancio</option>
+                                <option>Luis Rodriguez</option>
+                                <option>Paola Sanchez</option>
+                                <option>Tatiana Galindo</option>
+                                <option>Luna Perez</option>
+                                <option>Claudia Lopez</option>
+                                <option>Felipe Romero</option>
+                                <option>Laura Martinez</option>
+                                <option>Maria Rodriguez</option>
+                                <option>Carolina Forero</option>
+                                <option>Carla Rodriguez</option>
+                            </select>
+                        </div>
                     </div>
-                    <div className="grupo-input">
-                        <label htmlFor="nombreProfesor">Nombre del profesor</label>
-                        <select onChange={(e) => alCambiarValor(e.target.name, e.target.value)} value={materia.nombreProfesor} name="nombreProfesor" id="nombreProfesor">
-                                    <option value={1}>Selecciona...</option>
-                                    <option>Sandra Roncancio</option>
-                                    <option>Luis Rodriguez</option>
-                                    <option>Paola Sanchez</option>
-                                    <option>Tatiana Galindo</option>
-                                    <option>Luna Perez</option>
-                                    <option>Claudia Lopez</option>
-                                    <option>Felipe Romero</option>
-                                    <option>Laura Martinez</option>
-                                    <option>Maria Rodriguez</option>
-                                    <option>Carolina Forero</option>
-                                    <option>Carla Rodriguez</option>
-                                </select>
+                    <button disabled={inputLectura} type="submit">Guardar</button>
+                    <div className="habilitar">
+                        <input className="checkbox" onClick={habilitarFormulario} type="checkbox" name="habilitar" id="habilitar" />
+                        {/* <FontAwesomeIcon icon={faCheck} ></FontAwesomeIcon> */}
+                        <label htmlFor="habilitar">Habilitar formulario</label>
                     </div>
-            </div>
-            <button type="submit">Guardar</button>
-        </form>
+                </form>
 
-    </div>
-    </>
+            </div>
+        </>
     )
 }

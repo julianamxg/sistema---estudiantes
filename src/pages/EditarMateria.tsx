@@ -7,6 +7,7 @@ import { addMateria, editarMateria, getMateriaById } from "../components/modelos
 import { RegistrarMateria } from "../components/materia/RegistrarMateria";
 
 function EditarMateria() {
+    const [inputLectura, setInputLectura] = useState(true)
     const [materias, setMaterias] = useState<IMateria[]>([]);
     const [materia, setMateria] = useState<IMateria>({
         materia: "",
@@ -58,9 +59,13 @@ function EditarMateria() {
         console.log('limpiar')
     }
 
+    const habilitarFormulario = () =>{
+        setInputLectura(!inputLectura)
+      }
+    
     return (
         <div className="App">
-            <RegistrarMateria guardarMateria={guardarMateria} materia={materia} alCambiarValor={alcambiarValor} limpiar={limpiarFormulario} />
+            <RegistrarMateria guardarMateria={guardarMateria} materia={materia} alCambiarValor={alcambiarValor} limpiar={limpiarFormulario} inputLectura={inputLectura} habilitarFormulario={habilitarFormulario}/>
         </div>
     );
 }

@@ -13,6 +13,7 @@ import { editarNota, getNotaById, addNota } from "../components/modelos/notas";
 
 
 const EditarNota= () => {
+    const [inputLectura, setInputLectura] = useState(true)
     const [notas, setNotas] = useState<INotas[]>([]);
     const [nota, setNota] = useState<INotas>({
         estudiante: "",
@@ -78,8 +79,12 @@ const EditarNota= () => {
         return getlistaMaterias();
       }
 
+      const habilitarFormulario = () =>{
+        setInputLectura(!inputLectura)
+      }
+
     return (
-        <RegistrarNotas guardarNota={guardarNota} alCambiarValor={alcambiarValor} limpiar={limpiarFormulario} nota={nota} catalogos={{listaMaterias: listaMaterias(), listaEstudiantes: listaEstudiantes()}}/>
+        <RegistrarNotas guardarNota={guardarNota} alCambiarValor={alcambiarValor} limpiar={limpiarFormulario} nota={nota} catalogos={{listaMaterias: listaMaterias(), listaEstudiantes: listaEstudiantes()}} inputLectura={inputLectura} habilitarFormulario={habilitarFormulario}/>
     )
 }
 

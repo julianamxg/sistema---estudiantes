@@ -15,10 +15,12 @@ export interface RegistrarNotasProps {
     nota: INotas;
     alCambiarValor: (key: string, value: string) => any
     limpiar: () => any;
-    catalogos : CatalogosNotas
+    catalogos : CatalogosNotas;
+    inputLectura: any;
+    habilitarFormulario: () => any;
 }
 
-export const RegistrarNotas: FunctionComponent<RegistrarNotasProps> = ({ guardarNota, nota, alCambiarValor, limpiar, catalogos }) => {
+export const RegistrarNotas: FunctionComponent<RegistrarNotasProps> = ({ guardarNota, nota, alCambiarValor, limpiar, catalogos, inputLectura, habilitarFormulario }) => {
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         // limpiar();
         e.preventDefault();
@@ -52,7 +54,7 @@ export const RegistrarNotas: FunctionComponent<RegistrarNotasProps> = ({ guardar
                     <div className="grupos" >
                         <div className="grupo-input">
                             <label htmlFor="materia">Materia</label>
-                            <select onChange={(e) => alCambiarValor(e.target.name, e.target.value)} value={nota.materia} name="materia" id="materia">
+                            <select disabled={inputLectura} onChange={(e) => alCambiarValor(e.target.name, e.target.value)} value={nota.materia} name="materia" id="materia">
                         
                                <option>Selecciona...</option>
                                 {catalogos.listaMaterias.map((materia) => (
@@ -64,7 +66,7 @@ export const RegistrarNotas: FunctionComponent<RegistrarNotasProps> = ({ guardar
                         </div>
                         <div className="grupo-input">
                             <label htmlFor="estudiante">Estudiante</label>
-                            <select onChange={(e) => alCambiarValor(e.target.name, e.target.value)} value={nota.estudiante} name="estudiante" id="estudiante">
+                            <select disabled={inputLectura} onChange={(e) => alCambiarValor(e.target.name, e.target.value)} value={nota.estudiante} name="estudiante" id="estudiante">
                                 <option>Selecciona...</option>
                                 {catalogos.listaEstudiantes.map((estudiante) => (
                                     <option key={estudiante.id}>{estudiante.nombres}</option>
@@ -73,9 +75,14 @@ export const RegistrarNotas: FunctionComponent<RegistrarNotasProps> = ({ guardar
                         </div>
                         <div className="grupo-input">
                             <label htmlFor="nota">Nota</label>
-                            <input onChange={(e) => alCambiarValor(e.target.name, e.target.value)} value={nota.promedio} type="number" name="promedio" id="promedio" placeholder="Ingresa el promedio de la materia" />
+                            <input disabled={inputLectura} onChange={(e) => alCambiarValor(e.target.name, e.target.value)} value={nota.promedio} type="number" name="promedio" id="promedio" placeholder="Ingresa el promedio de la materia" />
                         </div>
-                        <button type="submit">Guardar</button>
+                        <button disabled={inputLectura} type="submit">Guardar</button>
+                        <div className="habilitar">
+                        <input className="checkbox" onClick={habilitarFormulario} type="checkbox" name="habilitar" id="habilitar" />
+                        {/* <FontAwesomeIcon icon={faCheck} ></FontAwesomeIcon> */}
+                        <label htmlFor="habilitar">Habilitar formulario</label>
+                    </div>
                     </div>
                 </form>
             </div>
