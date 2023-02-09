@@ -80,7 +80,7 @@ const InicioNotas: FunctionComponent = () => {
     return (
         <div className="App">
             <RegistrarNotas guardarNota={guardarNota} alCambiarValor={alcambiarValor} limpiar={limpiarFormulario} nota={nota} catalogos={{listaEstudiantes : listaEstudiantes(), listaMaterias : listaMaterias()}} inputLectura={inputLectura} habilitarFormulario={habilitarFormulario} />
-            <ListarNotas eliminarNota={eliminarNota} notas={notas} />
+            {inputLectura ? <></> :<ListarNotas eliminarNota={eliminarNota} notas={notas} />}
         </div>
     )
 }

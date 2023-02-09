@@ -4,17 +4,11 @@ import InicioEstudiante from './pages/InicioEstudiante';
 import InicioMateria from './pages/InicioMateria';
 import Inicio from './pages/Inicio';
 import InicioNotas from './pages/InicioNotas';
-import IEstudiante from './components/modelos/estudiantes/entidades/IEstudiante';
 import EditarEstudiante from './pages/EditarEstudiante';
 import EditarMateria from './pages/EditarMateria';
 import EditarNota from './pages/EditarNota';
-import IMateria from './components/modelos/materias/entidades/IMateria';
-import { getlistaEstudiantes } from './components/modelos/estudiantes';
-import { getlistaMaterias } from './components/modelos/materias';
 
 function App() {
-
-  
   return (
     <Router>
       <Routes>

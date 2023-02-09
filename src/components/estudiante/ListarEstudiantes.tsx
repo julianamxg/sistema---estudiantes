@@ -1,4 +1,4 @@
-import { FunctionComponent, useContext, useEffect, useState } from "react"
+import { FunctionComponent} from "react"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faRotateRight } from '@fortawesome/free-solid-svg-icons'
 import { Estudiante } from "./Estudiante";

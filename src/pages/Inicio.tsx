@@ -1,9 +1,9 @@
-import { Menu } from "../components/Menu";
+import { MenuPrincipal } from "../components/Menu";
 
 function Inicio() {
     return (
         <>
-            < Menu />
+            < MenuPrincipal />
             <div className="degrade">
                 <div className="inicioPagina">
                     <h2>Sistema de información de estudiantes</h2>

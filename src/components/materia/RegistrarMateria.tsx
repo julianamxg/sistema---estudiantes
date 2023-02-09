@@ -1,6 +1,6 @@
 import { FunctionComponent } from "react";
 import IMateria from "../modelos/materias/entidades/IMateria";
-import { Menu } from "../Menu"
+import { MenuPrincipal } from "../Menu"
 import Swal from "sweetalert2";
 export interface RegistrarMateriaProps {
     guardarMateria: () => any;
@@ -57,7 +57,7 @@ export const RegistrarMateria: FunctionComponent<RegistrarMateriaProps> = ({ gua
     }
     return (
         <>
-            <Menu />
+            <MenuPrincipal />
             <div className="formulario materia">
                 <form onSubmit={handleSubmit}>
                     <h2>Guardar materia</h2>

@@ -1,8 +1,7 @@
 import { FunctionComponent } from "react";import IEstudiante from "../modelos/estudiantes/entidades/IEstudiante";
 import IMateria from "../modelos/materias/entidades/IMateria";
  import INotas from "../modelos/notas/entidades/INotas";
-import { ListarEstudiantes } from "../estudiante/ListarEstudiantes";
-import { Menu } from "../Menu"
+import { MenuPrincipal } from "../Menu"
 import Swal from "sweetalert2";
 
 interface CatalogosNotas {
@@ -46,7 +45,7 @@ export const RegistrarNotas: FunctionComponent<RegistrarNotasProps> = ({ guardar
 
     return (
         <>
-            <Menu />
+            <MenuPrincipal />
             <div className="formulario">
                 <form onSubmit={handleSubmit}>
                     <h2>Registrar notas</h2>

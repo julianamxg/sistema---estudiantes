@@ -4,10 +4,12 @@
   --gris-oscuro: rgb(54, 54, 54);
 }
 
+
 body {
-  background-color: var(--verde);
+  background: #ccc;
   font-family: 'Arimo', sans-serif;
 }
+/* 
 
 h2 {
   color: var(--gris-oscuro);
@@ -19,6 +21,7 @@ h2 {
   justify-content: space-between;
   align-items: center;
   margin: 2rem;
+  background:  linear-gradient(90deg, rgba(67,189,107,1) 35%, rgba(108,213,180,1) 100%); 
 }
 
 .links a {
@@ -28,7 +31,6 @@ h2 {
 }
 
 .links a:hover {
-
   border-bottom: 2px solid #fff;
 }
 
@@ -197,17 +199,17 @@ button {
   align-items: center;
 }
 
-.checkbox{
+.checkbox {
   cursor: pointer;
   /* background-color: #fff; */
-  padding: 5.5px;
+  /* padding: 5.5px;
   appearance: none;
   border: 1.8px solid var(--verde);
   border-radius: 2px;
 }
 
 
-.checkbox:checked{
+.checkbox:checked {
   background-color: var(--verde);
 }
 
@@ -275,14 +277,12 @@ a {
 
 table {
   margin-bottom: 1rem;
-  /* border: 1px solid var(--gris); */
   border-collapse: collapse;
   margin: auto;
   background-color: #fff;
 }
 
 td {
-  /* border: 1px solid var(--gris); */
   padding: 1rem;
 }
 
@@ -356,7 +356,7 @@ select {
 
 /* materia */
 
-.formulario.materia {
+/* .formulario.materia {
   background-color: #fff;
   margin: 1rem 3rem;
   padding: 1.5rem;
@@ -387,4 +387,4 @@ select {
   .formulario .grupos .grupo .grupo-input {
     width: 90%;
   }
-}
+}  */
