@@ -1,23 +1,20 @@
 import { editarEstudiante } from "../modelos/estudiantes";
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent } from "react";
 import { Menu } from "../Menu";
 import IEstudiante from "../modelos/estudiantes/entidades/IEstudiante";
 import Swal from "sweetalert2";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck } from '@fortawesome/free-solid-svg-icons'
 
 export interface RegistrarEstudianteProps {
-    guardarEstudiante: () => any
+    guardarEstudiante: () => void
     estudiante: IEstudiante
-    alCambiarValor: (key: string, value: string) => any
-    limpiar: () => any
-    inputLectura: any
-    habilitarFormulario: () => any
+    alCambiarValor: (key: string, value: string) => void
+    limpiar: () => void
+    inputLectura: boolean
+    habilitarFormulario: () => void
 }
 
 export const RegistrarEstudiante: FunctionComponent<RegistrarEstudianteProps> = ({ guardarEstudiante, estudiante, alCambiarValor, limpiar, inputLectura, habilitarFormulario }) => {
 
-    //evento de vista
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (estudiante.nombres === '' || estudiante.apellidos === '' || estudiante.tDocumento === '' || estudiante.nDocumento === 0 || estudiante.grado === '' || estudiante.dGrado === '') {
@@ -28,7 +25,6 @@ export const RegistrarEstudiante: FunctionComponent<RegistrarEstudianteProps> = 
             return false;
         }
 
-        //validación nombres
         if (estudiante.nombres.length > 16 || estudiante.nombres.length < 4) {
             Swal.fire({
                 text: `El campo "Nombres" debe tener de 4 a 16 caracteres`,
@@ -45,7 +41,6 @@ export const RegistrarEstudiante: FunctionComponent<RegistrarEstudianteProps> = 
             return false;
         }
 
-        //validación apellidos
         if (estudiante.apellidos.length > 16 || estudiante.apellidos.length < 4) {
             Swal.fire({
                 text: `El campo "Apellidos" debe tener de 4 a 16 caracteres`,
@@ -62,7 +57,6 @@ export const RegistrarEstudiante: FunctionComponent<RegistrarEstudianteProps> = 
             return false;
         }
 
-        //validación tipo documento
         if (estudiante.tDocumento === "1") {
             Swal.fire({
                 text: `Por favor selecciona un tipo de documento`,
@@ -71,7 +65,6 @@ export const RegistrarEstudiante: FunctionComponent<RegistrarEstudianteProps> = 
             return false;
         }
 
-        //validación de número de documento
         if (String(estudiante.nDocumento).length !== 10) {
             Swal.fire({
                 text: `El campo "Número de documento" debe tener 10 digitos`,
@@ -80,7 +73,6 @@ export const RegistrarEstudiante: FunctionComponent<RegistrarEstudianteProps> = 
             return false;
         }
 
-        //validación de grado
         if (estudiante.grado === "1") {
             Swal.fire({
                 text: `Por favor selecciona un grado`,
@@ -89,7 +81,6 @@ export const RegistrarEstudiante: FunctionComponent<RegistrarEstudianteProps> = 
             return false;
         }
 
-        //validación de director de grado
         if (estudiante.dGrado === "1") {
             Swal.fire({
                 text: `Por favor selecciona un director de grado`,
@@ -100,7 +91,6 @@ export const RegistrarEstudiante: FunctionComponent<RegistrarEstudianteProps> = 
 
         guardarEstudiante();
         editarEstudiante();
-        // estudiante.id ? editarEstudiante(estudiante.id, estudiante) : addEstudiante(estudiante);
     }
 
     return (
@@ -191,7 +181,6 @@ export const RegistrarEstudiante: FunctionComponent<RegistrarEstudianteProps> = 
                     <button disabled={inputLectura} className="botonGuardar" type="submit">Guardar</button>
                     <div className="habilitar">
                         <input className="checkbox" onClick={habilitarFormulario} type="checkbox" name="habilitar" id="habilitar" />
-                        {/* <FontAwesomeIcon icon={faCheck} ></FontAwesomeIcon> */}
                         <label htmlFor="habilitar">Habilitar formulario</label>
                     </div>
                 </form>
