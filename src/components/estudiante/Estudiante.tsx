@@ -4,6 +4,12 @@ import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import IEstudiante from '../modelos/estudiantes/entidades/IEstudiante';
 import { FunctionComponent } from 'react';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import { Button } from '@mui/material';
+import { styled } from '@mui/material/styles';
 
 export interface EstudianteProps {
     editarEstudiante: (id?: string) => any
@@ -38,26 +44,68 @@ export const Estudiante: FunctionComponent<EstudianteProps> = ({ editarEstudiant
         })
     }
 
+    const StyledTableCell = styled(TableCell)(({ theme }) => ({
+        [`&.${tableCellClasses.head}`]: {
+            backgroundColor: theme.palette.grey[400],
+            color: theme.palette.common.white,
+        },
+        [`&.${tableCellClasses.body}`]: {
+            fontSize: 14,
+        },
+    }));
+
+     const StyledTableRow = styled(TableRow)(({ theme }) => ({
+        '&:nth-of-type(odd)': {
+            backgroundColor: theme.palette.action.hover,
+        },
+        // hide last border
+        '&:last-child td, &:last-child th': {
+            border: 0,
+        },
+    }));
+
     return (
-        <tr>
-            <td>{estudiante.nombres}</td>
-            <td>{estudiante.apellidos}</td>
-            <td>{estudiante.tDocumento}</td>
-            <td>{estudiante.nDocumento}</td>
-            <td>{estudiante.grado}</td>
-            <td>{estudiante.dGrado}</td>
-            <td>
+        <StyledTableRow 
+            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+        >
+            <StyledTableCell  align="center">{estudiante.nombres}</StyledTableCell>
+            <StyledTableCell align="center">{estudiante.apellidos}</StyledTableCell>
+            <StyledTableCell align="center">{estudiante.tDocumento}</StyledTableCell>
+            <StyledTableCell align="center">{estudiante.nDocumento}</StyledTableCell>
+            <StyledTableCell align="center">{estudiante.grado}</StyledTableCell>
+            <StyledTableCell align="center">{estudiante.dGrado}</StyledTableCell>
+            <StyledTableCell align="center">
                 <Link to={`/editar-estudiante/${estudiante.id}`}>
-                    <button className="botones botonEd">
+                    <Button color="success">
                         <FontAwesomeIcon icon={faPenToSquare} />
-                    </button>
+                    </Button>
                 </Link>
-            </td>
-            <td>
-                <button onClick={() => eliminarEstudiante2()} className="botones botonEl">
+            </StyledTableCell>
+            <StyledTableCell align="center">
+                <Button onClick={() => eliminarEstudiante2()} color="error">
                     <FontAwesomeIcon icon={faTrash} />
-                </button>
-            </td>
-        </tr>
+                </Button>
+            </StyledTableCell>
+        </StyledTableRow >
+        // <tr>
+        //     <td>{estudiante.nombres}</td>
+        //     <td>{estudiante.apellidos}</td>
+        //     <td>{estudiante.tDocumento}</td>
+        //     <td>{estudiante.nDocumento}</td>
+        //     <td>{estudiante.grado}</td>
+        //     <td>{estudiante.dGrado}</td>
+        //     <td>
+        //         <Link to={`/editar-estudiante/${estudiante.id}`}>
+        //             <button className="botones botonEd">
+        //                 <FontAwesomeIcon icon={faPenToSquare} />
+        //             </button>
+        //         </Link>
+        //     </td>
+        //     <td>
+        //         <button onClick={() => eliminarEstudiante2()} className="botones botonEl">
+        //             <FontAwesomeIcon icon={faTrash} />
+        //         </button>
+        //     </td>
+        // </tr>
     )
 } 

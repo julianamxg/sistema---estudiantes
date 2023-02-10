@@ -1,12 +1,12 @@
-:root {
+/* :root {
   --verde: rgba(67, 189, 107, 0.815);
   --gris: rgb(176, 176, 176);
   --gris-oscuro: rgb(54, 54, 54);
-}
+} */
 
 
 body {
-  background: #ccc;
+  background: linear-gradient(90deg, #2e7d32 35%, #2e7d32 100%);
   font-family: 'Arimo', sans-serif;
 }
 /* 

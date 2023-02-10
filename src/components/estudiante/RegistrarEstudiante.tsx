@@ -9,10 +9,10 @@ import { width } from "@mui/system";
 // import '../../App.css'
 
 const estilosIndependientes = {
-    background: '#53BE76',
+    background: '#2e7d32',
     color: 'white',
     height: 48,
-    padding: '0 30px'
+    padding: '0px 50px'
 };
 
 export interface RegistrarEstudianteProps {
@@ -44,7 +44,7 @@ export const RegistrarEstudiante: FunctionComponent<RegistrarEstudianteProps> = 
             return false;
         }
 
-        if (!/^[a-zA-Z]+$/.test(estudiante.nombres.valueOf())) {
+        if (!/^[a-zA-ZÀ-ÿ\s]+$/.test(estudiante.nombres.valueOf())) {
             Swal.fire({
                 text: `El campo "Nombres" solo debe contener letras`,
                 icon: 'warning',
@@ -60,7 +60,7 @@ export const RegistrarEstudiante: FunctionComponent<RegistrarEstudianteProps> = 
             return false;
         }
 
-        if (!/^[a-zA-Z\s]+$/.test(estudiante.apellidos.valueOf())) {
+        if (!/^[a-zA-ZÀ-ÿ\s]+$/.test(estudiante.apellidos.valueOf())) {
             Swal.fire({
                 text: `El campo "Apellidos" solo debe contener letras`,
                 icon: 'warning',
@@ -115,13 +115,13 @@ export const RegistrarEstudiante: FunctionComponent<RegistrarEstudianteProps> = 
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
-                    marginTop: '8rem',
+                    marginTop: '5rem',
                     background: '#fff',
                     marginLeft: '5rem',
                     marginRight: '5rem',
-                    boxShadow: '0px 1px 6px 0px rgba(181,177,181,1)',
-                    paddingTop: '1.5rem',
-                    paddingBottom: '1.5rem'
+                    border: '1px solid rgb(224, 224, 224)',
+                    paddingTop: '3rem',
+                    paddingBottom: '3rem'
                 }}
                 noValidate
                 autoComplete="off"

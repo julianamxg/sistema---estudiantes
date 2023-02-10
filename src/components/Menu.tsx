@@ -20,12 +20,15 @@ export const MenuPrincipal = () => {
     return (
         <Box sx={{
             display: 'flex',
-            justifyContent:'space-between'
+            justifyContent:'space-between',
+           
         }}>
-            <CssBaseline />
+            {/* <CssBaseline /> */}
             <AppBar component="nav" sx={{
-                background: '#53BE76',
+                background: '#2e7d32',
                 display: 'flex',
+                boxShadow: '0px 0px 1px 0px rgba(46,125,50,1)',
+                padding: '1rem'
                 
             }}>
                 <Toolbar>
@@ -37,7 +40,8 @@ export const MenuPrincipal = () => {
                             flexGrow: 1,
                             display: { xs: 'flex', sm: 'flex' },
                             textDecoration: 'none',
-                            color: '#fff'
+                            color: '#fff',
+
                         }}
                     >
                         <FontAwesomeIcon icon={faHouseChimney} />
@@ -48,7 +52,7 @@ export const MenuPrincipal = () => {
                         component="a"
                         href='/materias'
                         sx={{
-                            flexGrow: 1,
+                            margin: '1rem',
                             display: { xs: 'flex', sm: 'flex' },
                             textDecoration: 'none',
                             color: '#fff'
@@ -62,7 +66,7 @@ export const MenuPrincipal = () => {
                         component="a"
                         href='/estudiantes'
                         sx={{
-                            flexGrow: 1,
+                            margin: '1rem',
                             display: { xs: 'flex', sm: 'flex' },
                             textDecoration: 'none',
                             color: '#fff'
@@ -76,7 +80,8 @@ export const MenuPrincipal = () => {
                         component="a"
                         href='/notas'
                         sx={{
-                            flexGrow: 1,
+                            margin: '1rem',
+                            flexGrow: -1,
                             display: { xs: 'flex', sm: 'flex' },
                             textDecoration: 'none',
                             color: '#fff'

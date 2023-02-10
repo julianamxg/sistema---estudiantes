@@ -23,7 +23,7 @@ function EditarEstudiante() {
     useEffect(() => {
         console.log(estudiante)
         cargarEstudiante();
-        setInputLectura(!inputLectura)
+     
     }, []);
 
     function habilitarFormulario(): void{
