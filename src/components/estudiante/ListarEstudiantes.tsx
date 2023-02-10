@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react"
 import { Estudiante } from "./Estudiante";
 import IEstudiante from "../modelos/estudiantes/entidades/IEstudiante";
-import {TableContainer } from "@mui/material";
+import { TableContainer } from "@mui/material";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
@@ -41,9 +41,12 @@ export const ListarEstudiantes: FunctionComponent<ListarEstudianteProps> = ({ ed
 
 
     return (
-
         <>
-            <Box>
+            <Box sx={{
+                width: '95%',
+                margin: 'auto',
+                marginBottom: '1.5rem'
+            }}>
                 <h1></h1>
                 {
                     estudiantes.length > 0 ? (
