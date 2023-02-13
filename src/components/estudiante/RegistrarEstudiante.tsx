@@ -136,8 +136,8 @@ export const RegistrarEstudiante: FunctionComponent<RegistrarEstudianteProps> = 
                         <Grid item xs={12} sm={6}>
                             <TextField sx={{
                                 width: '100%', // Ajusta el ancho en función del tamaño de pantalla
-                                mx: 'auto', // Centra el componente en el eje X
-                                // marginBottom: '1rem'
+                                mx: 'auto', 
+                               
 
                             }}
                                 id="filled-basic nombres"
