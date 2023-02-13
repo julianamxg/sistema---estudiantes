@@ -4,11 +4,7 @@ import { MenuPrincipal } from "../Menu";
 import IEstudiante from "../modelos/estudiantes/entidades/IEstudiante";
 import Swal from "sweetalert2";
 import Button from '@mui/material/Button';
-import { TextField, Select, MenuItem, InputLabel, FormControl, Divider, Box, Container, Checkbox, FormControlLabel, Grid } from "@mui/material";
-import { width } from "@mui/system";
-import { makeStyles } from "@mui/material";
-// import Grid from "@mui/material";
-// import '../../App.css'
+import { TextField, Select, MenuItem, InputLabel, FormControl, Box, Checkbox, FormControlLabel, Grid } from "@mui/material";
 
 const estilosIndependientes = {
     background: '#2e7d32',
@@ -16,7 +12,6 @@ const estilosIndependientes = {
     height: 48,
     padding: '0px 50px'
 };
-
 
 export interface RegistrarEstudianteProps {
     guardarEstudiante: () => void
@@ -113,13 +108,11 @@ export const RegistrarEstudiante: FunctionComponent<RegistrarEstudianteProps> = 
             <Box
                 component="form"
                 sx={{
-                    // '& .MuiTextField-root': { width: '60ch' },
-                    // margin: 'auto',
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
                     marginTop: '5rem',
-                    marginBottm: '5rem',
+                    marginBottom: '2rem',
                     background: '#fff',
                     marginLeft: '5rem',
                     marginRight: '5rem',
@@ -131,11 +124,10 @@ export const RegistrarEstudiante: FunctionComponent<RegistrarEstudianteProps> = 
                 onSubmit={handleSubmit}
             >
                 <h2>Guardar estudiante</h2>
-                {/* <div> */}
                     <Grid container spacing={3}>
                         <Grid item xs={12} sm={6}>
                             <TextField sx={{
-                                width: '100%', // Ajusta el ancho en función del tamaño de pantalla
+                                width: '100%',
                                 mx: 'auto', 
                                
 
@@ -152,11 +144,12 @@ export const RegistrarEstudiante: FunctionComponent<RegistrarEstudianteProps> = 
                             />
 
                         </Grid>
+
                         <Grid item xs={12} sm={6}>
                             <TextField
                                 sx={{
-                                    width: '100%', // Ajusta el ancho en función del tamaño de pantalla
-                                    mx: 'auto', // Centra el componente en el eje X
+                                    width: '100%', 
+                                    mx: 'auto', 
                                     marginBottom: '1.5rem'
                                 }}
                                 disabled={inputLectura}
@@ -171,14 +164,12 @@ export const RegistrarEstudiante: FunctionComponent<RegistrarEstudianteProps> = 
                             />
                         </Grid>
                     </Grid>
-                {/* </div> */}
-                {/* <div> */}
+
                     <Grid container spacing={3}>
                         <Grid item xs={12} sm={6}>
                             <FormControl variant="filled"  sx={{
-                                        width: '100%',  // Ajusta el ancho en función del tamaño de pantalla
-                                        mx: 'auto', // Centra el componente en el eje X
-                                        // marginBottom: '1rem'
+                                        width: '100%',  
+                                        mx: 'auto', 
                                     }}>
                                 <InputLabel color="success" id="demo-simple-select-filled-label">Tipo de documento</InputLabel>
                                 <Select
@@ -201,8 +192,8 @@ export const RegistrarEstudiante: FunctionComponent<RegistrarEstudianteProps> = 
                         <Grid item xs={12} sm={6}>
                             <TextField
                                 sx={{
-                                    width: '100%', // Ajusta el ancho en función del tamaño de pantalla
-                                    mx: 'auto', // Centra el componente en el eje X
+                                    width: '100%', 
+                                    mx: 'auto',
                                     marginBottom: '1.5rem'
                                 }}
                                 id="filled-basic nDocumento"
@@ -217,9 +208,7 @@ export const RegistrarEstudiante: FunctionComponent<RegistrarEstudianteProps> = 
                             />
                         </Grid>
                     </Grid>
-                {/* </div> */}
 
-                {/* <div> */}
                     <Grid container spacing={3}>
                         <Grid item xs={12} sm={6}>
                         <FormControl variant="filled"  sx={{
@@ -285,7 +274,6 @@ export const RegistrarEstudiante: FunctionComponent<RegistrarEstudianteProps> = 
                             </FormControl>
                         </Grid>
                     </Grid>
-                {/* </div> */}
 
                 <div>
                     <Button sx={{ marginTop: '1rem' }} style={estilosIndependientes} disabled={inputLectura} type="submit">Guardar</Button>

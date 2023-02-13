@@ -5,9 +5,7 @@ import Swal from 'sweetalert2';
 import IEstudiante from '../modelos/estudiantes/entidades/IEstudiante';
 import { FunctionComponent } from 'react';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
 import { Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
@@ -58,7 +56,6 @@ export const Estudiante: FunctionComponent<EstudianteProps> = ({ editarEstudiant
         '&:nth-of-type(odd)': {
             backgroundColor: theme.palette.action.hover,
         },
-        // hide last border
         '&:last-child td, &:last-child th': {
             border: 0,
         },
@@ -87,25 +84,5 @@ export const Estudiante: FunctionComponent<EstudianteProps> = ({ editarEstudiant
                 </Button>
             </StyledTableCell>
         </StyledTableRow >
-        // <tr>
-        //     <td>{estudiante.nombres}</td>
-        //     <td>{estudiante.apellidos}</td>
-        //     <td>{estudiante.tDocumento}</td>
-        //     <td>{estudiante.nDocumento}</td>
-        //     <td>{estudiante.grado}</td>
-        //     <td>{estudiante.dGrado}</td>
-        //     <td>
-        //         <Link to={`/editar-estudiante/${estudiante.id}`}>
-        //             <button className="botones botonEd">
-        //                 <FontAwesomeIcon icon={faPenToSquare} />
-        //             </button>
-        //         </Link>
-        //     </td>
-        //     <td>
-        //         <button onClick={() => eliminarEstudiante2()} className="botones botonEl">
-        //             <FontAwesomeIcon icon={faTrash} />
-        //         </button>
-        //     </td>
-        // </tr>
     )
 } 

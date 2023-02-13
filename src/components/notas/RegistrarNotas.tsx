@@ -1,12 +1,20 @@
-import { FunctionComponent } from "react";import IEstudiante from "../modelos/estudiantes/entidades/IEstudiante";
+import { FunctionComponent } from "react"; import IEstudiante from "../modelos/estudiantes/entidades/IEstudiante";
 import IMateria from "../modelos/materias/entidades/IMateria";
- import INotas from "../modelos/notas/entidades/INotas";
+import INotas from "../modelos/notas/entidades/INotas";
 import { MenuPrincipal } from "../Menu"
 import Swal from "sweetalert2";
+import { TextField, Select, MenuItem, InputLabel, FormControl, Box, Checkbox, FormControlLabel, Grid, Button } from "@mui/material";
+
+const estilosIndependientes = {
+    background: '#2e7d32',
+    color: 'white',
+    height: 48,
+    padding: '0px 50px'
+};
 
 interface CatalogosNotas {
-    listaMaterias : IMateria[]
-    listaEstudiantes : IEstudiante[]
+    listaMaterias: IMateria[]
+    listaEstudiantes: IEstudiante[]
 }
 
 export interface RegistrarNotasProps {
@@ -14,7 +22,7 @@ export interface RegistrarNotasProps {
     nota: INotas;
     alCambiarValor: (key: string, value: string) => any
     limpiar: () => any;
-    catalogos : CatalogosNotas;
+    catalogos: CatalogosNotas;
     inputLectura: any;
     habilitarFormulario: () => any;
 }
@@ -32,7 +40,7 @@ export const RegistrarNotas: FunctionComponent<RegistrarNotasProps> = ({ guardar
             return false;
         }
 
-        if (String(nota.promedio).length !== 2){
+        if (String(nota.promedio).length !== 2) {
             Swal.fire({
                 text: `El campo "Promedio" solo debe tener 2 digitos`,
                 icon: 'warning',
@@ -46,45 +54,104 @@ export const RegistrarNotas: FunctionComponent<RegistrarNotasProps> = ({ guardar
     return (
         <>
             <MenuPrincipal />
-            <div className="formulario">
-                <form onSubmit={handleSubmit}>
-                    <h2>Registrar notas</h2>
-                    {/* <Link to={'/'}>Inicio</Link> */}
-                    <div className="grupos" >
-                        <div className="grupo-input">
-                            <label htmlFor="materia">Materia</label>
-                            <select disabled={inputLectura} onChange={(e) => alCambiarValor(e.target.name, e.target.value)} value={nota.materia} name="materia" id="materia">
-                        
-                               <option>Selecciona...</option>
-                                {catalogos.listaMaterias.map((materia) => (
-                                       
-                                    <option key={materia.id}>{materia.materia}</option>
-                                ))}
-                            </select>
+            <Box
+                component="form"
+                sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    marginTop: '5rem',
+                    marginBottom: '2rem',
+                    background: '#fff',
+                    marginLeft: '5rem',
+                    marginRight: '5rem',
+                    border: '1px solid rgb(224, 224, 224)',
+                    padding: '3rem',
+                }}
+                noValidate
+                autoComplete="off"
+                onSubmit={handleSubmit}
+            >
 
-                        </div>
-                        <div className="grupo-input">
-                            <label htmlFor="estudiante">Estudiante</label>
-                            <select disabled={inputLectura} onChange={(e) => alCambiarValor(e.target.name, e.target.value)} value={nota.estudiante} name="estudiante" id="estudiante">
-                                <option>Selecciona...</option>
-                                {catalogos.listaEstudiantes.map((estudiante) => (
-                                    <option key={estudiante.id}>{estudiante.nombres}</option>
+                <h2>Registrar notas</h2>
+                <Grid container spacing={3}>
+                    <Grid item xs={12} sm={12}>
+                        <FormControl variant="filled" sx={{
+                            width: '100%',
+                            mx: 'auto'
+                        }}>
+                            <InputLabel color="success" id="demo-simple-select-filled-label" >Materia</InputLabel>
+                            <Select
+                                disabled={inputLectura}
+                                onChange={(e) => alCambiarValor(e.target.name, e.target.value)}
+                                value={nota.materia}
+                                name="materia"
+                                id="materia"
+                                color="success"
+                            >
+
+                                <MenuItem>Selecciona...</MenuItem>
+                                {catalogos.listaMaterias.map((materia) => (
+
+                                    <MenuItem key={materia.id}>{materia.materia}</MenuItem>
                                 ))}
-                            </select>
-                        </div>
-                        <div className="grupo-input">
-                            <label htmlFor="nota">Nota</label>
-                            <input disabled={inputLectura} onChange={(e) => alCambiarValor(e.target.name, e.target.value)} value={nota.promedio} type="number" name="promedio" id="promedio" placeholder="Ingresa el promedio de la materia" />
-                        </div>
-                        <button disabled={inputLectura} type="submit">Guardar</button>
-                        <div className="habilitar">
-                        <input className="checkbox" onClick={habilitarFormulario} type="checkbox" name="habilitar" id="habilitar" />
-                        {/* <FontAwesomeIcon icon={faCheck} ></FontAwesomeIcon> */}
-                        <label htmlFor="habilitar">Habilitar formulario</label>
-                    </div>
-                    </div>
-                </form>
-            </div>
+                            </Select>
+                        </FormControl>
+                    </Grid>
+
+                    <Grid item xs={12} sm={12}>
+                        <FormControl variant="filled" sx={{
+                            width: '100%',
+                            mx: 'auto'
+                        }}>
+                            <InputLabel color="success" id="demo-simple-select-filled-label">Estudiante</InputLabel>
+                            <Select disabled={inputLectura} 
+                            onChange={(e) => alCambiarValor(e.target.name, e.target.value)}
+                             value={nota.estudiante} 
+                             name="estudiante" 
+                             id="demo-simple-select-filled estudiante"
+                             color="success"
+                             >
+                                <MenuItem>Selecciona...</MenuItem>
+                                {catalogos.listaEstudiantes.map((estudiante) => (
+                                    <MenuItem key={estudiante.id}>{estudiante.nombres}</MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl>
+
+                    </Grid>
+
+                    <Grid item xs={12} sm={12}>
+                        <TextField
+                            sx={{
+                                width: '100%',
+                                mx: 'auto',
+                                marginBottom: '1.5rem'
+                            }}
+                            disabled={inputLectura}
+                            onChange={(e) => alCambiarValor(e.target.name, e.target.value)}
+                            value={nota.promedio}
+                            type="number"
+                            name="promedio"
+                            id="filled-basic promedio"
+                            color="success"
+                            label="Promedio"
+                            variant="filled"
+                        >
+
+                        </TextField>
+                    </Grid>
+                </Grid>
+                <div>
+                    <Button sx={{ marginTop: '1rem' }} style={estilosIndependientes} disabled={inputLectura} type="submit">Guardar</Button>
+                </div>
+                <FormControlLabel
+                    label="Habilitar formulario"
+                    control={
+                        <Checkbox size="small" name="habilitar" id="habilitar" onClick={habilitarFormulario} color="success" />}
+                />
+
+            </Box >
         </>
     )
 }

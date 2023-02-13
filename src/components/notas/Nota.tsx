@@ -4,6 +4,10 @@ import { FunctionComponent } from "react"
 import { Link } from "react-router-dom"
 import Swal from "sweetalert2"
 import INotas from "../modelos/notas/entidades/INotas"
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import TableRow from '@mui/material/TableRow';
+import { Button } from '@mui/material';
+import { styled } from '@mui/material/styles';
 
 export interface Notasprops {
     editarNota: (id?: string) => any
@@ -35,26 +39,33 @@ export const Nota: FunctionComponent<Notasprops> = ({ editarNota, eliminarNota, 
         })
     }
 
+ 
+
+    const backgroundColor = nota.promedio > 30 ? "#cae7cc" : "#e5c9c9";
+
 
     return (
-        <tr
-            style={{background: nota.promedio > 30? '#c1ffc7' : '#ffc1c1'}}>
-          
-            <td>{nota.estudiante}</td>
-            <td>{nota.promedio}</td>
-            <td >{nota.materia}</td> 
-            <td>
+        <TableRow
+            sx={{
+                border: 0,
+                background: backgroundColor
+            }} 
+    >
+            <TableCell align="center">{nota.estudiante}</TableCell>
+            <TableCell align="center">{nota.promedio}</TableCell>
+            <TableCell align="center">{nota.materia}</TableCell> 
+            <TableCell align="center">
                 <Link to={`/editar-nota/${nota.id}`}>
-                    <button className="botones botonEd">
+                    <Button color="success">
                         <FontAwesomeIcon icon={faPenToSquare} />
-                    </button>
+                    </Button>
                 </Link>
-            </td>
-            <td>
-                <button onClick={() => eliminarNotaAlert()} className="botones botonEl">
+            </TableCell>
+            <TableCell align="center">
+                <Button onClick={() => eliminarNotaAlert()} color="error">
                     <FontAwesomeIcon icon={faTrash} />
-                </button>
-            </td>
-        </tr>
+                </Button>
+            </TableCell>
+        </TableRow >
     )
 }

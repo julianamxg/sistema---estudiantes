@@ -47,11 +47,11 @@ export const ListarEstudiantes: FunctionComponent<ListarEstudianteProps> = ({ ed
                 margin: 'auto',
                 marginBottom: '1.5rem'
             }}>
-                <h1></h1>
+                
                 {
                     estudiantes.length > 0 ? (
                         <TableContainer component={Paper}>
-                            <Table sx={{ minWidth: 650 }} aria-label="customized table">
+                            <Table sx={{ minWidth: 650, margintOP: '1.5rem' }} aria-label="customized table">
                                 <TableHead>
                                     <TableRow>
                                         <StyledTableCell align="center">Nombres</StyledTableCell>
@@ -65,41 +65,9 @@ export const ListarEstudiantes: FunctionComponent<ListarEstudianteProps> = ({ ed
                                 </TableHead>
                                 <TableBody>
                                     {estudiantes.map((estudiante: IEstudiante) => <Estudiante key={estudiante.id} estudiante={estudiante} editarEstudiante={editarEstudiante} eliminarEstudiante={eliminarEstudiante} />)}
-                                    {/* {rows.map((row) => (
-                                    <TableRow
-                                        key={row.name}
-                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                    >
-                                        <TableCell component="th" scope="row">
-                                            {row.name}
-                                        </TableCell>
-                                        <TableCell align="right">{row.calories}</TableCell>
-                                        <TableCell align="right">{row.fat}</TableCell>
-                                        <TableCell align="right">{row.carbs}</TableCell>
-                                        <TableCell align="right">{row.protein}</TableCell>
-                                    </TableRow>
-                                ))} */}
                                 </TableBody>
                             </Table>
                         </TableContainer>
-
-                        // <table>
-                        //         <thead>
-                        //             <tr>
-                        //                 <td>Nombres</td>
-                        //                 <td>Apellidos</td>
-                        //                 <td>Tipo de documento</td>
-                        //                 <td>Número de documento</td>
-                        //                 <td>Grado</td>
-                        //                 <td>Directora de grado</td>
-                        //                 <td colSpan={2}>Acciones</td>
-                        //             </tr>
-                        //         </thead>
-
-                        //         <tbody>
-                        //             {estudiantes.map((estudiante: IEstudiante) => <Estudiante key={estudiante.id} estudiante={estudiante} editarEstudiante={editarEstudiante} eliminarEstudiante={eliminarEstudiante} />)}
-                        //         </tbody>
-                        //     </table></></>
                     ) : (
                         <p className="">No hay estudiantes</p>
                     )
