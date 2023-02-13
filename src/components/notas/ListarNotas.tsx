@@ -15,13 +15,29 @@ import { Icon } from '@mui/material';
 import { Box } from "@mui/material";
 import { styled } from '@mui/material/styles';
 import * as React from 'react';
+import { RegistrarNotas } from './RegistrarNotas';
+import IMateria from '../modelos/materias/entidades/IMateria';
+import IEstudiante from '../modelos/estudiantes/entidades/IEstudiante';
+import { MenuPrincipal } from '../Menu';
 
-export interface ListarNotasProps {
-    eliminarNota: (id?: string) => any
-    notas: INotas[];
+interface CatalogosNotas {
+    listaMaterias: IMateria[]
+    listaEstudiantes: IEstudiante[]
 }
 
-export const ListarNotas: FunctionComponent<ListarNotasProps> = ({ eliminarNota, notas }) => {
+export interface ListarNotasProps {
+    eliminarNota: (id?: string) => void
+    notas: INotas[];
+    guardarNota: () => void;
+    nota: INotas;
+    alCambiarValor: (key: string, value: string) => void
+    limpiar: () => void;
+    catalogos: CatalogosNotas;
+    inputLectura: boolean;
+    habilitarFormulario: () => void;
+}
+
+export const ListarNotas: FunctionComponent<ListarNotasProps> = ({ eliminarNota, notas, guardarNota, nota, alCambiarValor, limpiar, catalogos, inputLectura, habilitarFormulario }) => {
     const StyledTableCell = styled(TableCell)(({ theme }) => ({
         [`&.${tableCellClasses.head}`]: {
             backgroundColor: theme.palette.common.white,
@@ -39,77 +55,75 @@ export const ListarNotas: FunctionComponent<ListarNotasProps> = ({ eliminarNota,
     const handleClose = () => setOpen(false);
 
     const style = {
-        position: 'absolute' as 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        width: 400,
-        bgcolor: 'background.paper',
-        border: '2px solid #000',
-        boxShadow: 24,
-        p: 4,
-      };
-      
+        // position: 'absolute' as 'absolute',
+        // top: '50%',
+        // left: '50%',
+        // transform: 'translate(-50%, -50%)',
+        // width: '80%',
+        // bgcolor: 'background.paper',
+        // border: '2px solid #000',
+        // boxShadow: 24,
+        // p: 4,
+    };
+
 
     return (
-        <Box sx={{
-            margin: '1.5rem',
-            padding: '2rem',
-            background: '#fff'
-        }}>
-            <div>
-                <Button color='success' onClick={handleOpen}>
-                    <Icon color="success" sx={{
-                        paddingBottom: '1rem',
-                        paddingRight: '1rem'
-                    }}>
-                        <AddIcon sx={{ fontSize: 40 }} />
+        <>
+            <MenuPrincipal />
+            <Box sx={{
+                margin: '5rem 1rem',
+                padding: '2rem',
+                background: '#fff'
+            }}>
+                <div>
+                    <Button color='success' onClick={handleOpen}>
+                        <Icon color="success" sx={{
+                            paddingBottom: '1rem',
+                            paddingRight: '1rem'
+                        }}>
+                            <AddIcon sx={{ fontSize: 40 }} />
 
-                    </Icon>
-                    Agregar
-                </Button>
-                <Modal
-                    open={open}
-                    onClose={handleClose}
-                    aria-labelledby="modal-modal-title"
-                    aria-describedby="modal-modal-description"
-                >
-                    <Box sx={style}>
-                        <Typography id="modal-modal-title" variant="h6" component="h2">
-                            Text in a modal
-                        </Typography>
-                        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-                        </Typography>
-                    </Box>
-                </Modal>
-            </div>
+                        </Icon>
+                        Agregar
+                    </Button>
+                    <Modal
+                        open={open}
+                        onClose={handleClose}
+                        aria-labelledby="modal-modal-title"
+                        aria-describedby="modal-modal-description"
+                    >
+                        <Box>
+                            <RegistrarNotas guardarNota={guardarNota} alCambiarValor={alCambiarValor} limpiar={limpiar} nota={nota} catalogos={catalogos} inputLectura={inputLectura} habilitarFormulario={habilitarFormulario} />
+                        </Box>
+                    </Modal>
+                </div>
 
-            {
-                notas.length > 0 ? (
-                    <TableContainer>
-                        <Table sx={{ minWidth: 650, border: '1px solid rgb(224, 224, 224)', }} aria-label="customized table">
-                            <TableHead>
-                                <TableRow>
-                                    <StyledTableCell align="center">Materia</StyledTableCell>
-                                    <StyledTableCell align="center">Estudiante</StyledTableCell>
-                                    <StyledTableCell align="center">Promedio</StyledTableCell>
-                                    <StyledTableCell align="center" colSpan={2}>Acciones</StyledTableCell>
-                                </TableRow>
-                            </TableHead>
+                {
+                    notas.length > 0 ? (
+                        <TableContainer>
+                            <Table sx={{ minWidth: 650, border: '1px solid rgb(224, 224, 224)', }} aria-label="customized table">
+                                <TableHead>
+                                    <TableRow>
+                                        <StyledTableCell align="center">Materia</StyledTableCell>
+                                        <StyledTableCell align="center">Estudiante</StyledTableCell>
+                                        <StyledTableCell align="center">Promedio</StyledTableCell>
+                                        <StyledTableCell align="center" colSpan={2}>Acciones</StyledTableCell>
+                                    </TableRow>
+                                </TableHead>
 
-                            <TableBody>
-                                {
-                                    notas.map((nota: INotas) =>
-                                        <Nota key={nota.id} nota={nota} editarNota={editarNota} eliminarNota={eliminarNota} />)}
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
-                ) : (
-                    <p className="">No hay notas</p>
-                )
-            }
+                                <TableBody>
+                                    {
+                                        notas.map((nota: INotas) =>
+                                            <Nota key={nota.id} nota={nota} editarNota={editarNota} eliminarNota={eliminarNota} />)}
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
+                    ) : (
+                        <p className="">No hay notas</p>
+                    )
+                }
 
-        </Box>
+            </Box>
+        </>
     )
 }

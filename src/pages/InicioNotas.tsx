@@ -22,6 +22,7 @@ const InicioNotas: FunctionComponent = () => {
     const [inputLectura, setInputLectura] = useState(true)
     const [nota, setNota] = useState<INotas>(initialState);
     const [notas, setNotas] = useState<INotas[]>([]);
+    
 
     //listar
     useEffect(() => {
@@ -49,6 +50,7 @@ const InicioNotas: FunctionComponent = () => {
         }
         limpiarFormulario()
     }
+    
 
     const alcambiarValor = (name: string, value: string) => {
         setNota({ ...nota, [name]: value })
@@ -79,8 +81,8 @@ const InicioNotas: FunctionComponent = () => {
 
     return (
         <div className="App">
-            <RegistrarNotas guardarNota={guardarNota} alCambiarValor={alcambiarValor} limpiar={limpiarFormulario} nota={nota} catalogos={{ listaEstudiantes: listaEstudiantes(), listaMaterias: listaMaterias() }} inputLectura={inputLectura} habilitarFormulario={habilitarFormulario} />
-            {inputLectura ? <></> : <ListarNotas eliminarNota={eliminarNota} notas={notas} />}
+            {/* <RegistrarNotas  /> */}
+             <ListarNotas eliminarNota={eliminarNota} notas={notas} guardarNota={guardarNota} alCambiarValor={alcambiarValor} limpiar={limpiarFormulario} nota={nota} catalogos={{ listaEstudiantes: listaEstudiantes(), listaMaterias: listaMaterias() }} inputLectura={inputLectura} habilitarFormulario={habilitarFormulario}/>
         </div>
     )
 }
