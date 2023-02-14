@@ -51,15 +51,16 @@ export const Nota: FunctionComponent<Notasprops> = ({ editarNota, eliminarNota, 
                 background: backgroundColor
             }} 
     >
+            <TableCell align="center">{nota.materia}</TableCell>
             <TableCell align="center">{nota.estudiante}</TableCell>
-            <TableCell align="center">{nota.promedio}</TableCell>
-            <TableCell align="center">{nota.materia}</TableCell> 
+            <TableCell align="center">{nota.promedio}</TableCell> 
             <TableCell align="center">
                 <Link to={`/editar-nota/${nota.id}`}>
                     <Button color="success">
                         <FontAwesomeIcon icon={faPenToSquare} />
                     </Button>
                 </Link>
+                
             </TableCell>
             <TableCell align="center">
                 <Button onClick={() => eliminarNotaAlert()} color="error">

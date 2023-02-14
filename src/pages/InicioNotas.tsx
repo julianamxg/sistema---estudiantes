@@ -9,6 +9,7 @@ import Swal from "sweetalert2";
 import IEstudiante from "../components/modelos/estudiantes/entidades/IEstudiante";
 import { getlistaMaterias } from "../components/modelos/materias";
 import { getlistaEstudiantes } from "../components/modelos/estudiantes";
+import React from "react";
 
 
 
@@ -22,7 +23,11 @@ const InicioNotas: FunctionComponent = () => {
     const [inputLectura, setInputLectura] = useState(true)
     const [nota, setNota] = useState<INotas>(initialState);
     const [notas, setNotas] = useState<INotas[]>([]);
-    
+
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+
 
     //listar
     useEffect(() => {
@@ -50,7 +55,7 @@ const InicioNotas: FunctionComponent = () => {
         }
         limpiarFormulario()
     }
-    
+
 
     const alcambiarValor = (name: string, value: string) => {
         setNota({ ...nota, [name]: value })
@@ -82,7 +87,19 @@ const InicioNotas: FunctionComponent = () => {
     return (
         <div className="App">
             {/* <RegistrarNotas  /> */}
-             <ListarNotas eliminarNota={eliminarNota} notas={notas} guardarNota={guardarNota} alCambiarValor={alcambiarValor} limpiar={limpiarFormulario} nota={nota} catalogos={{ listaEstudiantes: listaEstudiantes(), listaMaterias: listaMaterias() }} inputLectura={inputLectura} habilitarFormulario={habilitarFormulario}/>
+            <ListarNotas
+                eliminarNota={eliminarNota}
+                notas={notas}
+                guardarNota={guardarNota}
+                alCambiarValor={alcambiarValor}
+                limpiar={limpiarFormulario} nota={nota}
+                catalogos={{ listaEstudiantes: listaEstudiantes(), listaMaterias: listaMaterias() }}
+                inputLectura={inputLectura}
+                habilitarFormulario={habilitarFormulario}
+                open={open}
+                handleOpen={handleOpen}
+                handleClose={handleClose}
+            />
         </div>
     )
 }

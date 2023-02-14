@@ -4,7 +4,7 @@ import INotas from '../modelos/notas/entidades/INotas';
 import { FunctionComponent } from 'react';
 import { Nota } from './Nota';
 import { editarNota } from '../modelos/notas';
-import { Button, TableContainer, Modal, Typography } from "@mui/material";
+import { Button, TableContainer, Modal } from "@mui/material";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
@@ -35,9 +35,13 @@ export interface ListarNotasProps {
     catalogos: CatalogosNotas;
     inputLectura: boolean;
     habilitarFormulario: () => void;
+    open: boolean;
+    handleOpen: () => void;
+    handleClose: () => void;
+
 }
 
-export const ListarNotas: FunctionComponent<ListarNotasProps> = ({ eliminarNota, notas, guardarNota, nota, alCambiarValor, limpiar, catalogos, inputLectura, habilitarFormulario }) => {
+export const ListarNotas: FunctionComponent<ListarNotasProps> = ({ eliminarNota, notas, guardarNota, nota, alCambiarValor, limpiar, catalogos, inputLectura, habilitarFormulario, open, handleOpen, handleClose }) => {
     const StyledTableCell = styled(TableCell)(({ theme }) => ({
         [`&.${tableCellClasses.head}`]: {
             backgroundColor: theme.palette.common.white,
@@ -50,9 +54,9 @@ export const ListarNotas: FunctionComponent<ListarNotasProps> = ({ eliminarNota,
         },
     }));
 
-    const [open, setOpen] = React.useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+    // const [open, setOpen] = React.useState(false);
+    // const handleOpen = () => setOpen(true);
+    // const handleClose = () => setOpen(false);
 
     const style = {
         // position: 'absolute' as 'absolute',
@@ -86,14 +90,17 @@ export const ListarNotas: FunctionComponent<ListarNotasProps> = ({ eliminarNota,
                         </Icon>
                         Agregar
                     </Button>
+                    <h2>Notas</h2>
                     <Modal
                         open={open}
                         onClose={handleClose}
                         aria-labelledby="modal-modal-title"
                         aria-describedby="modal-modal-description"
                     >
+
                         <Box>
-                            <RegistrarNotas guardarNota={guardarNota} alCambiarValor={alCambiarValor} limpiar={limpiar} nota={nota} catalogos={catalogos} inputLectura={inputLectura} habilitarFormulario={habilitarFormulario} />
+                        
+                            <RegistrarNotas guardarNota={guardarNota} alCambiarValor={alCambiarValor} limpiar={limpiar} nota={nota} catalogos={catalogos} inputLectura={inputLectura} habilitarFormulario={habilitarFormulario} handleClose={handleClose} />
                         </Box>
                     </Modal>
                 </div>

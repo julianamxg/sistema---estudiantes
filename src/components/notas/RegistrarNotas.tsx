@@ -3,7 +3,8 @@ import IMateria from "../modelos/materias/entidades/IMateria";
 import INotas from "../modelos/notas/entidades/INotas";
 import { MenuPrincipal } from "../Menu"
 import Swal from "sweetalert2";
-import { TextField, Select, MenuItem, InputLabel, FormControl, Box, Checkbox, FormControlLabel, Grid, Button } from "@mui/material";
+import { TextField, Select, MenuItem, InputLabel, FormControl, Box, Checkbox, FormControlLabel, Grid, Button, IconButton } from "@mui/material";
+import CloseIcon from '@mui/icons-material/Close';
 
 const estilosIndependientes = {
     background: '#2e7d32',
@@ -25,9 +26,10 @@ export interface RegistrarNotasProps {
     catalogos: CatalogosNotas;
     inputLectura: boolean;
     habilitarFormulario: () => any;
+    handleClose: () => void;
 }
 
-export const RegistrarNotas: FunctionComponent<RegistrarNotasProps> = ({ guardarNota, nota, alCambiarValor, limpiar, catalogos, inputLectura, habilitarFormulario }) => {
+export const RegistrarNotas: FunctionComponent<RegistrarNotasProps> = ({ guardarNota, nota, alCambiarValor, limpiar, catalogos, inputLectura, habilitarFormulario, handleClose }) => {
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         // limpiar();
         e.preventDefault();
@@ -58,7 +60,6 @@ export const RegistrarNotas: FunctionComponent<RegistrarNotasProps> = ({ guardar
             sx={{
                 display: 'flex',
                 flexDirection: 'column',
-                alignItems: 'center',
                 marginTop: '5rem',
                 marginBottom: '2rem',
                 background: '#fff',
@@ -66,14 +67,26 @@ export const RegistrarNotas: FunctionComponent<RegistrarNotasProps> = ({ guardar
                 marginRight: '5rem',
                 border: '1px solid rgb(224, 224, 224)',
                 padding: '3rem',
+                alignItems: 'inherit'
             }}
             noValidate
             autoComplete="off"
             onSubmit={handleSubmit}
         >
-
+            <IconButton
+                // edge="start"
+                color="inherit"
+                onClick={handleClose}
+                aria-label="close"
+                sx={{
+                    display: 'flex',
+                    justifyContent: 'end'
+                }}
+            >
+                <CloseIcon />
+            </IconButton>
             <h2>Registrar notas</h2>
-            <Grid container spacing={3}>
+            <Grid container spacing={3} >
                 <Grid item xs={12} sm={12}>
                     <FormControl
                         variant="filled" sx={{
@@ -95,7 +108,7 @@ export const RegistrarNotas: FunctionComponent<RegistrarNotasProps> = ({ guardar
                             <MenuItem>Selecciona...</MenuItem>
                             {catalogos.listaMaterias.map((materia) => (
 
-                                <MenuItem key={materia.id}>{materia.materia}</MenuItem>
+                                <MenuItem key={materia.id} value={materia.materia}>{materia.materia}</MenuItem>
                             ))}
                         </Select>
                     </FormControl>
@@ -119,7 +132,7 @@ export const RegistrarNotas: FunctionComponent<RegistrarNotasProps> = ({ guardar
                         >
                             <MenuItem>Selecciona...</MenuItem>
                             {catalogos.listaEstudiantes.map((estudiante) => (
-                                <MenuItem key={estudiante.id}>{estudiante.nombres}</MenuItem>
+                                <MenuItem value={estudiante.nombres} key={estudiante.id}>{estudiante.nombres}</MenuItem>
                             ))}
                         </Select>
                     </FormControl>

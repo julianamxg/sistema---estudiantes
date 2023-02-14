@@ -2,6 +2,9 @@ import { FunctionComponent } from "react";
 import IMateria from "../modelos/materias/entidades/IMateria";
 import { MenuPrincipal } from "../Menu"
 import Swal from "sweetalert2";
+import Button from '@mui/material/Button';
+import { TextField, Select, MenuItem, InputLabel, FormControl, Box, Checkbox, FormControlLabel, Grid } from "@mui/material";
+
 export interface RegistrarMateriaProps {
     guardarMateria: () => any;
     materia: IMateria;
@@ -15,10 +18,8 @@ export interface RegistrarMateriaProps {
 export const RegistrarMateria: FunctionComponent<RegistrarMateriaProps> = ({ guardarMateria, materia, alCambiarValor, limpiar, inputLectura, habilitarFormulario }) => {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        // limpiar();
         e.preventDefault();
 
-        //validación campos vacios
         if (materia.materia === '' || materia.nombreProfesor === '') {
             Swal.fire({
                 text: `Por favor diligencia todos los campos`,
@@ -27,7 +28,6 @@ export const RegistrarMateria: FunctionComponent<RegistrarMateriaProps> = ({ gua
             return false;
         }
 
-        //validación de materia
         if (materia.materia.length < 5 || materia.materia.length > 15) {
             Swal.fire({
                 text: `El campo "Materia" debe tener de 5 a 15 caracteres`,
@@ -58,41 +58,81 @@ export const RegistrarMateria: FunctionComponent<RegistrarMateriaProps> = ({ gua
     return (
         <>
             <MenuPrincipal />
-            <div className="formulario materia">
-                <form onSubmit={handleSubmit}>
-                    <h2>Guardar materia</h2>
-                    <div className="grupos materia" >
-                        <div className="grupo-input">
-                            <label htmlFor="materia">Materia</label>
-                            <input disabled={inputLectura} onChange={(e) => alCambiarValor(e.target.name, e.target.value)} value={materia.materia} type="text" name="materia" id="materia" placeholder="Ingresa el nombre de la materia" />
-                        </div>
-                        <div className="grupo-input">
-                            <label htmlFor="nombreProfesor">Nombre del profesor</label>
-                            <select disabled={inputLectura} onChange={(e) => alCambiarValor(e.target.name, e.target.value)} value={materia.nombreProfesor} name="nombreProfesor" id="nombreProfesor">
-                                <option value={1}>Selecciona...</option>
-                                <option>Sandra Roncancio</option>
-                                <option>Luis Rodriguez</option>
-                                <option>Paola Sanchez</option>
-                                <option>Tatiana Galindo</option>
-                                <option>Luna Perez</option>
-                                <option>Claudia Lopez</option>
-                                <option>Felipe Romero</option>
-                                <option>Laura Martinez</option>
-                                <option>Maria Rodriguez</option>
-                                <option>Carolina Forero</option>
-                                <option>Carla Rodriguez</option>
-                            </select>
-                        </div>
-                    </div>
-                    <button disabled={inputLectura} type="submit">Guardar</button>
-                    <div className="habilitar">
-                        <input className="checkbox" onClick={habilitarFormulario} type="checkbox" name="habilitar" id="habilitar" />
-                        {/* <FontAwesomeIcon icon={faCheck} ></FontAwesomeIcon> */}
-                        <label htmlFor="habilitar">Habilitar formulario</label>
-                    </div>
-                </form>
+            <Box component="form"
+                sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    marginTop: '5rem',
+                    marginBottom: '2rem',
+                    background: '#fff',
+                    marginLeft: '5rem',
+                    marginRight: '5rem',
+                    border: '1px solid rgb(224, 224, 224)',
+                    padding: '3rem',
+                }}
+                noValidate
+                autoComplete="off"
+                onSubmit={handleSubmit}
+            >
+                <h2>Guardar materia</h2>
+                <Grid container spacing={3}>
+                    <Grid item xs={12} sm={12}>
+                        <TextField
+                            sx={{
+                                width: '100%',
+                                mx: 'auto',
+                                marginBottom: '1.5rem'
+                            }}
+                            disabled={inputLectura}
+                            onChange={(e) => alCambiarValor(e.target.name, e.target.value)}
+                            value={materia.materia}
+                            type="text"
+                            name="materia"
+                            id="filled-basic materia"
+                            variant="filled"
+                            color="success"
+                        ></TextField>
 
-            </div>
+                    </Grid>
+                    <Grid item xs={6} sm={6}>
+                        <FormControl variant="filled" sx={{
+                            width: '100%',
+                            mx: 'auto'
+                        }}>
+                            <InputLabel color="success" id="demo-simple-select-filled-label">Nombre del profesor</InputLabel>
+                            <Select
+                                fullWidth
+                                labelId="demo-simple-select-filled-label"
+                                disabled={inputLectura}
+                                onChange={(e) => alCambiarValor(e.target.name, e.target.value)}
+                                value={materia.nombreProfesor}
+                                name="nombreProfesor"
+                                id="demo-simple-select-filled nombreProfesor">
+                                <MenuItem value={1}>Selecciona...</MenuItem>
+                                <MenuItem value="Sandra Roncancio">Sandra Roncancio</MenuItem>
+                                <MenuItem value="Luis Rodriguez">Luis Rodriguez</MenuItem>
+                                <MenuItem value="Paola Sanchez">Paola Sanchez</MenuItem>
+                                <MenuItem value="Tatiana Galindo">Tatiana Galindo</MenuItem>
+                                <MenuItem value="Luna Perez">Luna Perez</MenuItem>
+                                <MenuItem value="Claudia Lopez">Claudia Lopez</MenuItem>
+                                <MenuItem value="Felipe Romero">Felipe Romero</MenuItem>
+                                <MenuItem value="Laura Martinez">Laura Martinez</MenuItem>
+                                <MenuItem value="Maria Rodriguez">Maria Rodriguez</MenuItem>
+                                <MenuItem value="Carolina Forero">Carolina Forero</MenuItem>
+                                <MenuItem value="Carla Rodriguez">Carla Rodriguez</MenuItem>
+                            </Select>
+                        </FormControl>
+                    </Grid>
+
+                    <Button disabled={inputLectura} type="submit">Guardar</Button>
+                    <FormControlLabel
+                        label="Habilitar formulario"
+                        control={
+                            <Checkbox size="small" name="habilitar" id="habilitar" onClick={habilitarFormulario} color="success" />}
+                    />
+                </Grid>
+            </Box>
         </>
     )
 }

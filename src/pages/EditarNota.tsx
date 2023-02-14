@@ -9,6 +9,7 @@ import { RegistrarNotas } from "../components/notas/RegistrarNotas";
 import { getlistaEstudiantes } from "../components/modelos/estudiantes";
 import { getlistaMaterias } from "../components/modelos/materias";
 import { editarNota, getNotaById, addNota } from "../components/modelos/notas";
+import React from "react";
 
 
 
@@ -20,6 +21,9 @@ const EditarNota= () => {
         materia: "",
         promedio: 0
     });
+
+    const [open, setOpen] = React.useState(false);
+    const handleClose = () => setOpen(false);
 
 
     const { id } = useParams();
@@ -84,7 +88,7 @@ const EditarNota= () => {
       }
 
     return (
-        <RegistrarNotas guardarNota={guardarNota} alCambiarValor={alcambiarValor} limpiar={limpiarFormulario} nota={nota} catalogos={{listaMaterias: listaMaterias(), listaEstudiantes: listaEstudiantes()}} inputLectura={inputLectura} habilitarFormulario={habilitarFormulario}/>
+        <RegistrarNotas guardarNota={guardarNota} alCambiarValor={alcambiarValor} limpiar={limpiarFormulario} nota={nota} catalogos={{listaMaterias: listaMaterias(), listaEstudiantes: listaEstudiantes()}} inputLectura={inputLectura} habilitarFormulario={habilitarFormulario} handleClose={handleClose}/>
     )
 }
 
