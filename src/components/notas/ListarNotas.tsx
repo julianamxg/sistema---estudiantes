@@ -99,7 +99,7 @@ export const ListarNotas: FunctionComponent<ListarNotasProps> = ({ eliminarNota,
                     >
 
                         <Box>
-                        
+
                             <RegistrarNotas guardarNota={guardarNota} alCambiarValor={alCambiarValor} limpiar={limpiar} nota={nota} catalogos={catalogos} inputLectura={inputLectura} habilitarFormulario={habilitarFormulario} handleClose={handleClose} />
                         </Box>
                     </Modal>
@@ -121,7 +121,20 @@ export const ListarNotas: FunctionComponent<ListarNotasProps> = ({ eliminarNota,
                                 <TableBody>
                                     {
                                         notas.map((nota: INotas) =>
-                                            <Nota key={nota.id} nota={nota} editarNota={editarNota} eliminarNota={eliminarNota} />)}
+                                            <Nota
+                                                key={nota.id}
+                                                nota={nota}
+                                                editarNota={editarNota}
+                                                eliminarNota={eliminarNota}
+                                                guardarNota={guardarNota}
+                                                alCambiarValor={alCambiarValor}
+                                                limpiar={limpiar} 
+                                                catalogos={catalogos}
+                                                inputLectura={inputLectura}
+                                                habilitarFormulario={habilitarFormulario}
+                                                open={open}
+                                                handleOpen={handleOpen}
+                                                handleClose={handleClose} />)}
                                 </TableBody>
                             </Table>
                         </TableContainer>
@@ -134,3 +147,5 @@ export const ListarNotas: FunctionComponent<ListarNotasProps> = ({ eliminarNota,
         </>
     )
 }
+
+

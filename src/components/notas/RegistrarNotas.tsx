@@ -27,6 +27,7 @@ export interface RegistrarNotasProps {
     inputLectura: boolean;
     habilitarFormulario: () => any;
     handleClose: () => void;
+    
 }
 
 export const RegistrarNotas: FunctionComponent<RegistrarNotasProps> = ({ guardarNota, nota, alCambiarValor, limpiar, catalogos, inputLectura, habilitarFormulario, handleClose }) => {
@@ -85,7 +86,7 @@ export const RegistrarNotas: FunctionComponent<RegistrarNotasProps> = ({ guardar
             >
                 <CloseIcon />
             </IconButton>
-            <h2>Registrar notas</h2>
+            <h2>Guardar nota</h2>
             <Grid container spacing={3} >
                 <Grid item xs={12} sm={12}>
                     <FormControl
@@ -173,3 +174,7 @@ export const RegistrarNotas: FunctionComponent<RegistrarNotasProps> = ({ guardar
 
     )
 }
+
+
+
+

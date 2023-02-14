@@ -6,16 +6,47 @@ import Swal from "sweetalert2"
 import INotas from "../modelos/notas/entidades/INotas"
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
-import { Button } from '@mui/material';
+import { Box, Button, Modal } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import { RegistrarNotas } from "./RegistrarNotas"
+import IMateria from "../modelos/materias/entidades/IMateria"
+import IEstudiante from "../modelos/estudiantes/entidades/IEstudiante"
+
+interface CatalogosNotas {
+    listaMaterias: IMateria[]
+    listaEstudiantes: IEstudiante[]
+}
 
 export interface Notasprops {
     editarNota: (id?: string) => any
     eliminarNota: (id?: string) => any
-    nota: INotas
+    guardarNota: () => void;
+    nota: INotas;
+    alCambiarValor: (key: string, value: string) => void
+    limpiar: () => void;
+    catalogos: CatalogosNotas;
+    inputLectura: boolean;
+    habilitarFormulario: () => void;
+    open: boolean;
+    handleOpen: () => void;
+    handleClose: () => any;
+
 }
 
-export const Nota: FunctionComponent<Notasprops> = ({ editarNota, eliminarNota, nota }) => {
+export const Nota: FunctionComponent<Notasprops> = ({
+    editarNota,
+    eliminarNota,
+    guardarNota,
+    nota,
+    alCambiarValor,
+    limpiar,
+    catalogos,
+    inputLectura,
+    habilitarFormulario,
+    open,
+    handleOpen,
+    handleClose
+}) => {
     const eliminarNotaAlert = () => {
         Swal.fire({
             title: `¿Deseas eliminar la calificación de ${nota.estudiante}?`,
@@ -39,7 +70,7 @@ export const Nota: FunctionComponent<Notasprops> = ({ editarNota, eliminarNota, 
         })
     }
 
- 
+
 
     const backgroundColor = nota.promedio > 30 ? "#cae7cc" : "#e5c9c9";
 
@@ -49,18 +80,38 @@ export const Nota: FunctionComponent<Notasprops> = ({ editarNota, eliminarNota, 
             sx={{
                 border: 0,
                 background: backgroundColor
-            }} 
-    >
+            }}
+        >
             <TableCell align="center">{nota.materia}</TableCell>
             <TableCell align="center">{nota.estudiante}</TableCell>
-            <TableCell align="center">{nota.promedio}</TableCell> 
+            <TableCell align="center">{nota.promedio}</TableCell>
             <TableCell align="center">
-                <Link to={`/editar-nota/${nota.id}`}>
-                    <Button color="success">
-                        <FontAwesomeIcon icon={faPenToSquare} />
-                    </Button>
-                </Link>
-                
+                {/* <Link to={`/editar-nota/${nota.id}`}> */}
+                <Button color="success" onClick={() => handleOpen()}>
+                    <FontAwesomeIcon icon={faPenToSquare} />
+                </Button>
+                {/* </Link> */}
+
+                <Modal
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                >
+
+                    <Box>
+                        <RegistrarNotas
+                            guardarNota={guardarNota}
+                            alCambiarValor={alCambiarValor}
+                            limpiar={limpiar}
+                            nota={nota}
+                            catalogos={catalogos}
+                            inputLectura={inputLectura}
+                            habilitarFormulario={habilitarFormulario}
+                            handleClose={handleClose} />
+                    </Box>
+                </Modal>
+
             </TableCell>
             <TableCell align="center">
                 <Button onClick={() => eliminarNotaAlert()} color="error">
@@ -70,3 +121,5 @@ export const Nota: FunctionComponent<Notasprops> = ({ editarNota, eliminarNota, 
         </TableRow >
     )
 }
+
+

@@ -3,7 +3,7 @@ import { ListarNotas } from "../components/notas/ListarNotas";
 import INotas from "../components/modelos/notas/entidades/INotas";
 import { FunctionComponent, useEffect, useState } from "react";
 import IMateria from "../components/modelos/materias/entidades/IMateria";
-import { addNota, deleteNota, getListaNotas } from "../components/modelos/notas";
+import { addNota, deleteNota, editarNota, getListaNotas, getNotaById } from "../components/modelos/notas";
 import uuid from "react-uuid";
 import Swal from "sweetalert2";
 import IEstudiante from "../components/modelos/estudiantes/entidades/IEstudiante";
@@ -24,9 +24,26 @@ const InicioNotas: FunctionComponent = () => {
     const [nota, setNota] = useState<INotas>(initialState);
     const [notas, setNotas] = useState<INotas[]>([]);
 
+    const [notaSeleccionada, setNotaSeleccionada] = useState<INotas | null>(null);
+
     const [open, setOpen] = React.useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+
+    const handleOpen = (nota?: INotas) => {
+        if (nota) {
+          setNotaSeleccionada(nota);
+          setNota(nota);
+        } else {
+          setNotaSeleccionada(null);
+          setNota(initialState);
+        }
+        setOpen(true);
+      };
+      
+
+    const handleClose = () => {
+        setNotaSeleccionada(null);
+        setOpen(false);
+    };
 
 
     //listar
@@ -35,6 +52,18 @@ const InicioNotas: FunctionComponent = () => {
     }, [])
 
     function guardarNota() {
+
+        if (notaSeleccionada) {
+            editarNota(notaSeleccionada.id, nota);
+            setNotas(notas.map(n => n.id === notaSeleccionada.id ? nota : n));
+        } else {
+            let id = uuid();
+            addNota({ id, ...nota });
+            setNotas([...notas, { id, ...nota }]);
+        }
+
+        setNotaSeleccionada(null);
+
         let idNota = uuid()
         addNota({ id: idNota, ...nota });
         let listaNotas = [...notas]
@@ -105,3 +134,5 @@ const InicioNotas: FunctionComponent = () => {
 }
 
 export default InicioNotas;
+
+

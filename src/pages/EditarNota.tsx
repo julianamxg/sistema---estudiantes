@@ -10,10 +10,11 @@ import { getlistaEstudiantes } from "../components/modelos/estudiantes";
 import { getlistaMaterias } from "../components/modelos/materias";
 import { editarNota, getNotaById, addNota } from "../components/modelos/notas";
 import React from "react";
+import { Modal } from "@mui/material";
 
 
 
-const EditarNota= () => {
+const EditarNota = () => {
     const [inputLectura, setInputLectura] = useState(true)
     const [notas, setNotas] = useState<INotas[]>([]);
     const [nota, setNota] = useState<INotas>({
@@ -38,7 +39,7 @@ const EditarNota= () => {
     }, [id]);
 
 
- 
+
     function guardarNota(): void {
 
         if (nota.id) {
@@ -54,15 +55,15 @@ const EditarNota= () => {
             Swal.fire({
                 text: `Se ha guardado la nota de ${nota.estudiante} en la materia ${nota.materia} con promedio ${nota.promedio}`,
                 icon: 'success'
-      
+
             })
-          }
-          else {
+        }
+        else {
             Swal.fire({
-              text: `No se pudo guardar la materia`,
-              icon: 'error',
+                text: `No se pudo guardar la materia`,
+                icon: 'error',
             })
-          }
+        }
     }
 
     const alcambiarValor = (name: string, value: string) => {
@@ -74,21 +75,22 @@ const EditarNota= () => {
     }
 
 
-    
+
     function listaEstudiantes(): IEstudiante[] {
         return getlistaEstudiantes()
-      }
-      
-      function listaMaterias(): IMateria[] {
-        return getlistaMaterias();
-      }
+    }
 
-      const habilitarFormulario = () =>{
+    function listaMaterias(): IMateria[] {
+        return getlistaMaterias();
+    }
+
+    const habilitarFormulario = () => {
         setInputLectura(!inputLectura)
-      }
+    }
 
     return (
-        <RegistrarNotas guardarNota={guardarNota} alCambiarValor={alcambiarValor} limpiar={limpiarFormulario} nota={nota} catalogos={{listaMaterias: listaMaterias(), listaEstudiantes: listaEstudiantes()}} inputLectura={inputLectura} habilitarFormulario={habilitarFormulario} handleClose={handleClose}/>
+        <RegistrarNotas guardarNota={guardarNota} alCambiarValor={alcambiarValor} limpiar={limpiarFormulario} nota={nota} catalogos={{ listaMaterias: listaMaterias(), listaEstudiantes: listaEstudiantes() }} inputLectura={inputLectura} habilitarFormulario={habilitarFormulario} handleClose={handleClose} />
+
     )
 }
 
