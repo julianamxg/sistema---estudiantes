@@ -12,8 +12,8 @@ export const getListaNotas = () =>{
 
 export const getNotaById = (id?:string) => {
     const notas = getListaNotas();
-    const nota1 = notas.find((nota: INotas) => nota.id === id)
-    return nota1;
+    const nota = notas.find((nota: INotas) => nota.id === id);
+    return nota;
 }
 
 export const addNota = (nota: INotas) => {

@@ -29,7 +29,6 @@ const InicioEstudiante = () => {
     setInputLectura(!inputLectura)
   }
 
-  //registrar
   function guardarEstudiante(): void {
     let idEstudiante = uuid()
     addEstudiante({ id: idEstudiante, ...estudiante });
@@ -60,23 +59,16 @@ const InicioEstudiante = () => {
     setEstudiante(initialState)
   }
 
-  //listar
-  function verEstudiante(): void {
-    console.log("ver estudiantes")
-  }
-
-
   function eliminarEstudiante(id?: string): void {
     deleteEstudiante(id);
     let est = estudiantes.filter((estudiante: IEstudiante) => estudiante && estudiante.id !== id)
     setEstudiantes(est);
   }
 
-
   return (
     <div className="App">
       <RegistrarEstudiante guardarEstudiante={guardarEstudiante} estudiante={estudiante} alCambiarValor={alcambiarValor} limpiar={limpiarFormulario} inputLectura={inputLectura} habilitarFormulario={habilitarFormulario}/>
-      {inputLectura ? <></> :<ListarEstudiantes editarEstudiante={editarEstudiante} eliminarEstudiante={eliminarEstudiante} verEstudiante={verEstudiante} estudiantes={estudiantes} />}
+      {inputLectura ? <></> :<ListarEstudiantes editarEstudiante={editarEstudiante} eliminarEstudiante={eliminarEstudiante} estudiantes={estudiantes} />}
     </div>
   );
 }

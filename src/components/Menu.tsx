@@ -11,7 +11,6 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
-// import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
@@ -23,7 +22,6 @@ export const MenuPrincipal = () => {
             justifyContent:'space-between',
            
         }}>
-            {/* <CssBaseline /> */}
             <AppBar component="nav" sx={{
                 background: '#2e7d32',
                 display: 'flex',
@@ -89,7 +87,6 @@ export const MenuPrincipal = () => {
                     >
                         Notas
                     </Typography>
-
                 </Toolbar>
             </AppBar>
         </Box>

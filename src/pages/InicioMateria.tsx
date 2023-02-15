@@ -15,7 +15,6 @@ function InicioMateria() {
   const [materias, setMaterias] = useState<IMateria[]>([]);
   const [inputLectura, setInputLectura] = useState(true)
 
-  //registrar
   function guardarMateria(): void {
     let idMateria = uuid()
     addMateria({ id: idMateria, ...materia });

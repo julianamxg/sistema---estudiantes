@@ -5,11 +5,11 @@ import { FunctionComponent, useEffect, useState } from "react";
 import IMateria from "../components/modelos/materias/entidades/IMateria";
 import { addNota, deleteNota, editarNota, getListaNotas, getNotaById } from "../components/modelos/notas";
 import uuid from "react-uuid";
-import Swal from "sweetalert2";
 import IEstudiante from "../components/modelos/estudiantes/entidades/IEstudiante";
 import { getlistaMaterias } from "../components/modelos/materias";
 import { getlistaEstudiantes } from "../components/modelos/estudiantes";
 import React from "react";
+import { Alert, Box, Modal, Snackbar } from "@mui/material";
 
 
 
@@ -23,67 +23,40 @@ const InicioNotas: FunctionComponent = () => {
     const [inputLectura, setInputLectura] = useState(true)
     const [nota, setNota] = useState<INotas>(initialState);
     const [notas, setNotas] = useState<INotas[]>([]);
-
-    const [notaSeleccionada, setNotaSeleccionada] = useState<INotas | null>(null);
+    const [idNotaEditar, setIdNotaEditar] = useState<string>("");
 
     const [open, setOpen] = React.useState(false);
-
-    const handleOpen = (nota?: INotas) => {
-        if (nota) {
-          setNotaSeleccionada(nota);
-          setNota(nota);
-        } else {
-          setNotaSeleccionada(null);
-          setNota(initialState);
-        }
-        setOpen(true);
-      };
-      
-
-    const handleClose = () => {
-        setNotaSeleccionada(null);
-        setOpen(false);
+    const handleOpen = () => {
+        setOpen(!open)
+        setNota(initialState)
     };
 
+    const handleOpenEditar = (id: string) => {
+        setOpen(!open)
+        const nota = getNotaById(id);
+        setNota(nota);
+    };
 
-    //listar
     useEffect(() => {
         setNotas(getListaNotas());
     }, [])
 
     function guardarNota() {
-
-        if (notaSeleccionada) {
-            editarNota(notaSeleccionada.id, nota);
-            setNotas(notas.map(n => n.id === notaSeleccionada.id ? nota : n));
-        } else {
-            let id = uuid();
+        if (nota.id) {
+            const index = notas.findIndex((n) => n.id === nota.id);
+            const nuevasNotas = [...notas];
+            nuevasNotas[index] = nota;
+            setNotas(nuevasNotas);
+            editarNota(nota.id, nota);
+        }
+        else {
+            const id = uuid();
             addNota({ id, ...nota });
             setNotas([...notas, { id, ...nota }]);
         }
-
-        setNotaSeleccionada(null);
-
-        let idNota = uuid()
-        addNota({ id: idNota, ...nota });
-        let listaNotas = [...notas]
-        listaNotas.push({ id: idNota, ...nota })
-        setNotas(listaNotas)
-        if (1 === 1) {
-            Swal.fire({
-                text: `Se ha guardado la nota de ${nota.estudiante} en la materia de ${nota.materia} con un promedio de ${nota.promedio}`,
-                icon: 'success',
-
-            })
-        }
-        else {
-            Swal.fire({
-                text: `No se pudo guardar al usuario`,
-                icon: 'error',
-            })
-        }
-        limpiarFormulario()
+        limpiarFormulario();
     }
+
 
 
     const alcambiarValor = (name: string, value: string) => {
@@ -115,19 +88,23 @@ const InicioNotas: FunctionComponent = () => {
 
     return (
         <div className="App">
-            {/* <RegistrarNotas  /> */}
+            <Modal
+                open={open}
+                onClose={handleOpen}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+            >
+                <Box>
+                    <RegistrarNotas guardarNota={guardarNota} alCambiarValor={alcambiarValor} limpiar={limpiarFormulario} nota={nota} catalogos={{ listaEstudiantes: listaEstudiantes(), listaMaterias: listaMaterias() }} inputLectura={inputLectura} habilitarFormulario={habilitarFormulario} handleClose={handleOpen} />
+                </Box>
+            </Modal>
             <ListarNotas
                 eliminarNota={eliminarNota}
                 notas={notas}
-                guardarNota={guardarNota}
-                alCambiarValor={alcambiarValor}
-                limpiar={limpiarFormulario} nota={nota}
-                catalogos={{ listaEstudiantes: listaEstudiantes(), listaMaterias: listaMaterias() }}
-                inputLectura={inputLectura}
-                habilitarFormulario={habilitarFormulario}
-                open={open}
+                nota={nota}
                 handleOpen={handleOpen}
-                handleClose={handleClose}
+                handleOpenEditar={handleOpenEditar}
+
             />
         </div>
     )

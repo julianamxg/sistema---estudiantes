@@ -1,10 +1,10 @@
 import { editarEstudiante } from "../modelos/estudiantes";
-import { FunctionComponent } from "react";
+import { FunctionComponent, useState } from "react";
 import { MenuPrincipal } from "../Menu";
 import IEstudiante from "../modelos/estudiantes/entidades/IEstudiante";
 import Swal from "sweetalert2";
 import Button from '@mui/material/Button';
-import { TextField, Select, MenuItem, InputLabel, FormControl, Box, Checkbox, FormControlLabel, Grid } from "@mui/material";
+import { TextField, Select, MenuItem, InputLabel, FormControl, Box, Checkbox, FormControlLabel, Grid, Alert, AlertTitle, Snackbar } from "@mui/material";
 
 const estilosIndependientes = {
     background: '#2e7d32',
@@ -23,14 +23,11 @@ export interface RegistrarEstudianteProps {
 }
 
 export const RegistrarEstudiante: FunctionComponent<RegistrarEstudianteProps> = ({ guardarEstudiante, estudiante, alCambiarValor, limpiar, inputLectura, habilitarFormulario }) => {
-
+    const [showAlert, setShowAlert] = useState(false);
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (estudiante.nombres === '' || estudiante.apellidos === '' || estudiante.tDocumento === '' || estudiante.nDocumento === 0 || estudiante.grado === '' || estudiante.dGrado === '') {
-            Swal.fire({
-                text: `Por favor diligencia todos los campos`,
-                icon: 'error',
-            })
+            setShowAlert(true);
             return false;
         }
 
@@ -124,156 +121,159 @@ export const RegistrarEstudiante: FunctionComponent<RegistrarEstudianteProps> = 
                 onSubmit={handleSubmit}
             >
                 <h2>Guardar estudiante</h2>
-                    <Grid container spacing={3}>
-                        <Grid item xs={12} sm={6}>
-                            <TextField sx={{
+                <Grid container spacing={3}>
+                    <Grid item xs={12} sm={6}>
+                        <TextField sx={{
+                            width: '100%',
+                            mx: 'auto',
+
+
+                        }}
+                            id="filled-basic nombres"
+                            label="Nombres"
+                            variant="filled"
+                            disabled={inputLectura}
+                            onChange={(e) => alCambiarValor(e.target.name, e.target.value)}
+                            value={estudiante.nombres}
+                            type="text"
+                            name="nombres"
+                            color="success"
+                        />
+
+                    </Grid>
+
+                    <Grid item xs={12} sm={6}>
+                        <TextField
+                            sx={{
                                 width: '100%',
-                                mx: 'auto', 
-                               
-
+                                mx: 'auto',
+                                marginBottom: '1.5rem'
                             }}
-                                id="filled-basic nombres"
-                                label="Nombres"
-                                variant="filled"
+                            disabled={inputLectura}
+                            value={estudiante.apellidos}
+                            type="text"
+                            name="apellidos"
+                            id="filled-basic apellidos"
+                            label="Apellidos"
+                            variant="filled"
+                            onChange={(e) => alCambiarValor(e.target.name, e.target.value)}
+                            color="success"
+                        />
+                    </Grid>
+                </Grid>
+
+                <Grid container spacing={3}>
+                    <Grid item xs={12} sm={6}>
+                        <FormControl variant="filled" sx={{
+                            width: '100%',
+                            mx: 'auto',
+                        }}>
+                            <InputLabel color="success" id="demo-simple-select-filled-label">Tipo de documento</InputLabel>
+                            <Select
+                                fullWidth
+                                labelId="demo-simple-select-filled-label"
+                                id="demo-simple-select-filled tDocumento"
                                 disabled={inputLectura}
                                 onChange={(e) => alCambiarValor(e.target.name, e.target.value)}
-                                value={estudiante.nombres}
-                                type="text"
-                                name="nombres"
+                                value={estudiante.tDocumento}
+                                name="tDocumento"
                                 color="success"
-                            />
-
-                        </Grid>
-
-                        <Grid item xs={12} sm={6}>
-                            <TextField
-                                sx={{
-                                    width: '100%', 
-                                    mx: 'auto', 
-                                    marginBottom: '1.5rem'
-                                }}
-                                disabled={inputLectura}
-                                value={estudiante.apellidos}
-                                type="text"
-                                name="apellidos"
-                                id="filled-basic apellidos"
-                                label="Apellidos"
-                                variant="filled"
-                                onChange={(e) => alCambiarValor(e.target.name, e.target.value)}
-                                color="success"
-                            />
-                        </Grid>
+                            >
+                                <MenuItem value={1}>Selecciona...</MenuItem >
+                                <MenuItem value="Cedula de ciudadania" >Cedula de ciudadania</MenuItem >
+                                <MenuItem value="Tarjeta de identidad" >Tarjeta de identidad</MenuItem >
+                            </Select>
+                        </FormControl>
                     </Grid>
 
-                    <Grid container spacing={3}>
-                        <Grid item xs={12} sm={6}>
-                            <FormControl variant="filled"  sx={{
-                                        width: '100%',  
-                                        mx: 'auto', 
-                                    }}>
-                                <InputLabel color="success" id="demo-simple-select-filled-label">Tipo de documento</InputLabel>
-                                <Select
-                                    fullWidth
-                                    labelId="demo-simple-select-filled-label"
-                                    id="demo-simple-select-filled tDocumento"
-                                    disabled={inputLectura}
-                                    onChange={(e) => alCambiarValor(e.target.name, e.target.value)}
-                                    value={estudiante.tDocumento}
-                                    name="tDocumento"
-                                    color="success"
-                                >
-                                    <MenuItem value={1}>Selecciona...</MenuItem >
-                                    <MenuItem value="Cedula de ciudadania" >Cedula de ciudadania</MenuItem >
-                                    <MenuItem value="Tarjeta de identidad" >Tarjeta de identidad</MenuItem >
-                                </Select>
-                            </FormControl>
-                        </Grid>
-                        
-                        <Grid item xs={12} sm={6}>
-                            <TextField
-                                sx={{
-                                    width: '100%', 
-                                    mx: 'auto',
-                                    marginBottom: '1.5rem'
-                                }}
-                                id="filled-basic nDocumento"
-                                label="Número de documento"
-                                variant="filled"
+                    <Grid item xs={12} sm={6}>
+                        <TextField
+                            sx={{
+                                width: '100%',
+                                mx: 'auto',
+                                marginBottom: '1.5rem'
+                            }}
+                            id="filled-basic nDocumento"
+                            label="Número de documento"
+                            variant="filled"
+                            disabled={inputLectura}
+                            onChange={(e) => alCambiarValor(e.target.name, e.target.value)}
+                            value={estudiante.nDocumento}
+                            type="number"
+                            name="nDocumento"
+                            color="success"
+                        />
+                    </Grid>
+                </Grid>
+
+                <Grid container spacing={3}>
+                    <Grid item xs={12} sm={6}>
+                        <FormControl variant="filled" sx={{
+                            width: '100%', // Ajusta el ancho en función del tamaño de pantalla
+                            mx: 'auto', // Centra el componente en el eje X
+                            // marginBottom: '1rem'
+                        }}>
+                            <InputLabel color="success" id="demo-simple-select-filled-label">Grado</InputLabel>
+                            <Select
+                                fullWidth
                                 disabled={inputLectura}
                                 onChange={(e) => alCambiarValor(e.target.name, e.target.value)}
-                                value={estudiante.nDocumento}
-                                type="number"
-                                name="nDocumento"
+                                value={estudiante.grado}
+                                name="grado"
+                                id="grado"
                                 color="success"
-                            />
-                        </Grid>
+                            >
+                                <MenuItem value={1}>Selecciona...</MenuItem>
+                                <MenuItem value="Primero">Primero</MenuItem>
+                                <MenuItem value="Segundo">Segundo</MenuItem>
+                                <MenuItem value="Tercero">Tercero</MenuItem>
+                                <MenuItem value="Cuarto">Cuarto</MenuItem>
+                                <MenuItem value="Quinto">Quinto</MenuItem>
+                                <MenuItem value="Sexto">Sexto</MenuItem>
+                                <MenuItem value="Septimo">Septimo</MenuItem>
+                                <MenuItem value="Octavo">Octavo</MenuItem>
+                                <MenuItem value="Noveno">Noveno</MenuItem>
+                                <MenuItem value="Decimo">Decimo</MenuItem>
+                                <MenuItem value="Once">Once</MenuItem>
+                            </Select>
+                        </FormControl>
                     </Grid>
 
-                    <Grid container spacing={3}>
-                        <Grid item xs={12} sm={6}>
-                        <FormControl variant="filled"  sx={{
-                                        width: '100%', // Ajusta el ancho en función del tamaño de pantalla
-                                        mx: 'auto', // Centra el componente en el eje X
-                                        // marginBottom: '1rem'
-                                    }}>
-                                <InputLabel color="success" id="demo-simple-select-filled-label">Grado</InputLabel>
-                                <Select
-                                 fullWidth
-                                    disabled={inputLectura}
-                                    onChange={(e) => alCambiarValor(e.target.name, e.target.value)}
-                                    value={estudiante.grado}
-                                    name="grado"
-                                    id="grado"
-                                    color="success"
-                                >
-                                    <MenuItem value={1}>Selecciona...</MenuItem>
-                                    <MenuItem value="Primero">Primero</MenuItem>
-                                    <MenuItem value="Segundo">Segundo</MenuItem>
-                                    <MenuItem value="Tercero">Tercero</MenuItem>
-                                    <MenuItem value="Cuarto">Cuarto</MenuItem>
-                                    <MenuItem value="Quinto">Quinto</MenuItem>
-                                    <MenuItem value="Sexto">Sexto</MenuItem>
-                                    <MenuItem value="Septimo">Septimo</MenuItem>
-                                    <MenuItem value="Octavo">Octavo</MenuItem>
-                                    <MenuItem value="Noveno">Noveno</MenuItem>
-                                    <MenuItem value="Decimo">Decimo</MenuItem>
-                                    <MenuItem value="Once">Once</MenuItem>
-                                </Select>
-                            </FormControl>
-                        </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <FormControl variant="filled" sx={{
+                            width: '100%', // Ajusta el ancho en función del tamaño de pantalla
+                            mx: 'auto', // Centra el componente en el eje X
+                            // marginBottom: '1rem'
+                        }}>
+                            <InputLabel color="success" id="demo-simple-select-filled-label ">Director de grado</InputLabel>
+                            <Select
 
-                        <Grid item xs={12} sm={6}>
-                            <FormControl variant="filled"  sx={{
-                                        width: '100%', // Ajusta el ancho en función del tamaño de pantalla
-                                        mx: 'auto', // Centra el componente en el eje X
-                                        // marginBottom: '1rem'
-                                    }}>
-                                <InputLabel color="success" id="demo-simple-select-filled-label ">Director de grado</InputLabel>
-                                <Select
-                                   
-                                    disabled={inputLectura}
-                                    onChange={(e) => alCambiarValor(e.target.name, e.target.value)}
-                                    value={estudiante.dGrado}
-                                    name="dGrado"
-                                    id="dGrado"
-                                    color="success"
-                                >
-                                    <MenuItem value={1}>Selecciona...</MenuItem>
-                                    <MenuItem value="Sandra Roncancio">Sandra Roncancio</MenuItem>
-                                    <MenuItem value="Luis Rodriguez">Luis Rodriguez</MenuItem>
-                                    <MenuItem value="Paola Sanchez">Paola Sanchez</MenuItem>
-                                    <MenuItem value="Tatiana Galindo">Tatiana Galindo</MenuItem>
-                                    <MenuItem value="Luna Perez">Luna Perez</MenuItem>
-                                    <MenuItem value="Claudia Lopez">Claudia Lopez</MenuItem>
-                                    <MenuItem value="Felipe Romero">Felipe Romero</MenuItem>
-                                    <MenuItem value="Laura Martinez">Laura Martinez</MenuItem>
-                                    <MenuItem value="Maria Rodriguez">Maria Rodriguez</MenuItem>
-                                    <MenuItem value="Carolina Forero">Carolina Forero</MenuItem>
-                                    <MenuItem value="Carla Rodriguez">Carla Rodriguez</MenuItem>
-                                </Select>
-                            </FormControl>
-                        </Grid>
+                                disabled={inputLectura}
+                                onChange={(e) => alCambiarValor(e.target.name, e.target.value)}
+                                value={estudiante.dGrado}
+                                name="dGrado"
+                                id="dGrado"
+                                color="success"
+                            >
+                                <MenuItem value={1}>Selecciona...</MenuItem>
+                                <MenuItem value="Sandra Roncancio">Sandra Roncancio</MenuItem>
+                                <MenuItem value="Luis Rodriguez">Luis Rodriguez</MenuItem>
+                                <MenuItem value="Paola Sanchez">Paola Sanchez</MenuItem>
+                                <MenuItem value="Tatiana Galindo">Tatiana Galindo</MenuItem>
+                                <MenuItem value="Luna Perez">Luna Perez</MenuItem>
+                                <MenuItem value="Claudia Lopez">Claudia Lopez</MenuItem>
+                                <MenuItem value="Felipe Romero">Felipe Romero</MenuItem>
+                                <MenuItem value="Laura Martinez">Laura Martinez</MenuItem>
+                                <MenuItem value="Maria Rodriguez">Maria Rodriguez</MenuItem>
+                                <MenuItem value="Carolina Forero">Carolina Forero</MenuItem>
+                                <MenuItem value="Carla Rodriguez">Carla Rodriguez</MenuItem>
+                            </Select>
+                        </FormControl>
+
                     </Grid>
+
+
+                </Grid>
 
                 <div>
                     <Button sx={{ marginTop: '1rem' }} style={estilosIndependientes} disabled={inputLectura} type="submit">Guardar</Button>
@@ -283,9 +283,13 @@ export const RegistrarEstudiante: FunctionComponent<RegistrarEstudianteProps> = 
                     control={
                         <Checkbox size="small" name="habilitar" id="habilitar" onClick={habilitarFormulario} color="success" />}
                 />
-
-
+                <Snackbar open={showAlert} autoHideDuration={5000} onClose={() => setShowAlert(false)}>
+                    <Alert severity="warning" onClose={() => setShowAlert(false)}>
+                        Por favor diligencia todos los campos
+                    </Alert>
+                </Snackbar>
             </Box>
+
 
         </>
     )

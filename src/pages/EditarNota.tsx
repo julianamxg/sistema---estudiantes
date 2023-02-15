@@ -90,7 +90,6 @@ const EditarNota = () => {
 
     return (
         <RegistrarNotas guardarNota={guardarNota} alCambiarValor={alcambiarValor} limpiar={limpiarFormulario} nota={nota} catalogos={{ listaMaterias: listaMaterias(), listaEstudiantes: listaEstudiantes() }} inputLectura={inputLectura} habilitarFormulario={habilitarFormulario} handleClose={handleClose} />
-
     )
 }
 

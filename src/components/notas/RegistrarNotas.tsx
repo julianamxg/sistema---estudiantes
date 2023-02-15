@@ -1,9 +1,9 @@
-import { FunctionComponent } from "react"; import IEstudiante from "../modelos/estudiantes/entidades/IEstudiante";
+import { FunctionComponent, useState } from "react"; import IEstudiante from "../modelos/estudiantes/entidades/IEstudiante";
 import IMateria from "../modelos/materias/entidades/IMateria";
 import INotas from "../modelos/notas/entidades/INotas";
 import { MenuPrincipal } from "../Menu"
 import Swal from "sweetalert2";
-import { TextField, Select, MenuItem, InputLabel, FormControl, Box, Checkbox, FormControlLabel, Grid, Button, IconButton } from "@mui/material";
+import { TextField, Select, MenuItem, InputLabel, FormControl, Box, Checkbox, FormControlLabel, Grid, Button, IconButton, Alert, Snackbar } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 
 const estilosIndependientes = {
@@ -27,30 +27,32 @@ export interface RegistrarNotasProps {
     inputLectura: boolean;
     habilitarFormulario: () => any;
     handleClose: () => void;
-    
 }
 
 export const RegistrarNotas: FunctionComponent<RegistrarNotasProps> = ({ guardarNota, nota, alCambiarValor, limpiar, catalogos, inputLectura, habilitarFormulario, handleClose }) => {
+    const [showAlert, setShowAlert] = useState(false);
+    const [showAlert2, setShowAlert2] = useState(false);
+    const [showAlert3, setShowAlert3] = useState(false);
+
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        // limpiar();
         e.preventDefault();
 
         if (nota.materia === '' || nota.estudiante === '' || nota.promedio === 0) {
-            Swal.fire({
-                text: `Por favor diligencia todos los campos`,
-                icon: 'error',
-            })
+            setShowAlert(true);
             return false;
         }
 
         if (String(nota.promedio).length !== 2) {
-            Swal.fire({
-                text: `El campo "Promedio" solo debe tener 2 digitos`,
-                icon: 'warning',
-            })
+            setShowAlert2(true);
             return false;
         }
 
+        if (1 == 1) {
+            setShowAlert3(true);
+            setTimeout(() => {
+                handleClose();
+            }, 1000);
+        }
         guardarNota();
     }
 
@@ -75,7 +77,6 @@ export const RegistrarNotas: FunctionComponent<RegistrarNotasProps> = ({ guardar
             onSubmit={handleSubmit}
         >
             <IconButton
-                // edge="start"
                 color="inherit"
                 onClick={handleClose}
                 aria-label="close"
@@ -169,6 +170,23 @@ export const RegistrarNotas: FunctionComponent<RegistrarNotasProps> = ({ guardar
                 control={
                     <Checkbox size="small" name="habilitar" id="habilitar" onClick={habilitarFormulario} color="success" />}
             />
+            <Snackbar open={showAlert} autoHideDuration={5000} onClose={() => setShowAlert(false)}>
+                <Alert severity="error" onClose={() => setShowAlert(false)}>
+                    Por favor diligencia todos los campos
+                </Alert>
+            </Snackbar>
+
+            <Snackbar open={showAlert2} autoHideDuration={5000} onClose={() => setShowAlert2(false)}>
+                <Alert severity="warning" onClose={() => setShowAlert2(false)}>
+                    El campo "Promedio" solo debe tener 2 digitos
+                </Alert>
+            </Snackbar>
+
+            <Snackbar open={showAlert3} autoHideDuration={5000} onClose={() => setShowAlert3(false)}>
+                <Alert severity="success" onClose={() => setShowAlert3(false)}>
+                    Nota guardada
+                </Alert>
+            </Snackbar>
 
         </Box >
 

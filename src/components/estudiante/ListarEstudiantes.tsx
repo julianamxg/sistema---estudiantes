@@ -13,13 +13,12 @@ import { styled } from '@mui/material/styles';
 
 
 export interface ListarEstudianteProps {
-    editarEstudiante: (id?: string) => any
-    eliminarEstudiante: (id?: string) => any
-    verEstudiante: () => any
+    editarEstudiante: (id?: string) => void
+    eliminarEstudiante: (id?: string) => void
     estudiantes: IEstudiante[]
 }
 
-export const ListarEstudiantes: FunctionComponent<ListarEstudianteProps> = ({ editarEstudiante, eliminarEstudiante, verEstudiante, estudiantes }) => {
+export const ListarEstudiantes: FunctionComponent<ListarEstudianteProps> = ({ editarEstudiante, eliminarEstudiante, estudiantes }) => {
 
     const botonRecargar = document.getElementById("botonRecargar");
     botonRecargar?.addEventListener("click", function () {

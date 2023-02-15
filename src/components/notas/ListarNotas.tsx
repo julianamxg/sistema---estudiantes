@@ -14,34 +14,23 @@ import AddIcon from '@mui/icons-material/Add';
 import { Icon } from '@mui/material';
 import { Box } from "@mui/material";
 import { styled } from '@mui/material/styles';
-import * as React from 'react';
-import { RegistrarNotas } from './RegistrarNotas';
 import IMateria from '../modelos/materias/entidades/IMateria';
 import IEstudiante from '../modelos/estudiantes/entidades/IEstudiante';
 import { MenuPrincipal } from '../Menu';
 
-interface CatalogosNotas {
-    listaMaterias: IMateria[]
-    listaEstudiantes: IEstudiante[]
-}
 
 export interface ListarNotasProps {
     eliminarNota: (id?: string) => void
     notas: INotas[];
-    guardarNota: () => void;
     nota: INotas;
-    alCambiarValor: (key: string, value: string) => void
-    limpiar: () => void;
-    catalogos: CatalogosNotas;
-    inputLectura: boolean;
-    habilitarFormulario: () => void;
-    open: boolean;
     handleOpen: () => void;
-    handleClose: () => void;
+    handleOpenEditar: (id: string) => void;
 
 }
 
-export const ListarNotas: FunctionComponent<ListarNotasProps> = ({ eliminarNota, notas, guardarNota, nota, alCambiarValor, limpiar, catalogos, inputLectura, habilitarFormulario, open, handleOpen, handleClose }) => {
+export const ListarNotas: FunctionComponent<ListarNotasProps> = ({ eliminarNota, notas, nota, handleOpen , handleOpenEditar}) => {
+
+
     const StyledTableCell = styled(TableCell)(({ theme }) => ({
         [`&.${tableCellClasses.head}`]: {
             backgroundColor: theme.palette.common.white,
@@ -53,23 +42,6 @@ export const ListarNotas: FunctionComponent<ListarNotasProps> = ({ eliminarNota,
             fontSize: 14,
         },
     }));
-
-    // const [open, setOpen] = React.useState(false);
-    // const handleOpen = () => setOpen(true);
-    // const handleClose = () => setOpen(false);
-
-    const style = {
-        // position: 'absolute' as 'absolute',
-        // top: '50%',
-        // left: '50%',
-        // transform: 'translate(-50%, -50%)',
-        // width: '80%',
-        // bgcolor: 'background.paper',
-        // border: '2px solid #000',
-        // boxShadow: 24,
-        // p: 4,
-    };
-
 
     return (
         <>
@@ -91,18 +63,6 @@ export const ListarNotas: FunctionComponent<ListarNotasProps> = ({ eliminarNota,
                         Agregar
                     </Button>
                     <h2>Notas</h2>
-                    <Modal
-                        open={open}
-                        onClose={handleClose}
-                        aria-labelledby="modal-modal-title"
-                        aria-describedby="modal-modal-description"
-                    >
-
-                        <Box>
-
-                            <RegistrarNotas guardarNota={guardarNota} alCambiarValor={alCambiarValor} limpiar={limpiar} nota={nota} catalogos={catalogos} inputLectura={inputLectura} habilitarFormulario={habilitarFormulario} handleClose={handleClose} />
-                        </Box>
-                    </Modal>
                 </div>
 
                 {
@@ -121,20 +81,7 @@ export const ListarNotas: FunctionComponent<ListarNotasProps> = ({ eliminarNota,
                                 <TableBody>
                                     {
                                         notas.map((nota: INotas) =>
-                                            <Nota
-                                                key={nota.id}
-                                                nota={nota}
-                                                editarNota={editarNota}
-                                                eliminarNota={eliminarNota}
-                                                guardarNota={guardarNota}
-                                                alCambiarValor={alCambiarValor}
-                                                limpiar={limpiar} 
-                                                catalogos={catalogos}
-                                                inputLectura={inputLectura}
-                                                habilitarFormulario={habilitarFormulario}
-                                                open={open}
-                                                handleOpen={handleOpen}
-                                                handleClose={handleClose} />)}
+                                            <Nota key={nota.id} nota={nota} editarNota={editarNota} eliminarNota={eliminarNota} handleOpenEditar={() => handleOpenEditar(nota.id ?? '')} />)}
                                 </TableBody>
                             </Table>
                         </TableContainer>
@@ -147,5 +94,3 @@ export const ListarNotas: FunctionComponent<ListarNotasProps> = ({ eliminarNota,
         </>
     )
 }
-
-

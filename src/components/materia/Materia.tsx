@@ -27,8 +27,6 @@ export const Materia: FunctionComponent<MateriaProps> = ({ eliminarMateria, mate
                     `Has eliminado la materia ${materia.materia}`,
                     'success'
                 )
-
-                // debugger
                 eliminarMateria(materia.id);
 
             }

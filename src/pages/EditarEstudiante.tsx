@@ -50,7 +50,6 @@ function EditarEstudiante() {
             Swal.fire({
                 text: `Se ha guardado a ${estudiante.nombres} ${estudiante.apellidos}`,
                 icon: 'success',
-
             })
         }
      

@@ -5,6 +5,13 @@ import Swal from "sweetalert2";
 import Button from '@mui/material/Button';
 import { TextField, Select, MenuItem, InputLabel, FormControl, Box, Checkbox, FormControlLabel, Grid } from "@mui/material";
 
+const estilosIndependientes = {
+    background: '#2e7d32',
+    color: 'white',
+    height: 48,
+    padding: '0px 50px'
+};
+
 export interface RegistrarMateriaProps {
     guardarMateria: () => any;
     materia: IMateria;
@@ -44,7 +51,6 @@ export const RegistrarMateria: FunctionComponent<RegistrarMateriaProps> = ({ gua
             return false;
         }
 
-        //validación de nombre de profesor
         if (materia.nombreProfesor === "1") {
             Swal.fire({
                 text: `Por favor selecciona el nombre del profesor`,
@@ -91,11 +97,12 @@ export const RegistrarMateria: FunctionComponent<RegistrarMateriaProps> = ({ gua
                             name="materia"
                             id="filled-basic materia"
                             variant="filled"
+                            label='Materia'
                             color="success"
                         ></TextField>
 
                     </Grid>
-                    <Grid item xs={6} sm={6}>
+                    <Grid item xs={12} sm={12}>
                         <FormControl variant="filled" sx={{
                             width: '100%',
                             mx: 'auto'
@@ -124,14 +131,16 @@ export const RegistrarMateria: FunctionComponent<RegistrarMateriaProps> = ({ gua
                             </Select>
                         </FormControl>
                     </Grid>
-
-                    <Button disabled={inputLectura} type="submit">Guardar</Button>
+                    </Grid>
+                    <div>
+                        <Button sx={{ marginTop: '1rem' }} style={estilosIndependientes} disabled={inputLectura} type="submit">Guardar</Button>
+                    </div>
                     <FormControlLabel
                         label="Habilitar formulario"
                         control={
                             <Checkbox size="small" name="habilitar" id="habilitar" onClick={habilitarFormulario} color="success" />}
                     />
-                </Grid>
+              
             </Box>
         </>
     )
