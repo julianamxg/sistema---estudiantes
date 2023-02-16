@@ -27,7 +27,6 @@ function PaperComponent(props: PaperProps) {
     );
 }
 
-
 export const Estudiante: FunctionComponent<EstudianteProps> = ({ editarEstudiante, eliminarEstudiante, estudiante, handleOpenEditar }) => {
 
     const eliminarEstudiante2 = () => {

@@ -32,25 +32,26 @@ function InicioLoggeado() {
                 }}>
                     <Grid container spacing={3} sx={{
                         display: { xs: 'flex', sm: 'flex' },
+                        flexDirection: { xs: 'column', sm: 'row' },
                         justifyContent: 'center',
                         alignItems: 'center',
-                        margin: 'auto',
+                        margin: { xs: '6rem auto', sm: 'auto' },
                         textAlign: 'center',
-                        width: 'calc(80% + 0px)',
+                        width: 'calc(100% + 0px)',
                         color: '#317e3b'
                     }}>
                          <Link href='/estudiantes' sx={{
                             display: 'flex',
-                            flexDirection: 'column',
                             alignItems: 'center',
-                            width: '24%',
+                            width: { xs: '80%', sm: '24%' },
                             background: '#fff',
                             margin: '0.5rem',
-                            height: '168px',
                             justifyContent: 'center',
                             textDecoration: 'none',
-                            color: '#317e3b'
-
+                            color: '#317e3b',
+                            '&:hover': {
+                                background: '#ffffffc4',
+                            },
 
                         }}>
                         <Grid item sm={3} xs={12} sx={{
@@ -58,8 +59,6 @@ function InicioLoggeado() {
                             flexDirection: 'column',
                             alignItems: 'center',
                             padding: '24px',
-                            background: '#fff',
-                            margin: '0.5rem',
                             height: '168px',
                             justifyContent: 'center'
                         }}>
@@ -73,13 +72,16 @@ function InicioLoggeado() {
                             display: 'flex',
                             flexDirection: 'column',
                             alignItems: 'center',
-                            width: '24%',
+                            width: { xs: '80%', sm: '24%' },
                             background: '#fff',
                             margin: '0.5rem',
                             height: '168px',
                             justifyContent: 'center',
                             textDecoration: 'none',
-                            color: '#317e3b'
+                            color: '#317e3b',
+                            '&:hover': {
+                                background: '#ffffffc4',
+                            },
 
 
                         }}>
@@ -88,10 +90,10 @@ function InicioLoggeado() {
                                 flexDirection: 'column',
                                 alignItems: 'center',
                                 padding: '24px',
-                                background: '#fff',
                                 margin: '0.5rem',
                                 height: '168px',
                                 justifyContent: 'center',
+                               
 
                             }}>
                                 <Icon
@@ -111,17 +113,24 @@ function InicioLoggeado() {
                             display: 'flex',
                             flexDirection: 'column',
                             alignItems: 'center',
-                            width: '24%',
+                            width: { xs: '80%', sm: '24%' },
                             background: '#fff',
                             margin: '0.5rem',
                             height: '168px',
                             justifyContent: 'center',
                             textDecoration: 'none',
-                            color: '#317e3b'
-
+                            color: '#317e3b',
+                            '&:hover': {
+                                background: '#ffffffc4',
+                            },
 
                         }}>
-                            <Grid item xs={12} sm={3}>
+                            <Grid item xs={12} sm={3} sx={{
+                                 display: 'flex',
+                                 flexDirection: 'column',
+                                 alignItems: 'center',
+                                 justifyContent: 'center'
+                            }}>
 
                                 <Icon >
                                     <ClassOutlinedIcon />
