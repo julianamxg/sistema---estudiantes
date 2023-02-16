@@ -5,7 +5,7 @@ import Swal from "sweetalert2"
 import INotas from "../modelos/notas/entidades/INotas"
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
-import {  Button, Modal } from '@mui/material';
+import {  Button} from '@mui/material';
 
 export interface Notasprops {
     editarNota: (id?: string) => any
@@ -38,7 +38,8 @@ export const Nota: FunctionComponent<Notasprops> = ({ editarNota, eliminarNota, 
 
  
 
-    const backgroundColor = nota.promedio > 30 ? "#cae7cc" : "#e5c9c9";
+    const backgroundColor = nota.promedio < 30 ? "#e5c9c9" : nota.promedio > 45 ? "#cae7cc" : undefined;
+
 
     return (
         <TableRow
@@ -49,6 +50,7 @@ export const Nota: FunctionComponent<Notasprops> = ({ editarNota, eliminarNota, 
     >
             <TableCell align="center">{nota.materia}</TableCell>
             <TableCell align="center">{nota.estudiante}</TableCell>
+            <TableCell align="center">{nota.promedio}</TableCell>
             <TableCell align="center">
                     <Button color="success" onClick={() =>handleOpenEditar(nota.id ?? '')} >
                         <FontAwesomeIcon icon={faPenToSquare} />

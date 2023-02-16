@@ -11,8 +11,6 @@ import { getlistaEstudiantes } from "../components/modelos/estudiantes";
 import React from "react";
 import { Alert, Box, Modal, Snackbar } from "@mui/material";
 
-
-
 const InicioNotas: FunctionComponent = () => {
     const initialState: INotas = {
         estudiante: "",
@@ -23,7 +21,6 @@ const InicioNotas: FunctionComponent = () => {
     const [inputLectura, setInputLectura] = useState(true)
     const [nota, setNota] = useState<INotas>(initialState);
     const [notas, setNotas] = useState<INotas[]>([]);
-    const [idNotaEditar, setIdNotaEditar] = useState<string>("");
 
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => {
@@ -93,6 +90,7 @@ const InicioNotas: FunctionComponent = () => {
                 onClose={handleOpen}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
+                
             >
                 <Box>
                     <RegistrarNotas guardarNota={guardarNota} alCambiarValor={alcambiarValor} limpiar={limpiarFormulario} nota={nota} catalogos={{ listaEstudiantes: listaEstudiantes(), listaMaterias: listaMaterias() }} inputLectura={inputLectura} habilitarFormulario={habilitarFormulario} handleClose={handleOpen} />

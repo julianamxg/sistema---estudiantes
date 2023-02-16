@@ -1,9 +1,9 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useState } from "react";
 import IMateria from "../modelos/materias/entidades/IMateria";
-import { MenuPrincipal } from "../Menu"
 import Swal from "sweetalert2";
 import Button from '@mui/material/Button';
-import { TextField, Select, MenuItem, InputLabel, FormControl, Box, Checkbox, FormControlLabel, Grid } from "@mui/material";
+import { TextField, Select, MenuItem, InputLabel, FormControl, Box, Checkbox, FormControlLabel, Grid, IconButton, Snackbar, Alert, AlertTitle } from "@mui/material";
+import CloseIcon from '@mui/icons-material/Close';
 
 const estilosIndependientes = {
     background: '#2e7d32',
@@ -19,68 +19,75 @@ export interface RegistrarMateriaProps {
     limpiar: () => any;
     inputLectura: any;
     habilitarFormulario: () => any
-
+    handleClose: () => void;
 }
 
-export const RegistrarMateria: FunctionComponent<RegistrarMateriaProps> = ({ guardarMateria, materia, alCambiarValor, limpiar, inputLectura, habilitarFormulario }) => {
+export const RegistrarMateria: FunctionComponent<RegistrarMateriaProps> = ({ guardarMateria, materia, alCambiarValor, limpiar, inputLectura, habilitarFormulario, handleClose }) => {
+    const [showAlert, setShowAlert] = useState(false);
+    const [showAlert2, setShowAlert2] = useState(false);
+    const [showAlert3, setShowAlert3] = useState(false);
+    const [showAlert4, setShowAlert4] = useState(false);
+
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         if (materia.materia === '' || materia.nombreProfesor === '') {
-            Swal.fire({
-                text: `Por favor diligencia todos los campos`,
-                icon: 'error',
-            })
+            setShowAlert(true);
             return false;
         }
 
         if (materia.materia.length < 5 || materia.materia.length > 15) {
-            Swal.fire({
-                text: `El campo "Materia" debe tener de 5 a 15 caracteres`,
-                icon: 'warning',
-            })
+            setShowAlert2(true);
             return false;
         }
 
         if (!/^[a-zA-Z]+$/.test(materia.materia.valueOf())) {
-            Swal.fire({
-                text: `El campo "Materia" solo debe contener letras`,
-                icon: 'warning',
-            });
+            setShowAlert3(true);
             return false;
         }
 
-        if (materia.nombreProfesor === "1") {
-            Swal.fire({
-                text: `Por favor selecciona el nombre del profesor`,
-                icon: 'warning',
-            });
-            return false;
+        if (materia) {
+            setShowAlert4(true);
+            setTimeout(() => {
+                handleClose();
+            }, 1000);
         }
+
 
         guardarMateria();
     }
     return (
         <>
-            <MenuPrincipal />
+
             <Box component="form"
                 sx={{
                     display: 'flex',
                     flexDirection: 'column',
-                    alignItems: 'center',
+                    alignItems: 'inherit',
                     marginTop: '5rem',
                     marginBottom: '2rem',
                     background: '#fff',
                     marginLeft: '5rem',
                     marginRight: '5rem',
                     border: '1px solid rgb(224, 224, 224)',
-                    padding: '3rem',
+                    padding: '2rem',
                 }}
                 noValidate
                 autoComplete="off"
                 onSubmit={handleSubmit}
             >
+                <IconButton
+                    color="inherit"
+                    onClick={handleClose}
+                    aria-label="close"
+                    sx={{
+                        display: 'flex',
+                        justifyContent: 'end'
+                    }}
+                >
+                    <CloseIcon />
+                </IconButton>
                 <h2>Guardar materia</h2>
                 <Grid container spacing={3}>
                     <Grid item xs={12} sm={12}>
@@ -88,7 +95,6 @@ export const RegistrarMateria: FunctionComponent<RegistrarMateriaProps> = ({ gua
                             sx={{
                                 width: '100%',
                                 mx: 'auto',
-                                marginBottom: '1.5rem'
                             }}
                             disabled={inputLectura}
                             onChange={(e) => alCambiarValor(e.target.name, e.target.value)}
@@ -115,7 +121,9 @@ export const RegistrarMateria: FunctionComponent<RegistrarMateriaProps> = ({ gua
                                 onChange={(e) => alCambiarValor(e.target.name, e.target.value)}
                                 value={materia.nombreProfesor}
                                 name="nombreProfesor"
-                                id="demo-simple-select-filled nombreProfesor">
+                                id="demo-simple-select-filled nombreProfesor"
+                                color='success'
+                            >
                                 <MenuItem value={1}>Selecciona...</MenuItem>
                                 <MenuItem value="Sandra Roncancio">Sandra Roncancio</MenuItem>
                                 <MenuItem value="Luis Rodriguez">Luis Rodriguez</MenuItem>
@@ -131,16 +139,40 @@ export const RegistrarMateria: FunctionComponent<RegistrarMateriaProps> = ({ gua
                             </Select>
                         </FormControl>
                     </Grid>
-                    </Grid>
-                    <div>
-                        <Button sx={{ marginTop: '1rem' }} style={estilosIndependientes} disabled={inputLectura} type="submit">Guardar</Button>
-                    </div>
-                    <FormControlLabel
-                        label="Habilitar formulario"
-                        control={
-                            <Checkbox size="small" name="habilitar" id="habilitar" onClick={habilitarFormulario} color="success" />}
-                    />
-              
+                </Grid>
+                <div>
+                    <Button sx={{ marginTop: '1rem' }} style={estilosIndependientes} disabled={inputLectura} type="submit">Guardar</Button>
+                </div>
+                <FormControlLabel
+                    label="Habilitar formulario"
+                    control={
+                        <Checkbox size="small" name="habilitar" id="habilitar" onClick={habilitarFormulario} color="success" />}
+                />
+                <Snackbar open={showAlert} autoHideDuration={5000} onClose={() => setShowAlert(false)}>
+                    <Alert severity="error" onClose={() => setShowAlert(false)}>
+                        Por favor diligencia todos los campos
+                    </Alert>
+                </Snackbar>
+
+                <Snackbar open={showAlert2} autoHideDuration={5000} onClose={() => setShowAlert2(false)}>
+                    <Alert severity="warning" onClose={() => setShowAlert2(false)}>
+                        El campo "Materia" debe tener de 5 a 15 caracteres
+                    </Alert>
+                </Snackbar>
+
+                <Snackbar open={showAlert3} autoHideDuration={5000} onClose={() => setShowAlert3(false)}>
+                    <Alert severity="warning" onClose={() => setShowAlert3(false)}>
+                        El campo "Materia" solo debe contener letras
+                    </Alert>
+                </Snackbar>
+
+                <Snackbar open={showAlert4} autoHideDuration={7000} onClose={() => setShowAlert4(false)}>
+                <Alert variant="filled" severity="success" onClose={() => setShowAlert4(false)}>
+                    <AlertTitle>Estudiante guardado</AlertTitle>
+                    Se ha registrado el estudiante <strong>¡Correctamente!</strong>
+                </Alert>
+            </Snackbar>
+
             </Box>
         </>
     )

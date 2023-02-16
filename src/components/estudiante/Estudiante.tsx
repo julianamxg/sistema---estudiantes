@@ -1,21 +1,34 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons'
-import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import IEstudiante from '../modelos/estudiantes/entidades/IEstudiante';
 import { FunctionComponent } from 'react';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
-import { Button } from '@mui/material';
+import { Button, Paper, PaperProps } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import Draggable from 'react-draggable';
 
 export interface EstudianteProps {
     editarEstudiante: (id?: string) => any
     eliminarEstudiante: (id?: string) => any
-    estudiante: IEstudiante
+    estudiante: IEstudiante;
+    handleOpenEditar: (id?: string) => void
 }
 
-export const Estudiante: FunctionComponent<EstudianteProps> = ({ editarEstudiante, eliminarEstudiante, estudiante }) => {
+function PaperComponent(props: PaperProps) {
+    return (
+        <Draggable
+            handle="#draggable-dialog-title"
+            cancel={'[class*="MuiDialogContent-root"]'}
+        >
+            <Paper {...props} />
+        </Draggable>
+    );
+}
+
+
+export const Estudiante: FunctionComponent<EstudianteProps> = ({ editarEstudiante, eliminarEstudiante, estudiante, handleOpenEditar }) => {
 
     const eliminarEstudiante2 = () => {
         Swal.fire({
@@ -52,7 +65,7 @@ export const Estudiante: FunctionComponent<EstudianteProps> = ({ editarEstudiant
         },
     }));
 
-     const StyledTableRow = styled(TableRow)(({ theme }) => ({
+    const StyledTableRow = styled(TableRow)(({ theme }) => ({
         '&:nth-of-type(odd)': {
             backgroundColor: theme.palette.action.hover,
         },
@@ -62,21 +75,19 @@ export const Estudiante: FunctionComponent<EstudianteProps> = ({ editarEstudiant
     }));
 
     return (
-        <StyledTableRow 
+        <StyledTableRow
             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
         >
-            <StyledTableCell  align="center">{estudiante.nombres}</StyledTableCell>
+            <StyledTableCell align="center">{estudiante.nombres}</StyledTableCell>
             <StyledTableCell align="center">{estudiante.apellidos}</StyledTableCell>
             <StyledTableCell align="center">{estudiante.tDocumento}</StyledTableCell>
             <StyledTableCell align="center">{estudiante.nDocumento}</StyledTableCell>
             <StyledTableCell align="center">{estudiante.grado}</StyledTableCell>
             <StyledTableCell align="center">{estudiante.dGrado}</StyledTableCell>
             <StyledTableCell align="center">
-                <Link to={`/editar-estudiante/${estudiante.id}`}>
-                    <Button color="success">
-                        <FontAwesomeIcon icon={faPenToSquare} />
-                    </Button>
-                </Link>
+                <Button color="success" onClick={() => handleOpenEditar(estudiante.id ?? '')}>
+                    <FontAwesomeIcon icon={faPenToSquare} />
+                </Button>
             </StyledTableCell>
             <StyledTableCell align="center">
                 <Button onClick={() => eliminarEstudiante2()} color="error">

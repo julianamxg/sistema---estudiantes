@@ -1,45 +1,38 @@
-import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHouseChimney } from '@fortawesome/free-solid-svg-icons'
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
-import CssBaseline from '@mui/material/CssBaseline';
-import Divider from '@mui/material/Divider';
-import Drawer from '@mui/material/Drawer';
-import IconButton from '@mui/material/IconButton';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
 
 export const MenuPrincipal = () => {
     return (
         <Box sx={{
             display: 'flex',
-            justifyContent:'space-between',
-           
+            justifyContent: 'space-between',
+
         }}>
             <AppBar component="nav" sx={{
-                background: '#2e7d32',
+                background: 'rgb(46,125,50)',
                 display: 'flex',
                 boxShadow: '0px 0px 1px 0px rgba(46,125,50,1)',
                 padding: '1rem'
-                
+
             }}>
                 <Toolbar>
                     <Typography
                         variant="h6"
                         component="a"
-                        href='/'
+                        href='/inicio'
                         sx={{
                             flexGrow: 1,
                             display: { xs: 'flex', sm: 'flex' },
                             textDecoration: 'none',
                             color: '#fff',
-
+                            transition: 'all 0.5s ease',
+                            '&:hover': {
+                                color: '#ffffff9c',
+                            },
                         }}
                     >
                         <FontAwesomeIcon icon={faHouseChimney} />
@@ -53,10 +46,14 @@ export const MenuPrincipal = () => {
                             margin: '1rem',
                             display: { xs: 'flex', sm: 'flex' },
                             textDecoration: 'none',
-                            color: '#fff'
+                            color: '#fff',
+                            transition: 'all 0.5s ease',
+                            '&:hover': {
+                                color: '#ffffff9c',
+                            },
                         }}
                     >
-                       Materias
+                        Materias
                     </Typography>
 
                     <Typography
@@ -67,7 +64,11 @@ export const MenuPrincipal = () => {
                             margin: '1rem',
                             display: { xs: 'flex', sm: 'flex' },
                             textDecoration: 'none',
-                            color: '#fff'
+                            color: '#fff',
+                            transition: 'all 0.5s ease',
+                            '&:hover': {
+                                color: '#ffffff9c',
+                            },
                         }}
                     >
                         Estudiantes
@@ -82,7 +83,11 @@ export const MenuPrincipal = () => {
                             flexGrow: -1,
                             display: { xs: 'flex', sm: 'flex' },
                             textDecoration: 'none',
-                            color: '#fff'
+                            color: '#fff',
+                            transition: 'all 0.5s ease',
+                            '&:hover': {
+                                color: '#ffffff9c',
+                            },
                         }}
                     >
                         Notas

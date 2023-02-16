@@ -16,7 +16,7 @@ import { Box } from "@mui/material";
 import { styled } from '@mui/material/styles';
 import IMateria from '../modelos/materias/entidades/IMateria';
 import IEstudiante from '../modelos/estudiantes/entidades/IEstudiante';
-import { MenuPrincipal } from '../Menu';
+import { MenuPrincipal } from '../MenuPrincipal';
 
 
 export interface ListarNotasProps {

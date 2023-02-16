@@ -1,10 +1,10 @@
 import { editarEstudiante } from "../modelos/estudiantes";
 import { FunctionComponent, useState } from "react";
-import { MenuPrincipal } from "../Menu";
 import IEstudiante from "../modelos/estudiantes/entidades/IEstudiante";
 import Swal from "sweetalert2";
 import Button from '@mui/material/Button';
-import { TextField, Select, MenuItem, InputLabel, FormControl, Box, Checkbox, FormControlLabel, Grid, Alert, AlertTitle, Snackbar } from "@mui/material";
+import { TextField, Select, MenuItem, InputLabel, FormControl, Box, Checkbox, FormControlLabel, Grid, Alert, AlertTitle, Snackbar, IconButton } from "@mui/material";
+import CloseIcon from '@mui/icons-material/Close';
 
 const estilosIndependientes = {
     background: '#2e7d32',
@@ -20,10 +20,20 @@ export interface RegistrarEstudianteProps {
     limpiar: () => void
     inputLectura: boolean
     habilitarFormulario: () => void
+    handleClose: () => void;
 }
-
-export const RegistrarEstudiante: FunctionComponent<RegistrarEstudianteProps> = ({ guardarEstudiante, estudiante, alCambiarValor, limpiar, inputLectura, habilitarFormulario }) => {
+export const RegistrarEstudiante: FunctionComponent<RegistrarEstudianteProps> = ({ guardarEstudiante, estudiante, alCambiarValor, limpiar, inputLectura, habilitarFormulario, handleClose }) => {
     const [showAlert, setShowAlert] = useState(false);
+    const [showAlert2, setShowAlert2] = useState(false);
+    const [showAlert3, setShowAlert3] = useState(false);
+    const [showAlert4, setShowAlert4] = useState(false);
+    const [showAlert5, setShowAlert5] = useState(false);
+    const [showAlert6, setShowAlert6] = useState(false);
+    const [showAlert7, setShowAlert7] = useState(false);
+    const [showAlert8, setShowAlert8] = useState(false);
+
+
+
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (estudiante.nombres === '' || estudiante.apellidos === '' || estudiante.tDocumento === '' || estudiante.nDocumento === 0 || estudiante.grado === '' || estudiante.dGrado === '') {
@@ -32,67 +42,50 @@ export const RegistrarEstudiante: FunctionComponent<RegistrarEstudianteProps> = 
         }
 
         if (estudiante.nombres.length > 16 || estudiante.nombres.length < 4) {
-            Swal.fire({
-                text: `El campo "Nombres" debe tener de 4 a 16 caracteres`,
-                icon: 'warning',
-            })
+            setShowAlert2(true);
             return false;
         }
 
         if (!/^[a-zA-ZÀ-ÿ\s]+$/.test(estudiante.nombres.valueOf())) {
-            Swal.fire({
-                text: `El campo "Nombres" solo debe contener letras`,
-                icon: 'warning',
-            });
+            setShowAlert3(true);
             return false;
         }
 
         if (estudiante.apellidos.length > 16 || estudiante.apellidos.length < 4) {
-            Swal.fire({
-                text: `El campo "Apellidos" debe tener de 4 a 16 caracteres`,
-                icon: 'warning',
-            })
+            setShowAlert4(true);
             return false;
         }
 
         if (!/^[a-zA-ZÀ-ÿ\s]+$/.test(estudiante.apellidos.valueOf())) {
-            Swal.fire({
-                text: `El campo "Apellidos" solo debe contener letras`,
-                icon: 'warning',
-            });
+            setShowAlert5(true);
             return false;
         }
 
-        if (estudiante.tDocumento === "1") {
-            Swal.fire({
-                text: `Por favor selecciona un tipo de documento`,
-                icon: 'warning',
-            })
+        if (estudiante.tDocumento === "") {
+            setShowAlert(true);
             return false;
         }
 
         if (String(estudiante.nDocumento).length !== 10) {
-            Swal.fire({
-                text: `El campo "Número de documento" debe tener 10 digitos`,
-                icon: 'warning',
-            })
+            setShowAlert7(true);
             return false;
         }
 
-        if (estudiante.grado === "1") {
-            Swal.fire({
-                text: `Por favor selecciona un grado`,
-                icon: 'warning',
-            })
+        if (estudiante.grado === "") {
+            setShowAlert(true);
             return false;
         }
 
-        if (estudiante.dGrado === "1") {
-            Swal.fire({
-                text: `Por favor selecciona un director de grado`,
-                icon: 'warning',
-            })
+        if (estudiante.dGrado === "") {
+            setShowAlert(true);
             return false;
+        }
+
+        if (estudiante) {
+            setShowAlert8(true);
+            setTimeout(() => {
+                handleClose();
+            }, 1000);
         }
 
         guardarEstudiante();
@@ -101,32 +94,44 @@ export const RegistrarEstudiante: FunctionComponent<RegistrarEstudianteProps> = 
 
     return (
         <>
-            <MenuPrincipal />
+
             <Box
                 component="form"
                 sx={{
                     display: 'flex',
                     flexDirection: 'column',
-                    alignItems: 'center',
                     marginTop: '5rem',
                     marginBottom: '2rem',
                     background: '#fff',
                     marginLeft: '5rem',
                     marginRight: '5rem',
                     border: '1px solid rgb(224, 224, 224)',
-                    padding: '3rem',
+                    padding: '2rem',
+                    alignItems: 'inherit',
+
+
                 }}
                 noValidate
                 autoComplete="off"
                 onSubmit={handleSubmit}
             >
+                <IconButton
+                    color="inherit"
+                    onClick={handleClose}
+                    aria-label="close"
+                    sx={{
+                        display: 'flex',
+                        justifyContent: 'end'
+                    }}
+                >
+                    <CloseIcon />
+                </IconButton>
                 <h2>Guardar estudiante</h2>
                 <Grid container spacing={3}>
                     <Grid item xs={12} sm={6}>
                         <TextField sx={{
                             width: '100%',
                             mx: 'auto',
-
 
                         }}
                             id="filled-basic nombres"
@@ -179,7 +184,7 @@ export const RegistrarEstudiante: FunctionComponent<RegistrarEstudianteProps> = 
                                 name="tDocumento"
                                 color="success"
                             >
-                                <MenuItem value={1}>Selecciona...</MenuItem >
+                                {/* <MenuItem value="">Selecciona...</MenuItem > */}
                                 <MenuItem value="Cedula de ciudadania" >Cedula de ciudadania</MenuItem >
                                 <MenuItem value="Tarjeta de identidad" >Tarjeta de identidad</MenuItem >
                             </Select>
@@ -216,14 +221,15 @@ export const RegistrarEstudiante: FunctionComponent<RegistrarEstudianteProps> = 
                             <InputLabel color="success" id="demo-simple-select-filled-label">Grado</InputLabel>
                             <Select
                                 fullWidth
+                                labelId="demo-simple-select-filled-label"
                                 disabled={inputLectura}
                                 onChange={(e) => alCambiarValor(e.target.name, e.target.value)}
                                 value={estudiante.grado}
                                 name="grado"
-                                id="grado"
+                                id="demo-simple-select-filled grado"
                                 color="success"
                             >
-                                <MenuItem value={1}>Selecciona...</MenuItem>
+                                {/* <MenuItem value="">Selecciona...</MenuItem> */}
                                 <MenuItem value="Primero">Primero</MenuItem>
                                 <MenuItem value="Segundo">Segundo</MenuItem>
                                 <MenuItem value="Tercero">Tercero</MenuItem>
@@ -245,17 +251,17 @@ export const RegistrarEstudiante: FunctionComponent<RegistrarEstudianteProps> = 
                             mx: 'auto', // Centra el componente en el eje X
                             // marginBottom: '1rem'
                         }}>
-                            <InputLabel color="success" id="demo-simple-select-filled-label ">Director de grado</InputLabel>
+                            <InputLabel color="success" id="demo-simple-select-filled-label">Director de grado</InputLabel>
                             <Select
-
+                                fullWidth
+                                labelId="demo-simple-select-filled-label"
                                 disabled={inputLectura}
                                 onChange={(e) => alCambiarValor(e.target.name, e.target.value)}
                                 value={estudiante.dGrado}
                                 name="dGrado"
-                                id="dGrado"
+                                id="demo-simple-select-filled grado"
                                 color="success"
                             >
-                                <MenuItem value={1}>Selecciona...</MenuItem>
                                 <MenuItem value="Sandra Roncancio">Sandra Roncancio</MenuItem>
                                 <MenuItem value="Luis Rodriguez">Luis Rodriguez</MenuItem>
                                 <MenuItem value="Paola Sanchez">Paola Sanchez</MenuItem>
@@ -269,7 +275,6 @@ export const RegistrarEstudiante: FunctionComponent<RegistrarEstudianteProps> = 
                                 <MenuItem value="Carla Rodriguez">Carla Rodriguez</MenuItem>
                             </Select>
                         </FormControl>
-
                     </Grid>
 
 
@@ -284,12 +289,56 @@ export const RegistrarEstudiante: FunctionComponent<RegistrarEstudianteProps> = 
                         <Checkbox size="small" name="habilitar" id="habilitar" onClick={habilitarFormulario} color="success" />}
                 />
                 <Snackbar open={showAlert} autoHideDuration={5000} onClose={() => setShowAlert(false)}>
-                    <Alert severity="warning" onClose={() => setShowAlert(false)}>
+                    <Alert severity="error" onClose={() => setShowAlert(false)}>
                         Por favor diligencia todos los campos
                     </Alert>
                 </Snackbar>
-            </Box>
 
+                <Snackbar open={showAlert2} autoHideDuration={5000} onClose={() => setShowAlert2(false)}>
+                    <Alert severity="warning" onClose={() => setShowAlert2(false)}>
+                        El campo "Nombres" debe tener de 4 a 16 caracteres
+                    </Alert>
+                </Snackbar>
+
+                <Snackbar open={showAlert3} autoHideDuration={5000} onClose={() => setShowAlert3(false)}>
+                    <Alert severity="warning" onClose={() => setShowAlert3(false)}>
+                        El campo "Nombres" solo debe contener letras
+                    </Alert>
+                </Snackbar>
+
+                <Snackbar open={showAlert4} autoHideDuration={5000} onClose={() => setShowAlert4(false)}>
+                    <Alert severity="warning" onClose={() => setShowAlert4(false)}>
+                        El campo "Apellidos" debe tener de 4 a 16 caracteres
+                    </Alert>
+                </Snackbar>
+
+                <Snackbar open={showAlert5} autoHideDuration={5000} onClose={() => setShowAlert5(false)}>
+                    <Alert severity="warning" onClose={() => setShowAlert5(false)}>
+                        El campo "Apellidos" solo debe contener letras
+                    </Alert>
+                </Snackbar>
+
+                <Snackbar open={showAlert6} autoHideDuration={5000} onClose={() => setShowAlert6(false)}>
+                    <Alert severity="warning" onClose={() => setShowAlert6(false)}>
+                        Por favor selecciona un tipo de documento
+                    </Alert>
+                </Snackbar>
+
+                <Snackbar open={showAlert7} autoHideDuration={5000} onClose={() => setShowAlert7(false)}>
+                    <Alert severity="warning" onClose={() => setShowAlert7(false)}>
+                        El campo "Número de documento" debe tener 10 digitos
+                    </Alert>
+                </Snackbar>
+
+
+
+            </Box>
+            <Snackbar open={showAlert8} autoHideDuration={7000} onClose={() => setShowAlert8(false)}>
+                <Alert variant="filled" severity="success" onClose={() => setShowAlert8(false)}>
+                    <AlertTitle>Estudiante guardado</AlertTitle>
+                    Se ha registrado el estudiante <strong>¡Correctamente!</strong>
+                </Alert>
+            </Snackbar>
 
         </>
     )

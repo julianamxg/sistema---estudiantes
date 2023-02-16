@@ -1,9 +1,7 @@
 import { FunctionComponent, useState } from "react"; import IEstudiante from "../modelos/estudiantes/entidades/IEstudiante";
 import IMateria from "../modelos/materias/entidades/IMateria";
 import INotas from "../modelos/notas/entidades/INotas";
-import { MenuPrincipal } from "../Menu"
-import Swal from "sweetalert2";
-import { TextField, Select, MenuItem, InputLabel, FormControl, Box, Checkbox, FormControlLabel, Grid, Button, IconButton, Alert, Snackbar } from "@mui/material";
+import { TextField, Select, MenuItem, InputLabel, FormControl, Box, Checkbox, FormControlLabel, Grid, Button, IconButton, Alert, Snackbar, AlertTitle } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 
 const estilosIndependientes = {
@@ -47,7 +45,7 @@ export const RegistrarNotas: FunctionComponent<RegistrarNotasProps> = ({ guardar
             return false;
         }
 
-        if (1 == 1) {
+        if (nota) {
             setShowAlert3(true);
             setTimeout(() => {
                 handleClose();
@@ -69,7 +67,7 @@ export const RegistrarNotas: FunctionComponent<RegistrarNotasProps> = ({ guardar
                 marginLeft: '5rem',
                 marginRight: '5rem',
                 border: '1px solid rgb(224, 224, 224)',
-                padding: '3rem',
+                padding: '2rem',
                 alignItems: 'inherit'
             }}
             noValidate
@@ -178,16 +176,16 @@ export const RegistrarNotas: FunctionComponent<RegistrarNotasProps> = ({ guardar
 
             <Snackbar open={showAlert2} autoHideDuration={5000} onClose={() => setShowAlert2(false)}>
                 <Alert severity="warning" onClose={() => setShowAlert2(false)}>
-                    El campo "Promedio" solo debe tener 2 digitos
+                    El campo "Promedio" debe tener 2 digitos
                 </Alert>
             </Snackbar>
 
-            <Snackbar open={showAlert3} autoHideDuration={5000} onClose={() => setShowAlert3(false)}>
-                <Alert severity="success" onClose={() => setShowAlert3(false)}>
-                    Nota guardada
+            <Snackbar open={showAlert3} autoHideDuration={7000} onClose={() => setShowAlert3(false)}>
+                <Alert variant="filled" severity="success" onClose={() => setShowAlert3(false)}>
+                    <AlertTitle>Nota guardada </AlertTitle>
+                    Se ha registrado la nota — <strong>¡Correctamente!</strong>
                 </Alert>
             </Snackbar>
-
         </Box >
 
     )
