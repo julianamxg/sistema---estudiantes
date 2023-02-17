@@ -67,7 +67,6 @@ function InicioMateria() {
     setInputLectura(!inputLectura)
   }
 
-
   return (
     <div className="App">
       <Modal

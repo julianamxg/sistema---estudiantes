@@ -1,5 +1,5 @@
-import { FunctionComponent, useState } from "react";
-import { TextField, Select, MenuItem, InputLabel, FormControl, Box, Checkbox, FormControlLabel, Grid, IconButton, Snackbar, Alert, AlertTitle, Link, Typography } from "@mui/material";
+import { FunctionComponent } from "react";
+import { TextField, Box, Grid, IconButton, Typography } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 
 export interface RegistrarUsuarioProps {
@@ -10,7 +10,6 @@ export const RegistrarUsuario: FunctionComponent<RegistrarUsuarioProps> = ({ han
 
     return (
         <>
-
             <Box component="form"
                 sx={{
                     display: 'flex',

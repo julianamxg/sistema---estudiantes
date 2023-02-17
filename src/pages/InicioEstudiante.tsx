@@ -6,6 +6,7 @@ import IEstudiante from "../components/modelos/estudiantes/entidades/IEstudiante
 import uuid from 'react-uuid';
 import { Box, Modal } from '@mui/material';
 import React from 'react';
+import { IPokemon } from '../components/modelos/pokemones/entidades/IPokemon';
 
 const InicioEstudiante = () => {
   const initialState: IEstudiante = {
@@ -14,11 +15,22 @@ const InicioEstudiante = () => {
     tDocumento: "",
     nDocumento: 0,
     grado: "",
-    dGrado: ""
+    dGrado: "",
+    avatar: ""
   }
   const [estudiante, setEstudiante] = useState<IEstudiante>(initialState);
   const [estudiantes, setEstudiantes] = useState<IEstudiante[]>([]);
   const [inputLectura, setInputLectura] = useState(true)
+  const [listaPokemones, setListaPokemones] = useState<IPokemon[]>([]);
+
+  useEffect(() => {
+    fetch("https://pokeapi.co/api/v2/pokemon?limit=151")
+      .then((response) => response.json())
+      .then((data) => {
+        setListaPokemones(data.results);
+      });
+    setEstudiantes(getlistaEstudiantes());
+  }, []);
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => {
@@ -31,10 +43,6 @@ const InicioEstudiante = () => {
     const estudiante = getEstudianteById(id);
     setEstudiante(estudiante);
   };
-
-  useEffect(() => {
-    setEstudiantes(getlistaEstudiantes());
-  }, [])
 
   const habilitarFormulario = () => {
     setInputLectura(!inputLectura)
@@ -70,6 +78,7 @@ const InicioEstudiante = () => {
     setEstudiantes(est);
   }
 
+
   return (
     <div className="App">
       <Modal
@@ -82,7 +91,7 @@ const InicioEstudiante = () => {
         }}
       >
         <Box>
-          <RegistrarEstudiante guardarEstudiante={guardarEstudiante} estudiante={estudiante} alCambiarValor={alcambiarValor} limpiar={limpiarFormulario} inputLectura={inputLectura} habilitarFormulario={habilitarFormulario} handleClose={handleOpen} />
+          <RegistrarEstudiante guardarEstudiante={guardarEstudiante} estudiante={estudiante} alCambiarValor={alcambiarValor} limpiar={limpiarFormulario} inputLectura={inputLectura} habilitarFormulario={habilitarFormulario} handleClose={handleOpen} listaPokemones={listaPokemones} />
         </Box>
       </Modal>
       <ListarEstudiantes
@@ -91,7 +100,6 @@ const InicioEstudiante = () => {
         estudiantes={estudiantes}
         handleOpen={handleOpen}
         handleOpenEditar={handleOpenEditar}
-
       />
     </div>
   );

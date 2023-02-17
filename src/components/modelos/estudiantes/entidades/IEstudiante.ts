@@ -5,5 +5,6 @@ export default interface IEstudiante{
     tDocumento:string,
     nDocumento:number,
     grado:string,
-    dGrado:string
+    dGrado:string,
+    avatar: string,
 }

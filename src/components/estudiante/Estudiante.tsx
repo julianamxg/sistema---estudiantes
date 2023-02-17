@@ -83,6 +83,7 @@ export const Estudiante: FunctionComponent<EstudianteProps> = ({ editarEstudiant
             <StyledTableCell align="center">{estudiante.nDocumento}</StyledTableCell>
             <StyledTableCell align="center">{estudiante.grado}</StyledTableCell>
             <StyledTableCell align="center">{estudiante.dGrado}</StyledTableCell>
+            <StyledTableCell align="center" ><img src={`https://img.pokemondb.net/sprites/black-white/anim/normal/${estudiante.avatar}.gif`} alt="Avatar" width="50" height="50" /></StyledTableCell>
             <StyledTableCell align="center">
                 <Button color="success" onClick={() => handleOpenEditar(estudiante.id ?? '')}>
                     <FontAwesomeIcon icon={faPenToSquare} />

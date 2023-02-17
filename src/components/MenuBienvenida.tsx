@@ -1,5 +1,3 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHouseChimney } from '@fortawesome/free-solid-svg-icons'
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -13,7 +11,8 @@ export const MenuBienvenida = () => {
 
         }}>
             <AppBar component="nav" sx={{
-                background: 'transparent',
+                background: { xs: '#2e7d32', sm: 'transparent' },
+                // width: { xs: '80%', sm: '24%' },
                 display: 'flex',
                 boxShadow: '0px 0px 1px 0px rgba(46,125,50,1)',
                 padding: '1rem'

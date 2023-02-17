@@ -1,13 +1,8 @@
 import Box from '@mui/material/Box';
-import { Grid, Icon, IconButton, Link, Modal, Typography } from "@mui/material";
-import { MenuSesion } from "../components/MenuSesion";
-import { InicioSesion } from "../components/InicioSesion";
-import React from "react";
+import { Grid, Icon, Link } from "@mui/material";
 import SchoolOutlinedIcon from '@mui/icons-material/SchoolOutlined';
 import AutoStoriesOutlinedIcon from '@mui/icons-material/AutoStoriesOutlined';
 import ClassOutlinedIcon from '@mui/icons-material/ClassOutlined';
-import { RegistrarUsuario } from "../components/RegistrarUsuario";
-import { MenuPrincipal } from '../components/MenuPrincipal';
 import { MenuBienvenida } from '../components/MenuBienvenida';
 
 function InicioLoggeado() {
@@ -40,7 +35,7 @@ function InicioLoggeado() {
                         width: 'calc(100% + 0px)',
                         color: '#317e3b'
                     }}>
-                         <Link href='/estudiantes' sx={{
+                        <Link href='/estudiantes' sx={{
                             display: 'flex',
                             alignItems: 'center',
                             width: { xs: '80%', sm: '24%' },
@@ -54,19 +49,19 @@ function InicioLoggeado() {
                             },
 
                         }}>
-                        <Grid item sm={3} xs={12} sx={{
-                            display: 'flex',
-                            flexDirection: 'column',
-                            alignItems: 'center',
-                            padding: '24px',
-                            height: '168px',
-                            justifyContent: 'center'
-                        }}>
-                            <Icon>
-                                <SchoolOutlinedIcon />
-                            </Icon>
-                            Estudiantes
-                        </Grid>
+                            <Grid item sm={3} xs={12} sx={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'center',
+                                padding: '24px',
+                                height: '168px',
+                                justifyContent: 'center'
+                            }}>
+                                <Icon>
+                                    <SchoolOutlinedIcon />
+                                </Icon>
+                                Estudiantes
+                            </Grid>
                         </Link>
                         <Link href='/materias' sx={{
                             display: 'flex',
@@ -93,7 +88,7 @@ function InicioLoggeado() {
                                 margin: '0.5rem',
                                 height: '168px',
                                 justifyContent: 'center',
-                               
+
 
                             }}>
                                 <Icon
@@ -126,10 +121,10 @@ function InicioLoggeado() {
 
                         }}>
                             <Grid item xs={12} sm={3} sx={{
-                                 display: 'flex',
-                                 flexDirection: 'column',
-                                 alignItems: 'center',
-                                 justifyContent: 'center'
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'center',
+                                justifyContent: 'center'
                             }}>
 
                                 <Icon >

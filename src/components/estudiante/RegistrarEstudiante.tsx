@@ -1,10 +1,10 @@
 import { editarEstudiante } from "../modelos/estudiantes";
 import { FunctionComponent, useState } from "react";
 import IEstudiante from "../modelos/estudiantes/entidades/IEstudiante";
-import Swal from "sweetalert2";
 import Button from '@mui/material/Button';
 import { TextField, Select, MenuItem, InputLabel, FormControl, Box, Checkbox, FormControlLabel, Grid, Alert, AlertTitle, Snackbar, IconButton } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
+import { IPokemon } from "../modelos/pokemones/entidades/IPokemon";
 
 const estilosIndependientes = {
     background: '#2e7d32',
@@ -21,8 +21,9 @@ export interface RegistrarEstudianteProps {
     inputLectura: boolean
     habilitarFormulario: () => void
     handleClose: () => void;
+    listaPokemones: IPokemon[]
 }
-export const RegistrarEstudiante: FunctionComponent<RegistrarEstudianteProps> = ({ guardarEstudiante, estudiante, alCambiarValor, limpiar, inputLectura, habilitarFormulario, handleClose }) => {
+export const RegistrarEstudiante: FunctionComponent<RegistrarEstudianteProps> = ({ guardarEstudiante, estudiante, alCambiarValor, limpiar, inputLectura, habilitarFormulario, handleClose, listaPokemones }) => {
     const [showAlert, setShowAlert] = useState(false);
     const [showAlert2, setShowAlert2] = useState(false);
     const [showAlert3, setShowAlert3] = useState(false);
@@ -36,7 +37,7 @@ export const RegistrarEstudiante: FunctionComponent<RegistrarEstudianteProps> = 
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if (estudiante.nombres === '' || estudiante.apellidos === '' || estudiante.tDocumento === '' || estudiante.nDocumento === 0 || estudiante.grado === '' || estudiante.dGrado === '') {
+        if (estudiante.nombres === '' || estudiante.apellidos === '' || estudiante.tDocumento === '' || estudiante.nDocumento === 0 || estudiante.grado === '' || estudiante.dGrado === '' || estudiante.avatar === '') {
             setShowAlert(true);
             return false;
         }
@@ -126,6 +127,7 @@ export const RegistrarEstudiante: FunctionComponent<RegistrarEstudianteProps> = 
                 >
                     <CloseIcon />
                 </IconButton>
+                <img src={`https://img.pokemondb.net/sprites/black-white/anim/normal/${estudiante.avatar}.gif`} alt="Avatar" width="50" height="50" />
                 <h2>Guardar estudiante</h2>
                 <Grid container spacing={3}>
                     <Grid item xs={12} sm={6}>
@@ -184,7 +186,6 @@ export const RegistrarEstudiante: FunctionComponent<RegistrarEstudianteProps> = 
                                 name="tDocumento"
                                 color="success"
                             >
-                                {/* <MenuItem value="">Selecciona...</MenuItem > */}
                                 <MenuItem value="Cedula de ciudadania" >Cedula de ciudadania</MenuItem >
                                 <MenuItem value="Tarjeta de identidad" >Tarjeta de identidad</MenuItem >
                             </Select>
@@ -212,11 +213,10 @@ export const RegistrarEstudiante: FunctionComponent<RegistrarEstudianteProps> = 
                 </Grid>
 
                 <Grid container spacing={3}>
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={12} sm={3}>
                         <FormControl variant="filled" sx={{
-                            width: '100%', // Ajusta el ancho en función del tamaño de pantalla
-                            mx: 'auto', // Centra el componente en el eje X
-                            // marginBottom: '1rem'
+                            width: '100%',
+                            mx: 'auto',
                         }}>
                             <InputLabel color="success" id="demo-simple-select-filled-label">Grado</InputLabel>
                             <Select
@@ -229,7 +229,6 @@ export const RegistrarEstudiante: FunctionComponent<RegistrarEstudianteProps> = 
                                 id="demo-simple-select-filled grado"
                                 color="success"
                             >
-                                {/* <MenuItem value="">Selecciona...</MenuItem> */}
                                 <MenuItem value="Primero">Primero</MenuItem>
                                 <MenuItem value="Segundo">Segundo</MenuItem>
                                 <MenuItem value="Tercero">Tercero</MenuItem>
@@ -245,11 +244,10 @@ export const RegistrarEstudiante: FunctionComponent<RegistrarEstudianteProps> = 
                         </FormControl>
                     </Grid>
 
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={12} sm={3}>
                         <FormControl variant="filled" sx={{
-                            width: '100%', // Ajusta el ancho en función del tamaño de pantalla
-                            mx: 'auto', // Centra el componente en el eje X
-                            // marginBottom: '1rem'
+                            width: '100%',
+                            mx: 'auto',
                         }}>
                             <InputLabel color="success" id="demo-simple-select-filled-label">Director de grado</InputLabel>
                             <Select
@@ -276,8 +274,34 @@ export const RegistrarEstudiante: FunctionComponent<RegistrarEstudianteProps> = 
                             </Select>
                         </FormControl>
                     </Grid>
-
-
+                    <Grid item xs={12} sm={6}>
+                        <FormControl variant="filled" sx={{
+                            width: '100%',
+                            mx: 'auto',
+                        }}>
+                            <InputLabel color="success" id="demo-simple-select-filled-label">Avatar</InputLabel>
+                            <Select
+                                fullWidth
+                                labelId="demo-simple-select-filled-label"
+                                disabled={inputLectura}
+                                name="avatar"
+                                id="demo-simple-select-filled avatar"
+                                color="success"
+                                value={estudiante.avatar}
+                                onChange={(e) => alCambiarValor(e.target.name, e.target.value)}
+                            >
+                                <MenuItem value="">Selecciona...</MenuItem>
+                                
+                                    {listaPokemones.map((pokemon) => (
+                                        <MenuItem value={pokemon.name} key={pokemon.id}>
+                                            {pokemon.name}
+                                        </MenuItem>
+                                    ))}
+                               
+                            
+                            </Select>
+                        </FormControl>
+                    </Grid>
                 </Grid>
 
                 <div>

@@ -68,11 +68,12 @@ export const ListarEstudiantes: FunctionComponent<ListarEstudianteProps> = ({ ed
                                         <StyledTableCell align="center">Número de documento</StyledTableCell>
                                         <StyledTableCell align="center">Grado</StyledTableCell>
                                         <StyledTableCell align="center">Director de grado</StyledTableCell>
+                                        <StyledTableCell align="center">Avatar</StyledTableCell>
                                         <StyledTableCell colSpan={2} align="center">Acciones</StyledTableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {estudiantes.map((estudiante: IEstudiante) => <Estudiante key={estudiante.id} estudiante={estudiante} editarEstudiante={editarEstudiante} eliminarEstudiante={eliminarEstudiante} handleOpenEditar={() => handleOpenEditar(estudiante.id ?? '')} />)}
+                                    {estudiantes.map((estudiante: IEstudiante) => <Estudiante key={estudiante.id} estudiante={estudiante} editarEstudiante={editarEstudiante} eliminarEstudiante={eliminarEstudiante} handleOpenEditar={() => handleOpenEditar(estudiante.id ?? '')}/>)}
                                 </TableBody>
                             </Table>
                         </TableContainer>

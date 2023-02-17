@@ -1,4 +1,5 @@
 import uuid from "react-uuid";
+import { IPokemon } from "../pokemones/entidades/IPokemon";
 import IEstudiante from "./entidades/IEstudiante";
 
 export const getlistaEstudiantes = () => {
@@ -16,12 +17,30 @@ export const getEstudianteById = (id?: string) => {
     return estudiante1;
 }
 
+export const addEstudiante = async (estudiante: IEstudiante) => {
+    try {
+        const response = await fetch('https://unpkg.com/pokemons@1.1.0/pokemons.json');
+        const pokemones: IPokemon[] = await response.json();
 
-export const addEstudiante = (estudiante: IEstudiante) => {
-    const estudiantes = getlistaEstudiantes();
-    estudiantes.push({ id: uuid(), ...estudiante });
-    localStorage["@estudiantes"] = JSON.stringify(estudiantes)
+        // Encuentra el objeto de pokemon que coincide con el nombre del avatar seleccionado
+        const pokemonSeleccionado = pokemones.find(pokemon => pokemon.name === estudiante.avatar);
+
+        // Si no se encuentra el pokemon, lanza una excepción
+        if (!pokemonSeleccionado) {
+            throw new Error('No se encontró el pokemon seleccionado.');
+        }
+
+        // Guarda la URL de la imagen en el objeto de estudiante
+        estudiante.avatar = pokemonSeleccionado.imgnormal;
+
+        const estudiantes = getlistaEstudiantes();
+        estudiantes.push({ id: uuid(), ...estudiante });
+        localStorage["@estudiantes"] = JSON.stringify(estudiantes);
+    } catch (error) {
+        console.error(error);
+    }
 }
+
 
 export const editarEstudiante = (id?: string, newEstudiante?: any) => {
     let estudiantes = getlistaEstudiantes();
