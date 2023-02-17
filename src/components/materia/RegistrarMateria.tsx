@@ -1,6 +1,5 @@
 import { FunctionComponent, useState } from "react";
 import IMateria from "../modelos/materias/entidades/IMateria";
-import Swal from "sweetalert2";
 import Button from '@mui/material/Button';
 import { TextField, Select, MenuItem, InputLabel, FormControl, Box, Checkbox, FormControlLabel, Grid, IconButton, Snackbar, Alert, AlertTitle } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';

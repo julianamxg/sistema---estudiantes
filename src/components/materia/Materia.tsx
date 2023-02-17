@@ -1,7 +1,6 @@
 import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FunctionComponent } from "react";
-import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import IMateria from "../modelos/materias/entidades/IMateria"
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';

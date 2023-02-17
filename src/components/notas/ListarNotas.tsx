@@ -1,5 +1,3 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faRotateRight } from '@fortawesome/free-solid-svg-icons'
 import INotas from '../modelos/notas/entidades/INotas';
 import { FunctionComponent } from 'react';
 import { Nota } from './Nota';
@@ -14,8 +12,6 @@ import AddIcon from '@mui/icons-material/Add';
 import { Icon } from '@mui/material';
 import { Box } from "@mui/material";
 import { styled } from '@mui/material/styles';
-import IMateria from '../modelos/materias/entidades/IMateria';
-import IEstudiante from '../modelos/estudiantes/entidades/IEstudiante';
 import { MenuPrincipal } from '../MenuPrincipal';
 
 
