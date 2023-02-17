@@ -2,7 +2,7 @@ import INotas from '../modelos/notas/entidades/INotas';
 import { FunctionComponent } from 'react';
 import { Nota } from './Nota';
 import { editarNota } from '../modelos/notas';
-import { Button, TableContainer, Modal } from "@mui/material";
+import { Button, TableContainer } from "@mui/material";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
