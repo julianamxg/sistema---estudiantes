@@ -9,7 +9,7 @@ import IEstudiante from "../components/modelos/estudiantes/entidades/IEstudiante
 import { getlistaMaterias } from "../components/modelos/materias";
 import { getlistaEstudiantes } from "../components/modelos/estudiantes";
 import React from "react";
-import { Alert, Box, Modal, Snackbar } from "@mui/material";
+import { Box, Modal } from "@mui/material";
 
 const InicioNotas: FunctionComponent = () => {
     const initialState: INotas = {

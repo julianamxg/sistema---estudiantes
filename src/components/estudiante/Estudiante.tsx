@@ -5,9 +5,8 @@ import IEstudiante from '../modelos/estudiantes/entidades/IEstudiante';
 import { FunctionComponent } from 'react';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
-import { Button, Paper, PaperProps } from '@mui/material';
+import { Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import Draggable from 'react-draggable';
 
 export interface EstudianteProps {
     editarEstudiante: (id?: string) => any
@@ -16,16 +15,6 @@ export interface EstudianteProps {
     handleOpenEditar: (id?: string) => void
 }
 
-function PaperComponent(props: PaperProps) {
-    return (
-        <Draggable
-            handle="#draggable-dialog-title"
-            cancel={'[class*="MuiDialogContent-root"]'}
-        >
-            <Paper {...props} />
-        </Draggable>
-    );
-}
 
 export const Estudiante: FunctionComponent<EstudianteProps> = ({ editarEstudiante, eliminarEstudiante, estudiante, handleOpenEditar }) => {
 

@@ -1,5 +1,5 @@
 import Box from '@mui/material/Box';
-import { Grid, Icon, IconButton, Modal, Typography } from "@mui/material";
+import { Grid, Icon, Modal, Typography } from "@mui/material";
 import { MenuSesion } from "../components/MenuSesion";
 import { InicioSesion } from "../components/InicioSesion";
 import React from "react";
